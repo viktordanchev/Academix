@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academix.Web", "Academix.Web\Academix.Web.csproj", "{64AA6CB8-5D23-4CBF-87AE-A7B59B750E88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Academix.Web", "Academix.Web\Academix.Web.csproj", "{64AA6CB8-5D23-4CBF-87AE-A7B59B750E88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academix.Core", "Academix.Core\Academix.Core.csproj", "{78BFF78D-204F-484A-9492-0DE1A7B470E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academix.Infrastructure", "Academix.Infrastructure\Academix.Infrastructure.csproj", "{130B2032-9D45-4A6A-A374-02C8092C688E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{64AA6CB8-5D23-4CBF-87AE-A7B59B750E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64AA6CB8-5D23-4CBF-87AE-A7B59B750E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64AA6CB8-5D23-4CBF-87AE-A7B59B750E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BFF78D-204F-484A-9492-0DE1A7B470E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BFF78D-204F-484A-9492-0DE1A7B470E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BFF78D-204F-484A-9492-0DE1A7B470E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BFF78D-204F-484A-9492-0DE1A7B470E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130B2032-9D45-4A6A-A374-02C8092C688E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{130B2032-9D45-4A6A-A374-02C8092C688E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{130B2032-9D45-4A6A-A374-02C8092C688E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{130B2032-9D45-4A6A-A374-02C8092C688E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
