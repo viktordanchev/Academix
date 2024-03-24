@@ -1,4 +1,5 @@
 ﻿using Academix.Infrastructure;
+using Academix.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ namespace Academix.Web.Extensions
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services)
         {
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;

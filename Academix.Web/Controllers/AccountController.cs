@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Academix.Infrastructure.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Academix.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> singInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager)
         {
             _userManager = userManager;
             _signInManager = singInManager;
