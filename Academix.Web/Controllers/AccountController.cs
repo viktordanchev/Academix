@@ -31,9 +31,10 @@ namespace Academix.Web.Controllers
             }
 
             var user = await _userManager.FindByEmailAsync(model.Email);
+
             if (user != null)
             {
-                TempData["ErrorMessage"] = "This email is already registered!";
+                ModelState.AddModelError(string.Empty, "This email is already registered!");
 
                 return View(model);
             }
@@ -57,6 +58,36 @@ namespace Academix.Web.Controllers
 
                 return View(model);
             }
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid email or password!");
+
+                return View(model);
+            }
+
+            await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             return RedirectToAction("Index", "Home");
         }
