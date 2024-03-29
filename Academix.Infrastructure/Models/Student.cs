@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Academix.Infrastructure.Models.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,14 +8,17 @@ namespace Academix.Infrastructure.Models
     {
         public Student()
         {
-            Subjects = new List<Subject>();
+            StudentsSubjects = new List<SubjectsStudents>();
         }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public IdentityUser User { get; set; } = null!;
+        public string StudentIdentityId { get; set; } = null!;
+
+        [ForeignKey(nameof(StudentIdentityId))]
+        public ApplicationUser StudentIdentity { get; set; } = null!;
 
         [Required]
         public int SchoolId { get; set; }
@@ -29,6 +32,6 @@ namespace Academix.Infrastructure.Models
         [ForeignKey(nameof(ParentId))]
         public Parent Parent { get; set; } = null!;
 
-        public ICollection<Subject> Subjects { get; set; }
+        public ICollection<SubjectsStudents> StudentsSubjects { get; set; }
     }
 }

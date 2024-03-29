@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Academix.Infrastructure.Models.Enums;
 
 namespace Academix.Infrastructure.Models
@@ -13,5 +14,11 @@ namespace Academix.Infrastructure.Models
 
         [Required]
         public AbsenceTypes AbsenceType { get; set; }
+
+        [Required]
+        public int SubjectId { get; set; }
+
+        [ForeignKey(nameof(SubjectId))]
+        public Subject Subject { get; set; } = null!;
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Academix.Infrastructure.Models.Mapping;
+using System.ComponentModel.DataAnnotations;
 
 namespace Academix.Infrastructure.Models
 {
@@ -8,6 +8,7 @@ namespace Academix.Infrastructure.Models
         public Subject()
         {
             Grades = new List<Grade>();
+            SubjectsStudents = new List<SubjectsStudents>();
         }
 
         [Key]
@@ -16,20 +17,10 @@ namespace Academix.Infrastructure.Models
         [Required]
         public string Name { get; set; } = null!;
 
-        [Required]
-        public int TeacherId { get; set; }
-
-        [ForeignKey(nameof(TeacherId))]
-        public Teacher Teacher { get; set; } = null!;
-
-        [Required]
-        public int StudentId { get; set; }
-
-        [ForeignKey(nameof(StudentId))]
-        public Student Student { get; set; } = null!;
-
         public ICollection<Grade> Grades { get; set; }
 
-        public ICollection<Grade> Grades { get; set; }
+        public ICollection<Absence> Absences { get; set; }
+
+        public ICollection<SubjectsStudents> SubjectsStudents { get; set; }
     }
 }

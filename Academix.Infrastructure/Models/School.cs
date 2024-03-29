@@ -23,6 +23,12 @@ namespace Academix.Infrastructure.Models
         [ForeignKey(nameof(CityId))]
         public City City { get; set; } = null!;
 
+        [Required]
+        public int DirectorId { get; set; }
+
+        [ForeignKey(nameof(DirectorId))]
+        public Director Director { get; set; } = null!;
+
         public ICollection<Teacher> Teachers { get; set; }
 
         public ICollection<Student> Students { get; set; }
