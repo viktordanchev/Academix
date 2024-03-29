@@ -9,6 +9,7 @@ namespace Academix.Infrastructure.Models
         {
             Teachers = new List<Teacher>();
             Students = new List<Student>();
+            Classes = new List<Class>();
         }
 
         [Key]
@@ -32,5 +33,7 @@ namespace Academix.Infrastructure.Models
         public ICollection<Teacher> Teachers { get; set; }
 
         public ICollection<Student> Students { get; set; }
+
+        public ICollection<Class> Classes { get; set; }
     }
 }

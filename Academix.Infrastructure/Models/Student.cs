@@ -8,7 +8,7 @@ namespace Academix.Infrastructure.Models
     {
         public Student()
         {
-            StudentsSubjects = new List<SubjectsStudents>();
+            SubjectsStudent = new List<SubjectStudent>();
         }
 
         [Key]
@@ -32,6 +32,6 @@ namespace Academix.Infrastructure.Models
         [ForeignKey(nameof(ParentId))]
         public Parent Parent { get; set; } = null!;
 
-        public ICollection<SubjectsStudents> StudentsSubjects { get; set; }
+        public ICollection<SubjectStudent> SubjectsStudent { get; set; }
     }
 }

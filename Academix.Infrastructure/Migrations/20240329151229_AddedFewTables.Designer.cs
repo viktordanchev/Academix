@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academix.Infrastructure.Migrations
 {
     [DbContext(typeof(AcademixDbContext))]
-    [Migration("20240329101503_AddedFewTables")]
+    [Migration("20240329151229_AddedFewTables")]
     partial class AddedFewTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,6 +138,33 @@ namespace Academix.Infrastructure.Migrations
                     b.ToTable("Cities");
                 });
 
+            modelBuilder.Entity("Academix.Infrastructure.Models.Class", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ClassTeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SchoolId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassTeacherId");
+
+                    b.HasIndex("SchoolId");
+
+                    b.ToTable("Classes");
+                });
+
             modelBuilder.Entity("Academix.Infrastructure.Models.Director", b =>
                 {
                     b.Property<int>("Id")
@@ -184,7 +211,7 @@ namespace Academix.Infrastructure.Migrations
                     b.ToTable("Grades");
                 });
 
-            modelBuilder.Entity("Academix.Infrastructure.Models.Mapping.SubjectsStudents", b =>
+            modelBuilder.Entity("Academix.Infrastructure.Models.Mapping.SubjectStudent", b =>
                 {
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
@@ -253,6 +280,9 @@ namespace Academix.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("ClassId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
@@ -264,6 +294,8 @@ namespace Academix.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
 
                     b.HasIndex("ParentId")
                         .IsUnique();
@@ -469,6 +501,21 @@ namespace Academix.Infrastructure.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("Academix.Infrastructure.Models.Class", b =>
+                {
+                    b.HasOne("Academix.Infrastructure.Models.Teacher", "ClassTeacher")
+                        .WithMany()
+                        .HasForeignKey("ClassTeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Academix.Infrastructure.Models.School", null)
+                        .WithMany("Classes")
+                        .HasForeignKey("SchoolId");
+
+                    b.Navigation("ClassTeacher");
+                });
+
             modelBuilder.Entity("Academix.Infrastructure.Models.Director", b =>
                 {
                     b.HasOne("Academix.Infrastructure.Models.ApplicationUser", "DirectorIdentity")
@@ -491,16 +538,16 @@ namespace Academix.Infrastructure.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("Academix.Infrastructure.Models.Mapping.SubjectsStudents", b =>
+            modelBuilder.Entity("Academix.Infrastructure.Models.Mapping.SubjectStudent", b =>
                 {
                     b.HasOne("Academix.Infrastructure.Models.Student", "Student")
-                        .WithMany("StudentsSubjects")
+                        .WithMany("SubjectsStudent")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Academix.Infrastructure.Models.Subject", "Subject")
-                        .WithMany("SubjectsStudents")
+                        .WithMany("SubjectStudents")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -542,6 +589,10 @@ namespace Academix.Infrastructure.Migrations
 
             modelBuilder.Entity("Academix.Infrastructure.Models.Student", b =>
                 {
+                    b.HasOne("Academix.Infrastructure.Models.Class", null)
+                        .WithMany("Students")
+                        .HasForeignKey("ClassId");
+
                     b.HasOne("Academix.Infrastructure.Models.Parent", "Parent")
                         .WithOne()
                         .HasForeignKey("Academix.Infrastructure.Models.Student", "ParentId")
@@ -645,8 +696,15 @@ namespace Academix.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Academix.Infrastructure.Models.Class", b =>
+                {
+                    b.Navigation("Students");
+                });
+
             modelBuilder.Entity("Academix.Infrastructure.Models.School", b =>
                 {
+                    b.Navigation("Classes");
+
                     b.Navigation("Students");
 
                     b.Navigation("Teachers");
@@ -654,7 +712,7 @@ namespace Academix.Infrastructure.Migrations
 
             modelBuilder.Entity("Academix.Infrastructure.Models.Student", b =>
                 {
-                    b.Navigation("StudentsSubjects");
+                    b.Navigation("SubjectsStudent");
                 });
 
             modelBuilder.Entity("Academix.Infrastructure.Models.Subject", b =>
@@ -663,7 +721,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.Navigation("Grades");
 
-                    b.Navigation("SubjectsStudents");
+                    b.Navigation("SubjectStudents");
                 });
 #pragma warning restore 612, 618
         }

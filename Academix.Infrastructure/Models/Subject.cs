@@ -8,7 +8,7 @@ namespace Academix.Infrastructure.Models
         public Subject()
         {
             Grades = new List<Grade>();
-            SubjectsStudents = new List<SubjectsStudents>();
+            SubjectStudents = new List<SubjectStudent>();
         }
 
         [Key]
@@ -21,6 +21,6 @@ namespace Academix.Infrastructure.Models
 
         public ICollection<Absence> Absences { get; set; }
 
-        public ICollection<SubjectsStudents> SubjectsStudents { get; set; }
+        public ICollection<SubjectStudent> SubjectStudents { get; set; }
     }
 }

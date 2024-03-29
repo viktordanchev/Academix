@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Academix.Infrastructure.Models.Mapping
 {
-    public class SubjectsStudents
+    public class SubjectStudent
     {
         [Required]
         public int SubjectId { get; set; }

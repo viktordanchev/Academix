@@ -21,11 +21,12 @@ namespace Academix.Infrastructure
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<SubjectsStudents> SubjectsStudents { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<SubjectStudent> SubjectsStudents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<SubjectsStudents>()
+            builder.Entity<SubjectStudent>()
                 .HasKey(ss => new { ss.StudentId, ss.SubjectId });
 
             builder.Entity<Student>()
