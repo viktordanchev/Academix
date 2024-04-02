@@ -36,6 +36,9 @@ namespace Academix.Infrastructure.Migrations
                     b.Property<DateTime>("DateAndTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("ExcusedAbsence")
+                        .HasColumnType("bit");
+
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 

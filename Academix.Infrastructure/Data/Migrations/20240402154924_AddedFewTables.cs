@@ -225,6 +225,7 @@ namespace Academix.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateAndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExcusedAbsence = table.Column<bool>(type: "bit", nullable: false),
                     AbsenceType = table.Column<int>(type: "int", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: false)
                 },

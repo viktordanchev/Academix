@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academix.Infrastructure.Migrations
 {
     [DbContext(typeof(AcademixDbContext))]
-    [Migration("20240402152430_AddedFewTables")]
+    [Migration("20240402154924_AddedFewTables")]
     partial class AddedFewTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace Academix.Infrastructure.Migrations
 
                     b.Property<DateTime>("DateAndTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("ExcusedAbsence")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
