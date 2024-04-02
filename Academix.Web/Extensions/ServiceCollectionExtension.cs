@@ -1,6 +1,5 @@
-﻿using Academix.Infrastructure;
-using Academix.Infrastructure.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Academix.Infrastructure.Data;
+using Academix.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Web.Extensions

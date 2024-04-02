@@ -1,4 +1,4 @@
-﻿using Academix.Infrastructure.Models;
+﻿using Academix.Infrastructure.Data.Models;
 using Academix.Web.Models.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
