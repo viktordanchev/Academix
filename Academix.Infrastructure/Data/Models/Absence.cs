@@ -14,6 +14,9 @@ namespace Academix.Infrastructure.Data.Models
         public DateTime DateAndTime { get; set; }
 
         [Required]
+        public bool ExcusedAbsence { get; set; }
+
+        [Required]
         [Range(AbsenceConstants.AbsenceTypeMin, AbsenceConstants.AbsenceTypeMax)]
         public AbsenceTypes AbsenceType { get; set; }
 
