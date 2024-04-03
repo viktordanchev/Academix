@@ -2,6 +2,7 @@
 using Academix.Web.Models.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Web.Controllers
 {
@@ -9,22 +10,27 @@ namespace Academix.Web.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = singInManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            var model = new RegisterViewModel();
+            model.Roles = await GetRolesAsync();
+
+            return View(model);
         }
 
         [HttpPost]
@@ -108,6 +114,17 @@ namespace Academix.Web.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<string>> GetRolesAsync()
+        {
+            var roles = await _roleManager.Roles
+                .Where(r => r.Name != "Administrator")
+                .Select(r => r.Name)
+                .ToListAsync();
+
+            return roles;
         }
     }
 }
