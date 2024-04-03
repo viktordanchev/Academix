@@ -5,6 +5,11 @@ namespace Academix.Web.Models.Account
 {
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+            Roles = new List<string>();
+        }
+
         [Required]
         [RegularExpression(ApplicationUserConstants.NameMatch, ErrorMessage = "First Name is invalid.")]
         public string FirstName { get; set; } = null!;
@@ -26,5 +31,7 @@ namespace Academix.Web.Models.Account
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = null!;
+
+        public IEnumerable<string> Roles { get; set; }
     }
 }

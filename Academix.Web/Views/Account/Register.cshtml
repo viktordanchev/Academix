@@ -37,6 +37,16 @@
             <label asp-for="ConfirmPassword">Confirm Password</label>
             <span asp-validation-for="ConfirmPassword"></span>
         </div>
+        <div>
+            <label for="dog-names">Choose role:</label>
+            <select>
+                <option value="" selected disabled hidden>Roles</option>
+                @foreach (var role in Model.Roles)
+                {
+                    <option>@role</option>
+                }
+            </select>
+        </div>
         <button type="submit">Register</button>
     </form>
 </section>
