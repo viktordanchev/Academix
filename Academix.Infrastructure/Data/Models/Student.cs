@@ -38,11 +38,10 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(SchoolId))]
         public School School { get; set; } = null!;
 
-        [Required]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         [ForeignKey(nameof(ParentId))]
-        public Parent Parent { get; set; } = null!;
+        public Parent? Parent { get; set; }
 
         public ICollection<SubjectStudent> SubjectsStudent { get; set; }
     }

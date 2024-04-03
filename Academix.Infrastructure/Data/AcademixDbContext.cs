@@ -1,10 +1,8 @@
 ﻿using Academix.Infrastructure.Data.Configurations;
 using Academix.Infrastructure.Data.Models;
 using Academix.Infrastructure.Data.Models.Mapping;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace Academix.Infrastructure.Data
 {

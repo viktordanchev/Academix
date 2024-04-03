@@ -16,11 +16,10 @@ namespace Academix.Infrastructure.Data.Models
         [Required]
         public string Name { get; set; } = null!;
 
-        [Required]
-        public int ClassTeacherId { get; set; }
+        public int? ClassTeacherId { get; set; }
 
         [ForeignKey(nameof(ClassTeacherId))]
-        public Teacher ClassTeacher { get; set; } = null!;
+        public Teacher? ClassTeacher { get; set; }
 
         public ICollection<Student> Students { get; set; }
     }
