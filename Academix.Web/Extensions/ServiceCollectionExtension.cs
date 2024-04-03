@@ -1,5 +1,6 @@
 ﻿using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Web.Extensions
@@ -25,6 +26,7 @@ namespace Academix.Web.Extensions
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AcademixDbContext>();
             services.AddControllersWithViews();
 
