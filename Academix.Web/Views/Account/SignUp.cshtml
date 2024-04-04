@@ -51,16 +51,30 @@
                 </div>
 
                 <div class="form-step-2">
-                    <label asp-for="IdentityRoleId" class="form-label">Choose role</label>
-                    <select asp-for="IdentityRoleId" class="form-input">
-                        <option value="" selected disabled hidden>Roles</option>
-                        @foreach (var role in Model.Roles)
-                        {
-                            <option value=@role.Id>@role.Name</option>
-                        }
-                    </select>
-                    <span asp-validation-for="IdentityRoleId" class="invalid-field"></span>
+                    <div class="roles">
+                        <label asp-for="IdentityRoleId" class="form-label">Choose role</label>
+                        <select asp-for="IdentityRoleId" class="form-input">
+                            <option value="" selected disabled hidden>Roles</option>
+                            @foreach (var role in Model.Roles)
+                            {
+                                <option value=@role.Id>@role.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdentityRoleId" class="invalid-field"></span>
+                    </div>
+                    <div class="schools" hidden>
+                        <label asp-for="SchoolId" class="form-label">Choose school</label>
+                        <select asp-for="SchoolId" class="form-input">
+                            <option value="" selected disabled hidden>Schools</option>
+                            @foreach (var school in Model.Schools)
+                            {
+                                <option value=@school.Id>@school.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SchoolId" class="invalid-field"></span>
+                    </div>
                 </div>
+
 
                 <div class="form-btn-wrapper register">
                     <button class="btn back">Back</button>
@@ -75,6 +89,7 @@
 @section Scripts {
     <script src="~/js/authentication/particles.js"></script>
     <script src="~/js/authentication/app.js"></script>
-    <script src="~/js/authentication/func.js"></script>
+    <script src="~/js/authentication/singup.js"></script>
+    <script src="~/js/authentication/personalinfo.js"></script>
     <partial name="_ValidationScriptsPartial" />
 }
