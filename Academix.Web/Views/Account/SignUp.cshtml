@@ -1,0 +1,80 @@
+﻿@model SignUpViewModel
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<div id="particles-js" class="wrapper">
+    <div class="main-wrapper">
+        <div class="form-wrapper">
+            <form method="post">
+                <div class="steps">
+                    <ul>
+                        <li class="step-menu1 active">
+                            <span>1</span>
+                            Sign Up
+                        </li>
+                        <li class="step-menu2">
+                            <span>2</span>
+                            Personal info
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-step-1 active">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <label asp-for="FirstName" class="form-label">First name</label>
+                        <input asp-for="FirstName" class="form-input" autocomplete="given-name" aria-required="true" />
+                        <span asp-validation-for="FirstName" class="invalid-field"></span>
+                    </div>
+                    <div>
+                        <label asp-for="LastName" class="form-label">Last name</label>
+                        <input asp-for="LastName" class="form-input" autocomplete="family-name" aria-required="true" />
+                        <span asp-validation-for="LastName" class="invalid-field"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-input" autocomplete="email" aria-required="true" />
+                        <span asp-validation-for="Email" class="invalid-field"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" class="form-input" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="Password" class="invalid-field"></span>
+                    </div>
+                    <div>
+                        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-input" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="ConfirmPassword" class="invalid-field"></span>
+                    </div>
+                </div>
+
+                <div class="form-step-2">
+                    <label asp-for="IdentityRoleId" class="form-label">Choose role</label>
+                    <select asp-for="IdentityRoleId" class="form-input">
+                        <option value="" selected disabled hidden>Roles</option>
+                        @foreach (var role in Model.Roles)
+                        {
+                            <option value=@role.Id>@role.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdentityRoleId" class="invalid-field"></span>
+                </div>
+
+                <div class="form-btn-wrapper register">
+                    <button class="btn back">Back</button>
+                    <button class="btn cancel active">Cancel</button>
+                    <button class="btn next">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/authentication/particles.js"></script>
+    <script src="~/js/authentication/app.js"></script>
+    <script src="~/js/authentication/func.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

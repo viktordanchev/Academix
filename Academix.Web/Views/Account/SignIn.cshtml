@@ -1,0 +1,46 @@
+﻿@model SignInViewModel
+
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<div id="particles-js" class="wrapper">
+    <div class="main-wrapper">
+        <div class="form-wrapper">
+            <form method="post">
+                <div class="steps">
+                    <div>Sign In</div>
+                </div>
+                <div class="form-step-1 active">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-input" autocomplete="email" aria-required="true" />
+                        <span asp-validation-for="Email" class="invalid-field"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" class="form-input" autocomplete="current-password" aria-required="true" />
+                        <span asp-validation-for="Password" class="invalid-field"></span>
+                    </div>
+                    <div>
+                        <label asp-for="RememberMe" class="remember-me">
+                            <input asp-for="RememberMe" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-btn-wrapper sign-in">
+                    <button class="btn">Sing In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/authentication/particles.js"></script>
+    <script src="~/js/authentication/app.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
+

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/Academix.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
-    @if (ViewData["Title"] != "Log in" && ViewData["Title"] != "Register")
+    @if (ViewData["Title"] != "SignIn" && ViewData["Title"] != "SignUp")
     {
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -38,7 +38,7 @@
         @RenderBody()
     </main>
 
-    @if (ViewData["Title"] != "Log in" && ViewData["Title"] != "Register")
+    @if (ViewData["Title"] != "SignIn" && ViewData["Title"] != "SignUp")
     {
         <footer class="border-top footer text-muted">
             <div class="container">
