@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Academix.Infrastructure.Data.Configurations
 {
-    public class CityConfiguration : IEntityTypeConfiguration<City>
+    public class DirectorConfiguration : IEntityTypeConfiguration<Director>
     {
-        public void Configure(EntityTypeBuilder<City> builder)
+        public void Configure(EntityTypeBuilder<Director> builder)
         {
-            builder.HasData(DataSeed.SeedCities());
+            builder.HasData(DataSeed.SeedDirectors());
         }
     }
 }

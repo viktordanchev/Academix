@@ -43,6 +43,6 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(ParentId))]
         public Parent? Parent { get; set; }
 
-        public ICollection<SubjectStudent> SubjectsStudent { get; set; }
+        public IEnumerable<SubjectStudent> SubjectsStudent { get; set; }
     }
 }

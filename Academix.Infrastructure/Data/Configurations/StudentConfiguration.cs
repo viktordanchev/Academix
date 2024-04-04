@@ -17,6 +17,8 @@ namespace Academix.Infrastructure.Data.Configurations
                 .HasOne(s => s.Class)
                 .WithMany(s => s.Students)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasData(DataSeed.SeedStudents());
         }
     }
 }

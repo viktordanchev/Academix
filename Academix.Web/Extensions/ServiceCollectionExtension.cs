@@ -25,6 +25,7 @@ namespace Academix.Web.Extensions
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
+                options.Password.RequiredLength = 6;
             })
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AcademixDbContext>();

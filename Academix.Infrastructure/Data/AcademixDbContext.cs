@@ -28,11 +28,19 @@ namespace Academix.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new StudentConfiguration());
-            builder.ApplyConfiguration(new TeacherConfiguration());
+            builder.ApplyConfiguration(new AbsenceConfiguration());
+            builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());
-            builder.ApplyConfiguration(new SubjectStudentConfiguration());
+            builder.ApplyConfiguration(new ClassConfiguration());
+            builder.ApplyConfiguration(new DirectorConfiguration());
+            builder.ApplyConfiguration(new GradeConfiguration());
             builder.ApplyConfiguration(new IdentityRoleConfiguration());
+            builder.ApplyConfiguration(new ParentConfiguration());
+            builder.ApplyConfiguration(new SchoolConfiguration());
+            builder.ApplyConfiguration(new StudentConfiguration());
+            builder.ApplyConfiguration(new SubjectConfiguration());
+            builder.ApplyConfiguration(new SubjectStudentConfiguration());
+            builder.ApplyConfiguration(new TeacherConfiguration());
 
             base.OnModelCreating(builder);
         }
