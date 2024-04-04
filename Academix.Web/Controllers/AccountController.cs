@@ -1,4 +1,5 @@
-﻿using Academix.Infrastructure.Data.Models;
+﻿using Academix.Infrastructure.Data;
+using Academix.Infrastructure.Data.Models;
 using Academix.Web.Models.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,33 +12,37 @@ namespace Academix.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AcademixDbContext _context;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager, RoleManager<IdentityRole> roleManager, AcademixDbContext context)
         {
             _userManager = userManager;
             _signInManager = singInManager;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> SignUp()
         {
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            var model = new RegisterViewModel();
+            var model = new SignUpViewModel();
             model.Roles = await GetRolesAsync();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                model.Roles = await GetRolesAsync();
+
                 return View(model);
             }
 
@@ -50,8 +55,8 @@ namespace Academix.Web.Controllers
                 return View(model);
             }
 
-            user = new ApplicationUser() 
-            { 
+            user = new ApplicationUser()
+            {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
@@ -76,7 +81,7 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult SignIn()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -87,7 +92,7 @@ namespace Academix.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -117,11 +122,16 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
-        private async Task<IEnumerable<string>> GetRolesAsync()
+        private async Task<IEnumerable<IdentityRoleViewModel>> GetRolesAsync()
         {
             var roles = await _roleManager.Roles
                 .Where(r => r.Name != "Administrator")
-                .Select(r => r.Name)
+                .Select(r => new IdentityRoleViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name
+                })
+                .AsNoTracking()
                 .ToListAsync();
 
             return roles;
