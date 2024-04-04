@@ -19,6 +19,6 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(DirectorIdentityId))]
         public ApplicationUser DirectorIdentity { get; set; } = null!;
 
-        public ICollection<Request> Requests { get; set; }
+        public IEnumerable<Request> Requests { get; set; }
     }
 }

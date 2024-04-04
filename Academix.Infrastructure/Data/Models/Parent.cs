@@ -20,6 +20,6 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(ParentIdentityId))]
         public ApplicationUser ParentIdentity { get; set; } = null!;
 
-        public ICollection<Student> Students { get; set; }
+        public IEnumerable<Student> Students { get; set; }
     }
 }

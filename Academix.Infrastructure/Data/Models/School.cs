@@ -30,10 +30,10 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(DirectorId))]
         public Director Director { get; set; } = null!;
 
-        public ICollection<Teacher> Teachers { get; set; }
+        public IEnumerable<Teacher> Teachers { get; set; }
 
-        public ICollection<Student> Students { get; set; }
+        public IEnumerable<Student> Students { get; set; }
 
-        public ICollection<Class> Classes { get; set; }
+        public IEnumerable<Class> Classes { get; set; }
     }
 }
