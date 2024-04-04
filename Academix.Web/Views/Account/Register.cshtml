@@ -4,53 +4,73 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
-<a asp-controller="Home" asp-action="Index">
-    <i class="fa-solid fa-xmark"></i>
-</a>
-<section>
-    <form method="post">
-        <hr />
-        <div asp-validation-summary="ModelOnly"></div>
-        <div>
-            <input asp-for="FirstName" autocomplete="given-name" aria-required="true" />
-            <label asp-for="FirstName">First Name</label>
-            <span asp-validation-for="FirstName"></span>
+<div id="particles-js" class="register-wrapper">
+    <div class="register-main-wrapper">
+        <div class="register-form-wrapper">
+            <form method="post">
+                <div class="register-steps">
+                    <ul>
+                        <li class="register-step-menu1 active">
+                            <span>1</span>
+                            Sign Up
+                        </li>
+                        <li class="register-step-menu2">
+                            <span>2</span>
+                            Personal info
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="register-form-step-1 active">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <label asp-for="FirstName" class="register-form-label">First name</label>
+                        <input asp-for="FirstName" class="register-form-input" autocomplete="given-name" aria-required="true" />
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+                    <div>
+                        <label asp-for="LastName" class="register-form-label">Last name</label>
+                        <input asp-for="LastName" class="register-form-input" autocomplete="family-name" aria-required="true" />
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Email" class="register-form-label">Email</label>
+                        <input asp-for="Email" class="register-form-input" autocomplete="email" aria-required="true" />
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Password" class="register-form-label">Password</label>
+                        <input asp-for="Password" class="register-form-input" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div>
+                        <label asp-for="ConfirmPassword" class="register-form-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="register-form-input" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                </div>
+
+                <div class="register-form-step-2">
+                    <div>
+                        <label for="message" class="register-form-label"> Message </label>
+                        <textarea rows="6" name="message" id="message" placeholder="Type your message"
+                                  class="register-form-input"></textarea>
+                    </div>
+                </div>
+
+                <div class="register-form-btn-wrapper">
+                    <button class="register-btn back">Back</button>
+                    <button class="register-btn cancel">Cancel</button>
+                    <button class="register-btn next">Next</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <input asp-for="LastName" autocomplete="family-name" aria-required="true" />
-            <label asp-for="LastName">Last Name</label>
-            <span asp-validation-for="LastName"></span>
-        </div>
-        <div>
-            <input asp-for="Email" autocomplete="email" aria-required="true" />
-            <label asp-for="Email"></label>
-            <span asp-validation-for="Email"></span>
-        </div>
-        <div>
-            <input asp-for="Password" autocomplete="new-password" aria-required="true" />
-            <label asp-for="Password"></label>
-            <span asp-validation-for="Password"></span>
-        </div>
-        <div>
-            <input asp-for="ConfirmPassword" autocomplete="new-password" aria-required="true" />
-            <label asp-for="ConfirmPassword">Confirm Password</label>
-            <span asp-validation-for="ConfirmPassword"></span>
-        </div>
-        <div>
-            <label for="dog-names">Choose role:</label>
-            <select>
-                <option value="" selected disabled hidden>Roles</option>
-                @foreach (var role in Model.Roles)
-                {
-                    <option>@role</option>
-                }
-            </select>
-        </div>
-        <button type="submit">Register</button>
-    </form>
-</section>
+    </div>
+</div>
 
 @section Scripts {
+    <script src="~/js/register/particles.js"></script>
+    <script src="~/js/register/app.js"></script>
+    <script src="~/js/register/func.js"></script>
     <partial name="_ValidationScriptsPartial" />
 }
