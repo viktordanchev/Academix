@@ -51,18 +51,18 @@
                 </div>
 
                 <div class="form-step-2">
-                    <div class="roles">
+                    <div id="roles">
                         <label asp-for="IdentityRoleId" class="form-label">Choose role</label>
                         <select asp-for="IdentityRoleId" class="form-input">
                             <option value="" selected disabled hidden>Roles</option>
                             @foreach (var role in Model.Roles)
                             {
-                                <option value=@role.Id>@role.Name</option>
+                                <option value=@role.Name>@role.Name</option>
                             }
                         </select>
                         <span asp-validation-for="IdentityRoleId" class="invalid-field"></span>
                     </div>
-                    <div class="schools" hidden>
+                    <div id="schools" hidden>
                         <label asp-for="SchoolId" class="form-label">Choose school</label>
                         <select asp-for="SchoolId" class="form-input">
                             <option value="" selected disabled hidden>Schools</option>
@@ -72,6 +72,28 @@
                             }
                         </select>
                         <span asp-validation-for="SchoolId" class="invalid-field"></span>
+                    </div>
+                    <div id="students" hidden>
+                        <label asp-for="StudentId" class="form-label">Choose student</label>
+                        <select asp-for="StudentId" class="form-input">
+                            <option value="" selected disabled hidden>Classes</option>
+                            @foreach (var student in Model.Students)
+                            {
+                                <option value=@student.Id>@student.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="StudentId" class="invalid-field"></span>
+                    </div>
+                    <div id="classes" hidden>
+                        <label asp-for="ClassId" class="form-label">Choose class</label>
+                        <select asp-for="ClassId" class="form-input">
+                            <option value="" selected disabled hidden>Classes</option>
+                            @foreach (var curClass in Model.Classes)
+                            {
+                                <option value=@curClass.Id>@curClass.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="ClassId" class="invalid-field"></span>
                     </div>
                 </div>
 

@@ -14,11 +14,9 @@ namespace Academix.Infrastructure.Data.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string Address { get; set; } = null!;
+        public string? Address { get; set; }
 
-        [Required]
-        public int NumberInClass { get; set; }
+        public int? NumberInClass { get; set; }
 
         [Required]
         public string StudentIdentityId { get; set; } = null!;
@@ -31,12 +29,6 @@ namespace Academix.Infrastructure.Data.Models
 
         [ForeignKey(nameof(ClassId))]
         public Class Class { get; set; } = null!;
-
-        [Required]
-        public int SchoolId { get; set; }
-
-        [ForeignKey(nameof(SchoolId))]
-        public School School { get; set; } = null!;
 
         public int? ParentId { get; set; }
 

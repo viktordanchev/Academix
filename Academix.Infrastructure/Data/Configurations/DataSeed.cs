@@ -2,6 +2,7 @@
 using Academix.Infrastructure.Data.Models.Enumerations;
 using Academix.Infrastructure.Data.Models.Mapping;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Academix.Infrastructure.Data.Configurations
 {
@@ -174,6 +175,7 @@ namespace Academix.Infrastructure.Data.Configurations
             {
                 Id = 1,
                 Name = "12A",
+                SchoolId = 1,
                 ClassTeacherId = 1
             };
 
@@ -181,6 +183,7 @@ namespace Academix.Infrastructure.Data.Configurations
             {
                 Id = 2,
                 Name = "8B",
+                SchoolId = 1,
                 ClassTeacherId = 2
             };
 
@@ -278,7 +281,6 @@ namespace Academix.Infrastructure.Data.Configurations
                 NumberInClass = 5,
                 StudentIdentityId = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc",
                 ClassId = 1,
-                SchoolId = 1,
                 ParentId = 1
             };
 
@@ -289,7 +291,6 @@ namespace Academix.Infrastructure.Data.Configurations
                 NumberInClass = 3,
                 StudentIdentityId = "a171483f-6e48-446a-a5d7-36110d0c1443",
                 ClassId = 2,
-                SchoolId = 1,
                 ParentId = 2
             };
 
@@ -300,7 +301,6 @@ namespace Academix.Infrastructure.Data.Configurations
                 NumberInClass = 15,
                 StudentIdentityId = "b2502a25-8341-4e5c-af74-cd0f889ede1b",
                 ClassId = 2,
-                SchoolId = 1,
                 ParentId = 2
             };
 
@@ -380,6 +380,105 @@ namespace Academix.Infrastructure.Data.Configurations
             };
 
             return new Teacher[] { teacher, teacher2, teacher3 };
+        }
+
+        public static IdentityRole[] SeedRoles()
+        {
+            var director = new IdentityRole
+            {
+                Id = "a550b411-e5c7-407f-aaba-35161bab127e",
+                Name = "Director",
+                NormalizedName = "DIRECTOR"
+            };
+
+            var teacher = new IdentityRole
+            {
+                Id = "f67cd347-818b-4c3e-a1ce-ae76e1a2e31b",
+                Name = "Teacher",
+                NormalizedName = "TEACHER"
+            };
+
+            var student = new IdentityRole
+            {
+                Id = "e67d14b1-de35-47bd-96ac-a70fcc4c25be",
+                Name = "Student",
+                NormalizedName = "STUDENT"
+            };
+
+            var parent = new IdentityRole
+            {
+                Id = "fc1ee3a5-9b29-43ea-b038-2265c1806a75",
+                Name = "Parent",
+                NormalizedName = "PARENT"
+            };
+
+            var administrator = new IdentityRole
+            {
+                Id = "7f92327f-b1c1-4fd0-b837-afc278f256b2",
+                Name = "Administrator",
+                NormalizedName = "ADMINISTRATOR"
+            };
+
+            return new IdentityRole[] { director, teacher, student, parent, administrator };
+        }
+
+        public static IdentityUserRole<string>[] SeedUserRoles()
+        {
+            var director = new IdentityUserRole<string>
+            {
+                UserId = "a3717562-385e-41ce-9eff-0f1b994e5548",
+                RoleId = "a550b411-e5c7-407f-aaba-35161bab127e"
+            };
+
+            var teacher = new IdentityUserRole<string>
+            {
+                UserId = "5093413e-4acb-471a-9ce7-53df30689fc1",
+                RoleId = "f67cd347-818b-4c3e-a1ce-ae76e1a2e31b"
+            };
+
+            var teacher2 = new IdentityUserRole<string>
+            {
+                UserId = "6c1ff15b-1853-4d20-98ff-9695affb432c",
+                RoleId = "f67cd347-818b-4c3e-a1ce-ae76e1a2e31b"
+            };
+
+            var teacher3 = new IdentityUserRole<string>
+            {
+                UserId = "bd3e68c0-728b-44a0-ba3a-992d8ae683f9",
+                RoleId = "f67cd347-818b-4c3e-a1ce-ae76e1a2e31b"
+            };
+
+            var student = new IdentityUserRole<string>
+            {
+                UserId = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc",
+                RoleId = "e67d14b1-de35-47bd-96ac-a70fcc4c25be"
+            };
+
+            var student2 = new IdentityUserRole<string>
+            {
+                UserId = "a171483f-6e48-446a-a5d7-36110d0c1443",
+                RoleId = "e67d14b1-de35-47bd-96ac-a70fcc4c25be"
+            };
+
+            var student3 = new IdentityUserRole<string>
+            {
+                UserId = "b2502a25-8341-4e5c-af74-cd0f889ede1b",
+                RoleId = "e67d14b1-de35-47bd-96ac-a70fcc4c25be"
+            };
+
+            var parent = new IdentityUserRole<string>
+            {
+                UserId = "925da918-5cd0-4b17-9b62-2f417aac0343",
+                RoleId = "fc1ee3a5-9b29-43ea-b038-2265c1806a75"
+            };
+
+            var parent2 = new IdentityUserRole<string>
+            {
+                UserId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c",
+                RoleId = "fc1ee3a5-9b29-43ea-b038-2265c1806a75"
+            };
+
+            return new IdentityUserRole<string>[] { director, teacher, teacher2, teacher3, student, student2, student3, parent, parent2 };
         }
     }
 }

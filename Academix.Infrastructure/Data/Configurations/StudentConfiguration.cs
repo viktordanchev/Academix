@@ -9,11 +9,6 @@ namespace Academix.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<Student> builder)
         {
             builder
-                .HasOne(s => s.School)
-                .WithMany(s => s.Students)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder
                 .HasOne(s => s.Class)
                 .WithMany(s => s.Students)
                 .OnDelete(DeleteBehavior.NoAction);

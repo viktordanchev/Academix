@@ -8,7 +8,6 @@ namespace Academix.Infrastructure.Data.Models
         public School()
         {
             Teachers = new List<Teacher>();
-            Students = new List<Student>();
             Classes = new List<Class>();
         }
 
@@ -24,15 +23,12 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(CityId))]
         public City City { get; set; } = null!;
 
-        [Required]
-        public int DirectorId { get; set; }
+        public int? DirectorId { get; set; }
 
         [ForeignKey(nameof(DirectorId))]
-        public Director Director { get; set; } = null!;
+        public Director? Director { get; set; }
 
         public IEnumerable<Teacher> Teachers { get; set; }
-
-        public IEnumerable<Student> Students { get; set; }
 
         public IEnumerable<Class> Classes { get; set; }
     }

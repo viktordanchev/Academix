@@ -33,6 +33,7 @@ namespace Academix.Web.Controllers
             var model = new SignUpViewModel();
             model.Roles = await GetRolesAsync();
             model.Schools = await GetSchoolsAsync();
+            model.Classes = await GetClassesAsync(model.SchoolId);
 
             return View(model);
         }
@@ -44,6 +45,7 @@ namespace Academix.Web.Controllers
             {
                 model.Roles = await GetRolesAsync();
                 model.Schools = await GetSchoolsAsync();
+                model.Classes = await GetClassesAsync(model.SchoolId);
 
                 return View(model);
             }
@@ -146,12 +148,28 @@ namespace Academix.Web.Controllers
                 .Select(r => new InfoViewModel()
                 {
                     Id = r.Id,
-                    Name = r.Name
+                    Name = $"'{r.Name}' - {r.City.Name}"
                 })
                 .AsNoTracking()
                 .ToListAsync();
 
             return schools;
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<InfoViewModel>> GetClassesAsync(int schoolId)
+        {
+            var classes = await _context.Classes
+                .Where(c => c.SchoolId == schoolId)
+                .Select(c => new InfoViewModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .AsNoTracking()
+                .ToListAsync();
+        
+            return classes;
         }
     }
 }

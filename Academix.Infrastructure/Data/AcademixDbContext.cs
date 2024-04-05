@@ -41,6 +41,7 @@ namespace Academix.Infrastructure.Data
             builder.ApplyConfiguration(new SubjectConfiguration());
             builder.ApplyConfiguration(new SubjectStudentConfiguration());
             builder.ApplyConfiguration(new TeacherConfiguration());
+            builder.ApplyConfiguration(new IdentityUserRoleConfiguration());
 
             base.OnModelCreating(builder);
         }

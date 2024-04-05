@@ -16,6 +16,12 @@ namespace Academix.Infrastructure.Data.Models
         [Required]
         public string Name { get; set; } = null!;
 
+        [Required]
+        public int SchoolId { get; set; }
+
+        [ForeignKey(nameof(SchoolId))]
+        public School School { get; set; } = null!;
+
         public int? ClassTeacherId { get; set; }
 
         [ForeignKey(nameof(ClassTeacherId))]
