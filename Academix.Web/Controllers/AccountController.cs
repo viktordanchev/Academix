@@ -32,8 +32,6 @@ namespace Academix.Web.Controllers
 
             var model = new SignUpViewModel();
             model.Roles = await GetRolesAsync();
-            model.Schools = await GetSchoolsAsync();
-            model.Classes = await GetClassesAsync(model.SchoolId);
 
             return View(model);
         }
@@ -44,8 +42,6 @@ namespace Academix.Web.Controllers
             if (!ModelState.IsValid)
             {
                 model.Roles = await GetRolesAsync();
-                model.Schools = await GetSchoolsAsync();
-                model.Classes = await GetClassesAsync(model.SchoolId);
 
                 return View(model);
             }
@@ -84,7 +80,15 @@ namespace Academix.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> Info()
+        {
+
+
+            return View();
+        }
+
         [HttpGet]
+        [ActionName("Delete")]
         public IActionResult SignIn()
         {
             if (User.Identity.IsAuthenticated)
@@ -139,37 +143,6 @@ namespace Academix.Web.Controllers
                 .ToListAsync();
 
             return roles;
-        }
-
-        [HttpGet]
-        private async Task<IEnumerable<InfoViewModel>> GetSchoolsAsync()
-        {
-            var schools = await _context.Schools
-                .Select(r => new InfoViewModel()
-                {
-                    Id = r.Id,
-                    Name = $"'{r.Name}' - {r.City.Name}"
-                })
-                .AsNoTracking()
-                .ToListAsync();
-
-            return schools;
-        }
-
-        [HttpGet]
-        private async Task<IEnumerable<InfoViewModel>> GetClassesAsync(int schoolId)
-        {
-            var classes = await _context.Classes
-                .Where(c => c.SchoolId == schoolId)
-                .Select(c => new InfoViewModel()
-                {
-                    Id = c.Id,
-                    Name = c.Name
-                })
-                .AsNoTracking()
-                .ToListAsync();
-        
-            return classes;
         }
     }
 }
