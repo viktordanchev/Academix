@@ -3,7 +3,6 @@ using Academix.Infrastructure.Data.Models;
 using Academix.Web.Models.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Web.Controllers
@@ -55,6 +54,21 @@ namespace Academix.Web.Controllers
             {
                 ModelState.AddModelError(string.Empty, "This email is already registered!");
 
+                model.Roles = await GetRolesAsync();
+                model.Schools = await GetSchoolsAsync();
+
+                return View(model);
+            }
+
+            var school = await _context.Schools.FirstAsync(s => s.Id == model.SchoolId);
+
+            if (school.DirectorId != 0 && model.Role == "Director")
+            {
+                ModelState.AddModelError(string.Empty, "This school has teacher already!");
+
+                model.Roles = await GetRolesAsync();
+                model.Schools = await GetSchoolsAsync();
+
                 return View(model);
             }
 
@@ -75,8 +89,60 @@ namespace Academix.Web.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
 
+                model.Roles = await GetRolesAsync();
+                model.Schools = await GetSchoolsAsync();
+
                 return View(model);
             }
+
+            await _userManager.AddToRoleAsync(user, model.Role);
+
+            switch (model.Role)
+            {
+                case "Teacher":
+                    var teacher = new Teacher()
+                    {
+                        TeacherIdentity = user,
+                        SchoolId = model.SchoolId
+                    };
+
+                    await _context.Teachers.AddAsync(teacher);
+                    break;
+                case "Student":
+                    var student = new Student()
+                    {
+                        StudentIdentity = user,
+                        ClassId = model.ClassId
+                    };
+
+                    await _context.Students.AddAsync(student);
+                    break;
+                case "Parent":
+                    var parent = new Parent()
+                    {
+                        ParentIdentity = user
+                    };
+
+                    var parentStudent = await _context.Students
+                        .FirstAsync(s => s.Id == model.StudentId);
+
+                    parentStudent.Parent = parent;
+
+                    await _context.Parents.AddAsync(parent);
+                    break;
+                case "Director":
+                    var director = new Director()
+                    {
+                        DirectorIdentity = user
+                    };
+
+                    school.Director = director;
+
+                    await _context.Directors.AddAsync(director);
+                    break;
+            }
+
+            await _context.SaveChangesAsync();
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
@@ -124,6 +190,7 @@ namespace Academix.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public async Task<JsonResult> GetClassesBySchoolId(int schoolId)
         {
             var classes = await _context.Classes
@@ -135,15 +202,27 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
-        private async Task<IEnumerable<IdentityRoleViewModel>> GetRolesAsync()
+        public async Task<JsonResult> GetStudentsByClassId(int classId)
+        {
+            var students = await _context.Students
+                .Where(s => s.ClassId == classId)
+                .Select(s => new
+                {
+                    s.Id,
+                    Name = $"{s.StudentIdentity.FirstName} {s.StudentIdentity.LastName}"
+                })
+                .AsNoTracking()
+                .ToListAsync();
+
+            return Json(students);
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<string>> GetRolesAsync()
         {
             var roles = await _roleManager.Roles
                 .Where(r => r.Name != "Administrator")
-                .Select(r => new IdentityRoleViewModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name
-                })
+                .Select(r => r.Name)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -154,10 +233,10 @@ namespace Academix.Web.Controllers
         private async Task<IEnumerable<InfoViewModel>> GetSchoolsAsync()
         {
             var schools = await _context.Schools
-                .Select(r => new InfoViewModel()
+                .Select(s => new InfoViewModel()
                 {
-                    Id = r.Id,
-                    Name = r.Name
+                    Id = s.Id,
+                    Name = $"{s.Name} - {s.City.Name}"
                 })
                 .AsNoTracking()
                 .ToListAsync();
