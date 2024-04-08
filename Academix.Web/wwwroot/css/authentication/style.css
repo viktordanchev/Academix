@@ -4,6 +4,10 @@
     color: red;
 }
 
+    .invalid-field.validation ul {
+        list-style-type: none;
+    }
+
 .wrapper {
     height: 100vh;
     overflow: hidden;
@@ -211,6 +215,14 @@
         display: block;
     }
 
+.btn.next {
+    display: none;
+}
+
+    .btn.next.active {
+        display: block;
+    }
+
 .btn {
     display: flex;
     align-items: center;
@@ -229,7 +241,7 @@
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
 
-.remember-me{
+.remember-me {
     color: white;
     font-size: 17px;
 }

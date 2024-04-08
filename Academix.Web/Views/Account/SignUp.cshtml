@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-step-1 active">
-                    <div asp-validation-summary="ModelOnly"></div>
+                    <div asp-validation-summary="ModelOnly" class="invalid-field validation"></div>
                     <div>
                         <label asp-for="FirstName" class="form-label">First name</label>
                         <input asp-for="FirstName" class="form-input" autocomplete="given-name" aria-required="true" />
@@ -51,16 +51,17 @@
                 </div>
 
                 <div class="form-step-2">
+                    <div asp-validation-summary="ModelOnly" class="invalid-field validation"></div>
                     <div id="roles">
-                        <label asp-for="IdentityRoleId" class="form-label">Choose role</label>
-                        <select asp-for="IdentityRoleId" class="form-input">
+                        <label asp-for="Role" class="form-label">Choose role</label>
+                        <select asp-for="Role" class="form-input">
                             <option value="" selected disabled hidden>Roles</option>
                             @foreach (var role in Model.Roles)
                             {
-                                <option value="@role.Name">@role.Name</option>
+                                <option value="@role">@role</option>
                             }
                         </select>
-                        <span asp-validation-for="IdentityRoleId" class="invalid-field"></span>
+                        <span asp-validation-for="Role" class="invalid-field"></span>
                     </div>
                     <div id="schools">
                         <label asp-for="SchoolId" class="form-label">Choose school</label>
@@ -80,12 +81,19 @@
                         </select>
                         <span asp-validation-for="ClassId" class="invalid-field"></span>
                     </div>
+                    <div id="students" hidden>
+                        <label asp-for="StudentId" class="form-label">Choose student</label>
+                        <select asp-for="StudentId" class="form-input" id="studentId">
+                            <option value="" selected disabled hidden>Students</option>
+                        </select>
+                        <span asp-validation-for="StudentId" class="invalid-field"></span>
+                    </div>
                 </div>
 
                 <div class="form-btn-wrapper register">
                     <button class="btn back">Back</button>
                     <button asp-controller="Home" asp-action="Index" class="btn cancel active">Cancel</button>
-                    <button class="btn next">Next</button>
+                    <button class="btn next active">Next</button>
                 </div>
             </form>
         </div>
@@ -93,8 +101,8 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/authentication/particles.js"></script>
-    <script src="~/js/authentication/app.js"></script>
+    <script src="~/js/background/particles.js"></script>
+    <script src="~/js/background/app.js"></script>
     <script src="~/js/authentication/singup.js"></script>
     <script src="~/js/authentication/personalinfo.js"></script>
     <partial name="_ValidationScriptsPartial" />
@@ -113,10 +121,39 @@
                     schoolId: $('#schoolId').val(),
                 },
                 success: function (data) {
+                    $('#classId').find('option').remove().end()
+                        .append('<option value="" selected disabled hidden>Classes</option>')
                     $(data).each(
                         function (index, item) {
                             $('#classId').append('<option value="' + item.id + '">' + item.name + '</option>')
-                        })
+                        }
+                    );
+                }
+            })
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            getStudentsByClassId();
+        })
+        $("#classId").change(function () {
+            getStudentsByClassId();
+        });
+        var getStudentsByClassId = function () {
+            $.ajax({
+                url: '@Url.Action("GetStudentsByClassId", "Account")',
+                type: 'GET',
+                data: {
+                    classId: $('#classId').val(),
+                },
+                success: function (data) {
+                    $('#studentId').find('option').remove().end()
+                        .append('<option value="" selected disabled hidden>Students</option>')
+                    $(data).each(
+                        function (index, item) {
+                            $('#studentId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                        }
+                    );
                 }
             })
         }
