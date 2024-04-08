@@ -7,7 +7,7 @@
 <div id="particles-js" class="wrapper">
     <div class="main-wrapper">
         <div class="form-wrapper">
-            <form method="post">
+            <form method="post" asp-controller="Account" asp-action="SignUp">
                 <div class="steps">
                     <ul>
                         <li class="step-menu1 active">
@@ -48,21 +48,44 @@
                         <input asp-for="ConfirmPassword" class="form-input" autocomplete="new-password" aria-required="true" />
                         <span asp-validation-for="ConfirmPassword" class="invalid-field"></span>
                     </div>
+                </div>
+
+                <div class="form-step-2">
                     <div id="roles">
                         <label asp-for="IdentityRoleId" class="form-label">Choose role</label>
                         <select asp-for="IdentityRoleId" class="form-input">
                             <option value="" selected disabled hidden>Roles</option>
                             @foreach (var role in Model.Roles)
                             {
-                                <option value=@role.Name>@role.Name</option>
+                                <option value="@role.Name">@role.Name</option>
                             }
                         </select>
                         <span asp-validation-for="IdentityRoleId" class="invalid-field"></span>
                     </div>
+                    <div id="schools">
+                        <label asp-for="SchoolId" class="form-label">Choose school</label>
+                        <select asp-for="SchoolId" class="form-input" id="schoolId">
+                            <option value="" selected disabled hidden>Schools</option>
+                            @foreach (var school in Model.Schools)
+                            {
+                                <option value="@school.Id">@school.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SchoolId" class="invalid-field"></span>
+                    </div>
+                    <div id="classes" hidden>
+                        <label asp-for="ClassId" class="form-label">Choose class</label>
+                        <select asp-for="ClassId" class="form-input" id="classId">
+                            <option value="" selected disabled hidden>Classes</option>
+                        </select>
+                        <span asp-validation-for="ClassId" class="invalid-field"></span>
+                    </div>
                 </div>
 
                 <div class="form-btn-wrapper register">
-                    <button class="btn">Next</button>
+                    <button class="btn back">Back</button>
+                    <button asp-controller="Home" asp-action="Index" class="btn cancel active">Cancel</button>
+                    <button class="btn next">Next</button>
                 </div>
             </form>
         </div>
@@ -75,4 +98,27 @@
     <script src="~/js/authentication/singup.js"></script>
     <script src="~/js/authentication/personalinfo.js"></script>
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            getClassesBySchoolId();
+        })
+        $("#schoolId").change(function () {
+            getClassesBySchoolId();
+        });
+        var getClassesBySchoolId = function () {
+            $.ajax({
+                url: '@Url.Action("GetClassesBySchoolId", "Account")',
+                type: 'GET',
+                data: {
+                    schoolId: $('#schoolId').val(),
+                },
+                success: function (data) {
+                    $(data).each(
+                        function (index, item) {
+                            $('#classId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                        })
+                }
+            })
+        }
+    </script>
 }

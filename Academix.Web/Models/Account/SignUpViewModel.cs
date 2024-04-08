@@ -8,6 +8,7 @@ namespace Academix.Web.Models.Account
         public SignUpViewModel()
         {
             Roles = new List<IdentityRoleViewModel>();
+            Schools = new List<InfoViewModel>();
         }
 
         [Required(ErrorMessage = "The First name field is required.")]
@@ -35,6 +36,14 @@ namespace Academix.Web.Models.Account
         [Required(ErrorMessage = "The Role field is required.")]
         public string IdentityRoleId { get; set; } = null!;
 
+        [Required(ErrorMessage = "The School field is required.")]
+        public int SchoolId { get; set; }
+
+        [Required(ErrorMessage = "The Class field is required.")]
+        public int ClassId { get; set; }
+
         public IEnumerable<IdentityRoleViewModel> Roles { get; set; }
+
+        public IEnumerable<InfoViewModel> Schools { get; set; }
     }
 }

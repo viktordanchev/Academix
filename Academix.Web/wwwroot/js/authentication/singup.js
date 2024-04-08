@@ -4,9 +4,12 @@ const stepMenuTwo = document.querySelector(".step-menu2");
 const stepOne = document.querySelector(".form-step-1");
 const stepTwo = document.querySelector(".form-step-2");
 
-const formSubmitBtn = document.querySelector(".btn.next");
+const formNextBtn = document.querySelector(".btn.next");
 const formBackBtn = document.querySelector(".btn.back");
 const formCancelBtn = document.querySelector(".btn.cancel");
+const formButtonsHtml = document.querySelector(".form-btn-wrapper.register");
+
+const formSignUpButton = '<button type="submit" class="btn">Submit</button>';
 
 formSubmitBtn.addEventListener("click", function (event) {
     event.preventDefault();
@@ -30,10 +33,5 @@ formSubmitBtn.addEventListener("click", function (event) {
 
         formCancelBtn.classList.add("active");
         formBackBtn.classList.remove("active");
-        formSubmitBtn.textContent = "Next";
-        formSubmitBtn.removeAttribute("type");
     });
-
-    formSubmitBtn.textContent = "Sign Up";
-    formSubmitBtn.setAttribute("type", "submit");
 });

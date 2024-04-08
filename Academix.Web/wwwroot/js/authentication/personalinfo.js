@@ -6,5 +6,9 @@
 
     if (selectedValue === "Director") {
         schools.removeAttribute("hidden");
+        classes.removeAttribute("hidden");
+    } else {
+        schools.setAttribute("hidden", true);
+        classes.setAttribute("hidden", true);
     }
 });

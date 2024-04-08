@@ -3,6 +3,7 @@ using Academix.Infrastructure.Data.Models;
 using Academix.Web.Models.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Web.Controllers
@@ -32,6 +33,7 @@ namespace Academix.Web.Controllers
 
             var model = new SignUpViewModel();
             model.Roles = await GetRolesAsync();
+            model.Schools = await GetSchoolsAsync();
 
             return View(model);
         }
@@ -42,6 +44,7 @@ namespace Academix.Web.Controllers
             if (!ModelState.IsValid)
             {
                 model.Roles = await GetRolesAsync();
+                model.Schools = await GetSchoolsAsync();
 
                 return View(model);
             }
@@ -80,15 +83,7 @@ namespace Academix.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Info()
-        {
-
-
-            return View();
-        }
-
         [HttpGet]
-        [ActionName("Delete")]
         public IActionResult SignIn()
         {
             if (User.Identity.IsAuthenticated)
@@ -129,6 +124,16 @@ namespace Academix.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<JsonResult> GetClassesBySchoolId(int schoolId)
+        {
+            var classes = await _context.Classes
+                .Where(c => c.SchoolId == schoolId)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return Json(classes);
+        }
+
         [HttpGet]
         private async Task<IEnumerable<IdentityRoleViewModel>> GetRolesAsync()
         {
@@ -143,6 +148,21 @@ namespace Academix.Web.Controllers
                 .ToListAsync();
 
             return roles;
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<InfoViewModel>> GetSchoolsAsync()
+        {
+            var schools = await _context.Schools
+                .Select(r => new InfoViewModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name
+                })
+                .AsNoTracking()
+                .ToListAsync();
+
+            return schools;
         }
     }
 }
