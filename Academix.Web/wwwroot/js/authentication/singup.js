@@ -9,9 +9,12 @@ const formBackBtn = document.querySelector(".btn.back");
 const formCancelBtn = document.querySelector(".btn.cancel");
 const formButtonsHtml = document.querySelector(".form-btn-wrapper.register");
 
-const formSignUpButton = '<button type="submit" class="btn">Submit</button>';
+const formSignUpButton = document.createElement("button");
+formSignUpButton.className = "btn";
+formSignUpButton.innerHTML = "Sing Up";
+formSignUpButton.setAttribute("type", "submit");
 
-formSubmitBtn.addEventListener("click", function (event) {
+formNextBtn.addEventListener("click", function (event) {
     event.preventDefault();
 
     stepMenuOne.classList.remove("active");
@@ -22,6 +25,8 @@ formSubmitBtn.addEventListener("click", function (event) {
 
     formCancelBtn.classList.remove("active");
     formBackBtn.classList.add("active");
+    formNextBtn.classList.remove("active");
+
     formBackBtn.addEventListener("click", function (event) {
         event.preventDefault();
 
@@ -33,5 +38,10 @@ formSubmitBtn.addEventListener("click", function (event) {
 
         formCancelBtn.classList.add("active");
         formBackBtn.classList.remove("active");
+        formNextBtn.classList.add("active");
+
+        formButtonsHtml.removeChild(formSignUpButton);
     });
+
+    formButtonsHtml.appendChild(formSignUpButton);
 });

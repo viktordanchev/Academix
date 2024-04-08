@@ -1,14 +1,16 @@
 ﻿document.querySelector("#roles select").addEventListener('change', function () {
     var selectedValue = this.value;
-    var schools = document.getElementById("schools");
     var classes = document.getElementById("classes");
     var students = document.getElementById("students");
 
-    if (selectedValue === "Director") {
-        schools.removeAttribute("hidden");
+    if (selectedValue === "Student") {
+        students.setAttribute("hidden", true);
         classes.removeAttribute("hidden");
-    } else {
-        schools.setAttribute("hidden", true);
+    } else if (selectedValue === "Parent") {
+        classes.removeAttribute("hidden");
+        students.removeAttribute("hidden");
+    } else { 
         classes.setAttribute("hidden", true);
+        students.setAttribute("hidden", true);
     }
 });
