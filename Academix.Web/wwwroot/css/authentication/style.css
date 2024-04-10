@@ -11,15 +11,10 @@
 .wrapper {
     height: 100vh;
     overflow: hidden;
-    background-color: #080710;
     font-family: "Inter", sans-serif;
 }
 
 .main-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     margin: 0 auto;
     width: 350px;
     display: flex;
@@ -55,6 +50,8 @@
         list-style: none;
         display: flex;
         justify-content: space-between;
+        margin: 0;
+        padding: 0;
     }
 
     .steps li {
@@ -189,39 +186,8 @@
     display: flex;
     align-items: center;
     margin-top: 45px;
+    justify-content: space-between;
 }
-
-    .form-btn-wrapper.register {
-        justify-content: space-between;
-    }
-
-    .form-btn-wrapper.sign-in {
-        justify-content: center;
-    }
-
-.btn.cancel {
-    display: none;
-}
-
-    .btn.cancel.active {
-        display: block;
-    }
-
-.btn.back {
-    display: none;
-}
-
-    .btn.back.active {
-        display: block;
-    }
-
-.btn.next {
-    display: none;
-}
-
-    .btn.next.active {
-        display: block;
-    }
 
 .btn {
     display: flex;

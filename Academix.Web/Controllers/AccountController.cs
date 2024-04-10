@@ -1,9 +1,11 @@
 ﻿using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
 using Academix.Web.Models.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Academix.Web.Controllers
 {
@@ -23,7 +25,8 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SignUp()
+        [AllowAnonymous]
+        public IActionResult SignUp()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -31,20 +34,16 @@ namespace Academix.Web.Controllers
             }
 
             var model = new SignUpViewModel();
-            model.Roles = await GetRolesAsync();
-            model.Schools = await GetSchoolsAsync();
 
             return View(model);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                model.Roles = await GetRolesAsync();
-                model.Schools = await GetSchoolsAsync();
-
                 return View(model);
             }
 
@@ -53,21 +52,6 @@ namespace Academix.Web.Controllers
             if (user != null)
             {
                 ModelState.AddModelError(string.Empty, "This email is already registered!");
-
-                model.Roles = await GetRolesAsync();
-                model.Schools = await GetSchoolsAsync();
-
-                return View(model);
-            }
-
-            var school = await _context.Schools.FirstAsync(s => s.Id == model.SchoolId);
-
-            if (school.DirectorId != 0 && model.Role == "Director")
-            {
-                ModelState.AddModelError(string.Empty, "This school has teacher already!");
-
-                model.Roles = await GetRolesAsync();
-                model.Schools = await GetSchoolsAsync();
 
                 return View(model);
             }
@@ -89,60 +73,8 @@ namespace Academix.Web.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
 
-                model.Roles = await GetRolesAsync();
-                model.Schools = await GetSchoolsAsync();
-
                 return View(model);
             }
-
-            await _userManager.AddToRoleAsync(user, model.Role);
-
-            switch (model.Role)
-            {
-                case "Teacher":
-                    var teacher = new Teacher()
-                    {
-                        TeacherIdentity = user,
-                        SchoolId = model.SchoolId
-                    };
-
-                    await _context.Teachers.AddAsync(teacher);
-                    break;
-                case "Student":
-                    var student = new Student()
-                    {
-                        StudentIdentity = user,
-                        ClassId = model.ClassId
-                    };
-
-                    await _context.Students.AddAsync(student);
-                    break;
-                case "Parent":
-                    var parent = new Parent()
-                    {
-                        ParentIdentity = user
-                    };
-
-                    var parentStudent = await _context.Students
-                        .FirstAsync(s => s.Id == model.StudentId);
-
-                    parentStudent.Parent = parent;
-
-                    await _context.Parents.AddAsync(parent);
-                    break;
-                case "Director":
-                    var director = new Director()
-                    {
-                        DirectorIdentity = user
-                    };
-
-                    school.Director = director;
-
-                    await _context.Directors.AddAsync(director);
-                    break;
-            }
-
-            await _context.SaveChangesAsync();
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
@@ -150,6 +82,7 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult SignIn()
         {
             if (User.Identity.IsAuthenticated)
@@ -161,6 +94,7 @@ namespace Academix.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             if (!ModelState.IsValid)
@@ -178,6 +112,45 @@ namespace Academix.Web.Controllers
             }
 
             await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Manage()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddRole()
+        {
+            var model = new AddRoleViewModel();
+            model.Roles = await GetAllRoles();
+            model.Schools = await GetAllSchools();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRole(AddRoleViewModel model)
+        {
+            var school = await _context.Schools
+                .FirstAsync(s => s.Id == model.SchoolId);
+
+            var request = new Request()
+            {
+                Role = model.Role,
+                DirectorId = (int)school.DirectorId,
+                RequesterId = GetUserId(),
+                SchoolId = model.SchoolId,
+                ClassId = model.ClassId,
+                StudentId = model.StudentId,
+                Message = model.Message
+            };
+
+            await _context.Requests.AddAsync(request);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
         }
@@ -218,7 +191,7 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
-        private async Task<IEnumerable<string>> GetRolesAsync()
+        private async Task<IEnumerable<string>> GetAllRoles()
         {
             var roles = await _roleManager.Roles
                 .Where(r => r.Name != "Administrator")
@@ -230,18 +203,23 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
-        private async Task<IEnumerable<InfoViewModel>> GetSchoolsAsync()
+        private async Task<IEnumerable<InfoViewModel>> GetAllSchools()
         {
             var schools = await _context.Schools
-                .Select(s => new InfoViewModel()
-                {
-                    Id = s.Id,
-                    Name = $"{s.Name} - {s.City.Name}"
+                .Select(s => new InfoViewModel 
+                { 
+                    Id = s.Id, 
+                    Name = s.Name 
                 })
                 .AsNoTracking()
                 .ToListAsync();
 
             return schools;
+        }
+
+        private string GetUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }
