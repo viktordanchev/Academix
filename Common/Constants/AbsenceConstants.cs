@@ -1,4 +1,4 @@
-﻿namespace Academix.Infrastructure.Constants
+﻿namespace Academix.Common.Constants
 {
     public static class AbsenceConstants
     {
