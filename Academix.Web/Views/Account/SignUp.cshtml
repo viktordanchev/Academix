@@ -4,97 +4,40 @@
     ViewData["Title"] = "SignUp";
 }
 
-<div id="particles-js" class="wrapper">
-    <div class="main-wrapper">
-        <div class="form-wrapper">
-            <form method="post" asp-controller="Account" asp-action="SignUp">
-                <div class="steps">
-                    <ul>
-                        <li class="step-menu1 active">
-                            <span>1</span>
-                            Sign Up
-                        </li>
-                        <li class="step-menu2">
-                            <span>2</span>
-                            Personal info
-                        </li>
-                    </ul>
+<div id="particles-js" class="overflow-hidden vh-100 bg-dark">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <h1 class="display-1 text-white mb-5"><b>Academix</b></h1>
+        <div class="container bg-auth rounded-10">
+            <div class="text-center text-white">Sing Up</div>
+            <hr class="bg-white"/>
+            <form method="post" id="registerForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div>
+                    <label asp-for="FirstName" class="d-block">First Name</label>
+                    <input asp-for="FirstName" class="d-block" autocomplete="username" aria-required="true" placeholder="" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
-
-                <div class="form-step-1 active">
-                    <div asp-validation-summary="ModelOnly" class="invalid-field validation"></div>
-                    <div>
-                        <label asp-for="FirstName" class="form-label">First name</label>
-                        <input asp-for="FirstName" class="form-input" autocomplete="given-name" aria-required="true" />
-                        <span asp-validation-for="FirstName" class="invalid-field"></span>
-                    </div>
-                    <div>
-                        <label asp-for="LastName" class="form-label">Last name</label>
-                        <input asp-for="LastName" class="form-input" autocomplete="family-name" aria-required="true" />
-                        <span asp-validation-for="LastName" class="invalid-field"></span>
-                    </div>
-                    <div>
-                        <label asp-for="Email" class="form-label">Email</label>
-                        <input asp-for="Email" class="form-input" autocomplete="email" aria-required="true" />
-                        <span asp-validation-for="Email" class="invalid-field"></span>
-                    </div>
-                    <div>
-                        <label asp-for="Password" class="form-label">Password</label>
-                        <input asp-for="Password" class="form-input" autocomplete="new-password" aria-required="true" />
-                        <span asp-validation-for="Password" class="invalid-field"></span>
-                    </div>
-                    <div>
-                        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
-                        <input asp-for="ConfirmPassword" class="form-input" autocomplete="new-password" aria-required="true" />
-                        <span asp-validation-for="ConfirmPassword" class="invalid-field"></span>
-                    </div>
+                <div>
+                    <label asp-for="LastName" class="d-block">Last Name</label>
+                    <input asp-for="LastName" class="d-block" autocomplete="username" aria-required="true" placeholder="" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
-
-                <div class="form-step-2">
-                    <div asp-validation-summary="ModelOnly" class="invalid-field validation"></div>
-                    <div id="roles">
-                        <label asp-for="Role" class="form-label">Choose role</label>
-                        <select asp-for="Role" class="form-input">
-                            <option value="" selected disabled hidden>Roles</option>
-                            @foreach (var role in Model.Roles)
-                            {
-                                <option value="@role">@role</option>
-                            }
-                        </select>
-                        <span asp-validation-for="Role" class="invalid-field"></span>
-                    </div>
-                    <div id="schools">
-                        <label asp-for="SchoolId" class="form-label">Choose school</label>
-                        <select asp-for="SchoolId" class="form-input" id="schoolId">
-                            <option value="" selected disabled hidden>Schools</option>
-                            @foreach (var school in Model.Schools)
-                            {
-                                <option value="@school.Id">@school.Name</option>
-                            }
-                        </select>
-                        <span asp-validation-for="SchoolId" class="invalid-field"></span>
-                    </div>
-                    <div id="classes" hidden>
-                        <label asp-for="ClassId" class="form-label">Choose class</label>
-                        <select asp-for="ClassId" class="form-input" id="classId">
-                            <option value="" selected disabled hidden>Classes</option>
-                        </select>
-                        <span asp-validation-for="ClassId" class="invalid-field"></span>
-                    </div>
-                    <div id="students" hidden>
-                        <label asp-for="StudentId" class="form-label">Choose student</label>
-                        <select asp-for="StudentId" class="form-input" id="studentId">
-                            <option value="" selected disabled hidden>Students</option>
-                        </select>
-                        <span asp-validation-for="StudentId" class="invalid-field"></span>
-                    </div>
+                <div>
+                    <label asp-for="Email" class="d-block">Email</label>
+                    <input asp-for="Email" class="d-block" autocomplete="email" aria-required="true" placeholder="" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-
-                <div class="form-btn-wrapper register">
-                    <button class="btn back">Back</button>
-                    <button asp-controller="Home" asp-action="Index" class="btn cancel active">Cancel</button>
-                    <button class="btn next active">Next</button>
+                <div>
+                    <label asp-for="Password" class="d-block">Password</label>
+                    <input asp-for="Password" class="d-block" autocomplete="password" aria-required="true" placeholder="" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
+                <div>
+                    <label asp-for="ConfirmPassword" class="d-block">Confirm Password</label>
+                    <input asp-for="ConfirmPassword" class="d-block" autocomplete="password" aria-required="true" placeholder="" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
             </form>
         </div>
     </div>
@@ -103,7 +46,6 @@
 @section Scripts {
     <script src="~/js/background/particles.js"></script>
     <script src="~/js/background/app.js"></script>
-    <script src="~/js/authentication/singup.js"></script>
     <script src="~/js/authentication/personalinfo.js"></script>
     <partial name="_ValidationScriptsPartial" />
     <script>

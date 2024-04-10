@@ -1,16 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Academix.Infrastructure.Constants;
+using Academix.Common.Constants;
 
 namespace Academix.Web.Models.Account
 {
     public class SignUpViewModel
     {
-        public SignUpViewModel()
-        {
-            Roles = new List<string>();
-            Schools = new List<InfoViewModel>();
-        }
-
         [Required(ErrorMessage = "The First name field is required.")]
         [RegularExpression(ApplicationUserConstants.NameMatch, ErrorMessage = "First name is invalid.")]
         public string FirstName { get; set; } = null!;
@@ -32,21 +26,5 @@ namespace Academix.Web.Models.Account
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = null!;
-
-        [Required(ErrorMessage = "The Role field is required.")]
-        public string Role { get; set; } = null!;
-
-        [Required(ErrorMessage = "The School field is required.")]
-        public int SchoolId { get; set; }
-
-        [Required(ErrorMessage = "The Class field is required.")]
-        public int ClassId { get; set; }
-
-        [Required(ErrorMessage = "The Student field is required.")]
-        public int StudentId { get; set; }
-
-        public IEnumerable<string> Roles { get; set; }
-
-        public IEnumerable<InfoViewModel> Schools { get; set; }
     }
 }
