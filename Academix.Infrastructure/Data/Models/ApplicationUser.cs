@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using Academix.Infrastructure.Constants;
+using Academix.Common.Constants;
 
 namespace Academix.Infrastructure.Data.Models
 {

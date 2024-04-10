@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Academix.Infrastructure.Data.Models;
 
 namespace Academix.Infrastructure.Data.Models.Mapping
 {

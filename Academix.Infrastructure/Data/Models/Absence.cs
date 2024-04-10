@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Academix.Infrastructure.Constants;
+using Academix.Common.Constants;
 using Academix.Infrastructure.Data.Models.Enumerations;
 
 namespace Academix.Infrastructure.Data.Models

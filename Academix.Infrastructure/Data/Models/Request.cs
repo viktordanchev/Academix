@@ -9,14 +9,27 @@ namespace Academix.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
+        public string Role { get; set; } = null!;
+         
+        [Required]
         public int DirectorId { get; set; }
 
         [ForeignKey(nameof(DirectorId))]
         public Director Director { get; set; } = null!;
 
-        public string? Message { get; set; }
+        [Required]
+        public string RequesterId { get; set; } = null!;
+
+        [ForeignKey(nameof(RequesterId))]
+        public ApplicationUser Requester { get; set; } = null!;
 
         [Required]
-        public string Requester { get; set; } 
+        public int SchoolId { get; set; }
+
+        public int? ClassId { get; set; }
+
+        public int? StudentId { get; set; }
+
+        public string? Message { get; set; }
     }
 }

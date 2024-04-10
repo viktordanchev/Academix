@@ -36,6 +36,7 @@ namespace Academix.Infrastructure.Data
             builder.ApplyConfiguration(new GradeConfiguration());
             builder.ApplyConfiguration(new IdentityRoleConfiguration());
             builder.ApplyConfiguration(new ParentConfiguration());
+            builder.ApplyConfiguration(new RequestConfiguration());
             builder.ApplyConfiguration(new SchoolConfiguration());
             builder.ApplyConfiguration(new StudentConfiguration());
             builder.ApplyConfiguration(new SubjectConfiguration());
