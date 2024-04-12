@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Security.Claims;
 
 namespace Academix.Web.Controllers
@@ -135,19 +136,51 @@ namespace Academix.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRole(AddRoleViewModel model)
         {
+            if (!await IsDataValid(model))
+            {
+                ModelState.AddModelError(string.Empty, "Invalid data.");
+
+                model.Roles = await GetAllRoles();
+                model.Schools = await GetAllSchools();
+
+                return View(model);
+            }
+
             var school = await _context.Schools
                 .FirstAsync(s => s.Id == model.SchoolId);
+
+            if (model.Role == "Director" && school.DirectorId != null)
+            {
+                ModelState.AddModelError(string.Empty, "This school has already director.");
+
+                model.Roles = await GetAllRoles();
+                model.Schools = await GetAllSchools();
+
+                return View(model);
+            }
 
             var request = new Request()
             {
                 Role = model.Role,
-                DirectorId = (int)school.DirectorId,
                 RequesterId = GetUserId(),
                 SchoolId = model.SchoolId,
                 ClassId = model.ClassId,
                 StudentId = model.StudentId,
                 Message = model.Message
             };
+
+            if (model.Role == "Director")
+            {
+                var admins = await _context.Admins
+                    .Select(u => u.Id)
+                    .ToArrayAsync();
+
+                request.AdminId = admins[0];
+            }
+            else
+            {
+                request.DirectorId = school.DirectorId;
+            }
 
             await _context.Requests.AddAsync(request);
             await _context.SaveChangesAsync();
@@ -160,7 +193,7 @@ namespace Academix.Web.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Authentication", "Home");
         }
 
         [HttpGet]
@@ -194,7 +227,7 @@ namespace Academix.Web.Controllers
         private async Task<IEnumerable<string>> GetAllRoles()
         {
             var roles = await _roleManager.Roles
-                .Where(r => r.Name != "Administrator")
+                .Where(r => r.Name != "Admin")
                 .Select(r => r.Name)
                 .AsNoTracking()
                 .ToListAsync();
@@ -206,10 +239,10 @@ namespace Academix.Web.Controllers
         private async Task<IEnumerable<InfoViewModel>> GetAllSchools()
         {
             var schools = await _context.Schools
-                .Select(s => new InfoViewModel 
-                { 
-                    Id = s.Id, 
-                    Name = s.Name 
+                .Select(s => new InfoViewModel
+                {
+                    Id = s.Id,
+                    Name = $"{s.Name} - {s.City.Name}"
                 })
                 .AsNoTracking()
                 .ToListAsync();
@@ -220,6 +253,49 @@ namespace Academix.Web.Controllers
         private string GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        private async Task<bool> IsDataValid(AddRoleViewModel model)
+        {
+            var result = true;
+
+            var isRoleExist = await _roleManager.RoleExistsAsync(model.Role);
+
+            var school = await _context.Schools
+                .FirstOrDefaultAsync(s => s.Id == model.SchoolId);
+
+            Student student = null;
+            Class curClass = null;
+
+            if(!isRoleExist || model.Role == "Admin" || school == null)
+            {
+                result = false;
+            }
+            else if (model.Role == "Student")
+            {
+                curClass = await _context.Classes
+                .FirstOrDefaultAsync(c => c.Id == model.ClassId);
+
+                if (curClass == null)
+                {
+                    result = false;
+                }
+            }
+            else if (model.Role == "Parent")
+            {
+                curClass = await _context.Classes
+                .FirstOrDefaultAsync(c => c.Id == model.ClassId);
+
+                student = await _context.Students
+                .FirstOrDefaultAsync(s => s.Id == model.StudentId);
+
+                if (curClass == null || student == null)
+                {
+                    result = false;
+                }
+            }
+
+            return result;
         }
     }
 }
