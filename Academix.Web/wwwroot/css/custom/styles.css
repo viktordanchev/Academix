@@ -5,3 +5,7 @@
 .rounded-10 {
     border-radius: 10px;
 }
+
+#alerts>ul {
+    list-style: none;
+}
