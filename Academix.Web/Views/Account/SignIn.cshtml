@@ -4,36 +4,35 @@
     ViewData["Title"] = "SignIn";
 }
 
-<div id="particles-js" class="wrapper bg-dark">
-    <h1 class="display-1 text-white"><b>Academix</b></h1>
-    <div class="main-wrapper">
-        <div class="form-wrapper">
-            <form method="post">
-                <div class="steps">
-                    <div>Sign In</div>
+<div id="particles-js" class="overflow-hidden vh-100 bg-dark">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <h1 class="display-1 text-white mb-5 fw-bold">Academix</h1>
+        <div class="container bg-auth rounded-10">
+            <div class="text-center text-white fs-3 fw-normal pt-3">Sing In</div>
+            <hr class="bg-white mx-4 my-3" />
+            <form method="post" id="registerForm">
+                <div asp-validation-summary="ModelOnly" id="alerts" class="text-danger fw-bold" role="alert"></div>
+                <div class="mx-4">
+                    <label asp-for="Email" class="d-block text-white fs-5">Email</label>
+                    <input asp-for="Email" class="d-block w-100 form-control" autocomplete="email" aria-required="true" placeholder="" />
+                    <span asp-validation-for="Email" class="text-danger fw-bold"></span>
                 </div>
-                <div class="form-step-1 active">
-                    <div asp-validation-summary="ModelOnly"></div>
-                    <div>
-                        <label asp-for="Email" class="form-label">Email</label>
-                        <input asp-for="Email" class="form-input" autocomplete="email" aria-required="true" />
-                        <span asp-validation-for="Email" class="invalid-field"></span>
-                    </div>
-                    <div>
-                        <label asp-for="Password" class="form-label">Password</label>
-                        <input asp-for="Password" class="form-input" autocomplete="current-password" aria-required="true" />
-                        <span asp-validation-for="Password" class="invalid-field"></span>
-                    </div>
-                    <div>
-                        <label asp-for="RememberMe" class="remember-me">
-                            <input asp-for="RememberMe" />
+                <div class="mx-4">
+                    <label asp-for="Password" class="d-block text-white fs-5">Password</label>
+                    <input asp-for="Password" class="d-block w-100 form-control" autocomplete="password" aria-required="true" placeholder="" />
+                    <span asp-validation-for="Password" class="text-danger fw-bold"></span>
+                </div>
+                <div class="mx-4 mt-2">
+                    <div class="checkbox">
+                        <label asp-for="RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="RememberMe" />
                             @Html.DisplayNameFor(m => m.RememberMe)
                         </label>
                     </div>
                 </div>
-                <div class="form-btn-wrapper">
-                    <button asp-controller="Home" asp-action="Index" class="btn">Cancel</button>
-                    <button type="submit" class="btn">Sing In</button>
+                <div class="d-flex flex-row mx-4 justify-content-between py-4">
+                    <a asp-controller="Home" asp-action="Authentication" class="w-20 btn btn-lg btn-primary">Cancel</a>
+                    <button id="registerSubmit" type="submit" class="w-20 btn btn-lg btn-primary">Sign In</button>
                 </div>
             </form>
         </div>
