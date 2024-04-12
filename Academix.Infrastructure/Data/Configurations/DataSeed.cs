@@ -142,7 +142,19 @@ namespace Academix.Infrastructure.Data.Configurations
             };
             teacher3.PasswordHash = hasher.HashPassword(teacher3, "123456");
 
-            return new ApplicationUser[] { director, student, student2, student3, parent, parent2, teacher, teacher2, teacher3 };
+            var admin = new ApplicationUser()
+            {
+                Id = "11f2b8bd-a49a-42cd-b08b-ce067e430965",
+                UserName = "admin@mail.com",
+                NormalizedUserName = "ADMIN@MAIL.COM",
+                Email = "admin@mail.com",
+                NormalizedEmail = "ADMIN@MAIL.COM",
+                FirstName = "admin",
+                LastName = "Admin"
+            };
+            admin.PasswordHash = hasher.HashPassword(teacher3, "123456");
+
+            return new ApplicationUser[] { director, student, student2, student3, parent, parent2, teacher, teacher2, teacher3, admin };
         }
 
         public static City[] SeedCities()
@@ -241,7 +253,7 @@ namespace Academix.Infrastructure.Data.Configurations
 
         public static Parent[] SeedParents()
         {
-            return new Parent[] 
+            return new Parent[]
             {
                 new Parent()
                 {
@@ -258,7 +270,7 @@ namespace Academix.Infrastructure.Data.Configurations
 
         public static School[] SeedSchools()
         {
-            return new School[] 
+            return new School[]
             {
                 new School()
                 {
@@ -266,13 +278,19 @@ namespace Academix.Infrastructure.Data.Configurations
                     Name = "Vasil Levski",
                     CityId = 1,
                     DirectorId = 1
+                },
+                new School()
+                {
+                    Id = 2,
+                    Name = "137 Georgi Asparuhov",
+                    CityId = 1
                 }
             };
         }
 
         public static Student[] SeedStudents()
         {
-            return new Student[] 
+            return new Student[]
             {
                 new Student()
                 {
@@ -306,8 +324,8 @@ namespace Academix.Infrastructure.Data.Configurations
 
         public static Subject[] SeedSubjects()
         {
-            return new Subject[] 
-            { 
+            return new Subject[]
+            {
                 new Subject()
                 {
                     Id = 1,
@@ -353,7 +371,7 @@ namespace Academix.Infrastructure.Data.Configurations
 
         public static Teacher[] SeedTeacher()
         {
-            return new Teacher[] 
+            return new Teacher[]
             {
                 new Teacher()
                 {
@@ -378,7 +396,7 @@ namespace Academix.Infrastructure.Data.Configurations
 
         public static IdentityRole[] SeedRoles()
         {
-            return new IdentityRole[] 
+            return new IdentityRole[]
             {
                 new IdentityRole
                 {
@@ -407,15 +425,15 @@ namespace Academix.Infrastructure.Data.Configurations
                 new IdentityRole
                 {
                     Id = "7f92327f-b1c1-4fd0-b837-afc278f256b2",
-                    Name = "Administrator",
-                    NormalizedName = "ADMINISTRATOR"
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
                 }
             };
         }
 
         public static IdentityUserRole<string>[] SeedUserRoles()
         {
-            return new IdentityUserRole<string>[] 
+            return new IdentityUserRole<string>[]
             {
                 new IdentityUserRole<string>
                 {
@@ -461,6 +479,23 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     UserId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c",
                     RoleId = "fc1ee3a5-9b29-43ea-b038-2265c1806a75"
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = "11f2b8bd-a49a-42cd-b08b-ce067e430965",
+                    RoleId = "7f92327f-b1c1-4fd0-b837-afc278f256b2"
+                }
+            };
+        }
+
+        public static Admin[] SeedAdmins()
+        {
+            return new Admin[]
+            {
+                new Admin()
+                {
+                    Id = 1,
+                    AdminIdentityId = "11f2b8bd-a49a-42cd-b08b-ce067e430965"
                 }
             };
         }

@@ -14,6 +14,7 @@ namespace Academix.Infrastructure.Data
         }
 
         public DbSet<Absence> Absences { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Director> Directors { get; set; }
@@ -29,6 +30,7 @@ namespace Academix.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new AbsenceConfiguration());
+            builder.ApplyConfiguration(new AdminConfiguration());
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());
             builder.ApplyConfiguration(new ClassConfiguration());
@@ -36,7 +38,6 @@ namespace Academix.Infrastructure.Data
             builder.ApplyConfiguration(new GradeConfiguration());
             builder.ApplyConfiguration(new IdentityRoleConfiguration());
             builder.ApplyConfiguration(new ParentConfiguration());
-            builder.ApplyConfiguration(new RequestConfiguration());
             builder.ApplyConfiguration(new SchoolConfiguration());
             builder.ApplyConfiguration(new StudentConfiguration());
             builder.ApplyConfiguration(new SubjectConfiguration());

@@ -11,11 +11,15 @@ namespace Academix.Infrastructure.Data.Models
         [Required]
         public string Role { get; set; } = null!;
          
-        [Required]
-        public int DirectorId { get; set; }
+        public int? DirectorId { get; set; }
 
         [ForeignKey(nameof(DirectorId))]
-        public Director Director { get; set; } = null!;
+        public Director? Director { get; set; }
+
+        public int? AdminId { get; set; }
+
+        [ForeignKey(nameof(AdminId))]
+        public Admin? Admin { get; set; }
 
         [Required]
         public string RequesterId { get; set; } = null!;
