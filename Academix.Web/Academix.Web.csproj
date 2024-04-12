@@ -26,6 +26,7 @@
     <Folder Include="Areas\Administrator\Controllers\" />
     <Folder Include="Areas\Administrator\Models\" />
     <Folder Include="Areas\Administrator\Views\" />
+    <Folder Include="Areas\Director\Models\" />
     <Folder Include="Areas\Parent\Controllers\" />
     <Folder Include="Areas\Parent\Models\" />
     <Folder Include="Areas\Parent\Views\" />
