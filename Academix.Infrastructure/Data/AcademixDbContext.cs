@@ -26,6 +26,7 @@ namespace Academix.Infrastructure.Data
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<SubjectStudent> SubjectsStudents { get; set; }
+        public DbSet<StudentParent> StudentsParents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -42,6 +43,7 @@ namespace Academix.Infrastructure.Data
             builder.ApplyConfiguration(new StudentConfiguration());
             builder.ApplyConfiguration(new SubjectConfiguration());
             builder.ApplyConfiguration(new SubjectStudentConfiguration());
+            builder.ApplyConfiguration(new StudentParentConfiguration());
             builder.ApplyConfiguration(new TeacherConfiguration());
             builder.ApplyConfiguration(new IdentityUserRoleConfiguration());
 

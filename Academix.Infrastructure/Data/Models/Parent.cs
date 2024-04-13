@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Academix.Infrastructure.Data.Models.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +8,7 @@ namespace Academix.Infrastructure.Data.Models
     {
         public Parent()
         {
-            Students = new List<Student>();
+            StudentsParent = new List<StudentParent>();
         }
 
         [Key]
@@ -20,6 +20,6 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(ParentIdentityId))]
         public ApplicationUser ParentIdentity { get; set; } = null!;
 
-        public IEnumerable<Student> Students { get; set; }
+        public IEnumerable<StudentParent> StudentsParent { get; set; }
     }
 }

@@ -298,8 +298,7 @@ namespace Academix.Infrastructure.Data.Configurations
                     Address = "Vasil Aprilov 5",
                     NumberInClass = 5,
                     StudentIdentityId = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc",
-                    ClassId = 1,
-                    ParentId = 1
+                    ClassId = 1
                 },
                 new Student()
                 {
@@ -307,8 +306,7 @@ namespace Academix.Infrastructure.Data.Configurations
                     Address = "Krali Marko 12",
                     NumberInClass = 3,
                     StudentIdentityId = "a171483f-6e48-446a-a5d7-36110d0c1443",
-                    ClassId = 2,
-                    ParentId = 2
+                    ClassId = 2
                 },
                 new Student()
                 {
@@ -316,8 +314,7 @@ namespace Academix.Infrastructure.Data.Configurations
                     Address = "Kalimanci 13",
                     NumberInClass = 15,
                     StudentIdentityId = "b2502a25-8341-4e5c-af74-cd0f889ede1b",
-                    ClassId = 2,
-                    ParentId = 2
+                    ClassId = 2
                 }
             };
         }
@@ -365,6 +362,28 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     SubjectId = 3,
                     StudentId = 1
+                }
+            };
+        }
+
+        public static StudentParent[] SeedStudentParent()
+        {
+            return new StudentParent[] 
+            {
+                new StudentParent()
+                {
+                    StudentId = 1,
+                    ParentId = 1
+                },
+                new StudentParent()
+                {
+                    StudentId = 2,
+                    ParentId = 2
+                },
+                new StudentParent()
+                {
+                    StudentId = 3,
+                    ParentId = 2
                 }
             };
         }
