@@ -138,8 +138,6 @@ namespace Academix.Web.Controllers
         {
             if (!await IsDataValid(model))
             {
-                ModelState.AddModelError(string.Empty, "Invalid data.");
-
                 model.Roles = await GetAllRoles();
                 model.Schools = await GetAllSchools();
 
@@ -148,16 +146,6 @@ namespace Academix.Web.Controllers
 
             var school = await _context.Schools
                 .FirstAsync(s => s.Id == model.SchoolId);
-
-            if (model.Role == "Director" && school.DirectorId != null)
-            {
-                ModelState.AddModelError(string.Empty, "This school has already director.");
-
-                model.Roles = await GetAllRoles();
-                model.Schools = await GetAllSchools();
-
-                return View(model);
-            }
 
             var request = new Request()
             {
@@ -223,7 +211,6 @@ namespace Academix.Web.Controllers
             return Json(students);
         }
 
-        [HttpGet]
         private async Task<IEnumerable<string>> GetAllRoles()
         {
             var roles = await _roleManager.Roles
@@ -235,7 +222,6 @@ namespace Academix.Web.Controllers
             return roles;
         }
 
-        [HttpGet]
         private async Task<IEnumerable<InfoViewModel>> GetAllSchools()
         {
             var schools = await _context.Schools
@@ -267,32 +253,48 @@ namespace Academix.Web.Controllers
             Student student = null;
             Class curClass = null;
 
-            if(!isRoleExist || model.Role == "Admin" || school == null)
+            if (!isRoleExist || model.Role == "Admin" || school == null)
             {
+                ModelState.AddModelError(string.Empty, "Invalid role. Please choose valid data.");
+
                 result = false;
             }
-            else if (model.Role == "Student")
+
+            switch (model.Role)
             {
-                curClass = await _context.Classes
-                .FirstOrDefaultAsync(c => c.Id == model.ClassId);
+                case "Director":
+                    if (school == null || school.DirectorId != null)
+                    {
+                        ModelState.AddModelError(string.Empty, "This school has already director.");
 
-                if (curClass == null)
-                {
-                    result = false;
-                }
-            }
-            else if (model.Role == "Parent")
-            {
-                curClass = await _context.Classes
-                .FirstOrDefaultAsync(c => c.Id == model.ClassId);
+                        result = false;
+                    }
+                    break;
+                case "Student":
+                    curClass = await _context.Classes
+                        .FirstOrDefaultAsync(c => c.Id == model.ClassId);
 
-                student = await _context.Students
-                .FirstOrDefaultAsync(s => s.Id == model.StudentId);
+                    if (curClass == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid class. Please choose valid data.");
 
-                if (curClass == null || student == null)
-                {
-                    result = false;
-                }
+                        result = false;
+                    }
+                    break;
+                case "Parent":
+                    curClass = await _context.Classes
+                        .FirstOrDefaultAsync(c => c.Id == model.ClassId);
+
+                    student = await _context.Students
+                        .FirstOrDefaultAsync(s => s.Id == model.StudentId);
+
+                    if (curClass == null || student == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid student. Please choose valid data.");
+
+                        result = false;
+                    }
+                    break;
             }
 
             return result;

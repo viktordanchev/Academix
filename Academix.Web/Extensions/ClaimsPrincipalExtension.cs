@@ -7,7 +7,7 @@ namespace Academix.Web.Extensions
     {
         public static bool IsAdmin(this ClaimsPrincipal user)
         {
-            return user.IsInRole(Administrator.RoleName);
+            return user.IsInRole(Admin.RoleName);
         }
 
         public static bool IsDirector(this ClaimsPrincipal user)

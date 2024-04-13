@@ -2,9 +2,9 @@
 {
     public static class RoleConstants
     {
-        public static class Administrator
+        public static class Admin
         {
-            public const string RoleName = "Administrator";
+            public const string RoleName = "Admin";
         }
 
         public static class Director

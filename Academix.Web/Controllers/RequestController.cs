@@ -1,5 +1,7 @@
 ﻿using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
+using Academix.Infrastructure.Data.Models.Mapping;
+using Academix.Web.Extensions;
 using Academix.Web.Models.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -26,16 +28,34 @@ namespace Academix.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var requests = await _context.Requests
-                .Where(r => r.Director.DirectorIdentityId == GetUserId())
-                .Select(r => new AllViewModel()
-                {
-                    Id = r.Id,
-                    Role = r.Role,
-                    RequesterName = $"{r.Requester.FirstName} + {r.Requester.LastName}",
-                    Message = r.Message
-                })
-                .ToListAsync();
+            List<AllViewModel> requests;
+
+            if (User.IsAdmin())
+            {
+                requests = await _context.Requests
+                   .Where(r => r.Admin.AdminIdentityId == GetUserId())
+                   .Select(r => new AllViewModel()
+                   {
+                       Id = r.Id,
+                       Role = r.Role,
+                       RequesterName = $"{r.Requester.FirstName} + {r.Requester.LastName}",
+                       Message = r.Message
+                   })
+                   .ToListAsync();
+            }
+            else
+            {
+                requests = await _context.Requests
+                   .Where(r => r.Director.DirectorIdentityId == GetUserId())
+                   .Select(r => new AllViewModel()
+                   {
+                       Id = r.Id,
+                       Role = r.Role,
+                       RequesterName = $"{r.Requester.FirstName} + {r.Requester.LastName}",
+                       Message = r.Message
+                   })
+                   .ToListAsync();
+            }
 
             return View(requests);
         }
@@ -65,6 +85,8 @@ namespace Academix.Web.Controllers
                     var school = await _context.Schools
                         .FirstAsync(s => s.Id == request.SchoolId);
 
+                    school.Director = director;
+
                     await _context.Directors.AddAsync(director);
                     break;
                 case "Student":
@@ -91,12 +113,17 @@ namespace Academix.Web.Controllers
                         ParentIdentity = request.Requester
                     };
 
-                    var studentForParent = await _context.Students
-                        .FirstAsync(s => s.ParentId == parent.Id);
+                    var student2 = await _context.Students
+                        .FirstAsync(s => s.Id == request.StudentId);
 
-                    studentForParent.ParentId = parent.Id;
+                    var studentParent = new StudentParent()
+                    {
+                        Student = student2,
+                        Parent = parent
+                    };
 
                     await _context.Parents.AddAsync(parent);
+                    await _context.StudentsParents.AddAsync(studentParent);
                     break;
             }
 
