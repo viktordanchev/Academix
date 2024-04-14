@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Academix.Web.Models.Request
+namespace Academix.Core.Models.Request
 {
     public class AllViewModel
     {
