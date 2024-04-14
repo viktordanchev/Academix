@@ -1,4 +1,6 @@
-﻿using Academix.Infrastructure.Data;
+﻿using Academix.Core.Contracts;
+using Academix.Core.Services;
+using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +9,13 @@ namespace Academix.Web.Extensions
 {
     public static class ServiceCollectionExtension
     {
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IRequestService, RequestService>();
+
+            return services;
+        }
+
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
