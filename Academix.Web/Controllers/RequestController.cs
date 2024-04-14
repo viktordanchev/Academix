@@ -1,8 +1,9 @@
-﻿using Academix.Infrastructure.Data;
+﻿using Academix.Core.Contracts;
+using Academix.Core.Models.Request;
+using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
 using Academix.Infrastructure.Data.Models.Mapping;
 using Academix.Web.Extensions;
-using Academix.Web.Models.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,46 +16,28 @@ namespace Academix.Web.Controllers
     public class RequestController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly AcademixDbContext _context;
+        private readonly IRequestService _requestService;
 
-        public RequestController(AcademixDbContext context, UserManager<ApplicationUser> userManager)
+        public RequestController(AcademixDbContext context, UserManager<ApplicationUser> userManager, IRequestService requestService)
         {
             _context = context;
             _userManager = userManager;
+            _requestService = requestService;
         }
 
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            List<AllViewModel> requests;
+            IEnumerable<AllViewModel> requests;
 
             if (User.IsAdmin())
             {
-                requests = await _context.Requests
-                   .Where(r => r.Admin.AdminIdentityId == GetUserId())
-                   .Select(r => new AllViewModel()
-                   {
-                       Id = r.Id,
-                       Role = r.Role,
-                       RequesterName = $"{r.Requester.FirstName} + {r.Requester.LastName}",
-                       Message = r.Message
-                   })
-                   .ToListAsync();
+                requests = await _requestService.GetAllRequestsToAdmin(GetUserId());
             }
             else
             {
-                requests = await _context.Requests
-                   .Where(r => r.Director.DirectorIdentityId == GetUserId())
-                   .Select(r => new AllViewModel()
-                   {
-                       Id = r.Id,
-                       Role = r.Role,
-                       RequesterName = $"{r.Requester.FirstName} + {r.Requester.LastName}",
-                       Message = r.Message
-                   })
-                   .ToListAsync();
+                requests = await _requestService.GetAllRequestsToDirector(GetUserId());
             }
 
             return View(requests);
