@@ -14,5 +14,20 @@ namespace Academix.Web.Extensions
         {
             return user.IsInRole(Director.RoleName);
         }
+
+        public static bool IsParent(this ClaimsPrincipal user)
+        {
+            return user.IsInRole(Parent.RoleName);
+        }
+
+        public static bool IsStudent(this ClaimsPrincipal user)
+        {
+            return user.IsInRole(Student.RoleName);
+        }
+
+        public static bool IsTeacher(this ClaimsPrincipal user)
+        {
+            return user.IsInRole(Teacher.RoleName);
+        }
     }
 }

@@ -9,6 +9,7 @@ builder.Services.AddApplicationServices();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/SignIn";
+    options.AccessDeniedPath = "/Home/Error";
 });
 
 var app = builder.Build();

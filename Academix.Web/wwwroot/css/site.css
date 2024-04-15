@@ -1,4 +1,3 @@
-@import url(authentication/style.css);
 @import url(custom/styles.css);
 
 html {
@@ -16,6 +15,15 @@ html {
     min-height: 100%;
 }
 
-body{
-    background-color: dark;
+.footer {
+    line-height: 60px;
+}
+
+#particles-js {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -100;
+    top: 0;
+    left: 0;
 }
