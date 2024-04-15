@@ -1,5 +1,6 @@
 ﻿using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
+using Academix.Web.Extensions;
 using Academix.Web.Models.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -118,8 +119,59 @@ namespace Academix.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Manage()
+        public async Task<IActionResult> Manage()
         {
+            var user = await _userManager.FindByIdAsync(GetUserId());
+
+            var model = new ManageViewModel()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
+            };
+
+            if (User.IsStudent())
+            {
+                var student = await _context.Students
+                    .FirstAsync(s => s.StudentIdentityId == GetUserId());
+
+                model.Address = student.Address;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Manage(ManageViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.FindByIdAsync(GetUserId());
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.UserName = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+
+            await _userManager.UpdateAsync(user);
+
+            if (User.IsStudent())
+            {
+                var student = await _context.Students
+                    .FirstAsync(s => s.StudentIdentityId == GetUserId());
+
+                student.Address = model.Address;
+            }
+
+            await _context.SaveChangesAsync();
+
+            TempData["AlertMessage"] = "Account settings has changed.";
+
             return View();
         }
 
