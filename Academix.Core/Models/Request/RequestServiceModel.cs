@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Academix.Core.Models.Request
+﻿namespace Academix.Core.Models.Request
 {
     public class RequestServiceModel
     {
@@ -9,7 +6,11 @@ namespace Academix.Core.Models.Request
 
         public string Role { get; set; } = null!;
 
-        
+        public int? DirectorId { get; set; }
+
+        public int? AdminId { get; set; }
+
+        public string RequesterId { get; set; } = null!;
 
         public int SchoolId { get; set; }
 
