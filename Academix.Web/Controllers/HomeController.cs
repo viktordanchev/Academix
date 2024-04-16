@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Academix.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -13,6 +13,11 @@ namespace Academix.Web.Controllers
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }

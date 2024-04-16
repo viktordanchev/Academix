@@ -1,5 +1,4 @@
 ﻿@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,15 +17,15 @@
             <header class="mx-3 my-3 h-10">
                 <nav class="rounded-10 navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3 h-100">
                     <div class="container-fluid mx-3">
-                        <a class="navbar-brand fs-2 fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Academix</a>
+                        <a class="navbar-brand fs-1 fw-bold mx-3" asp-area="" asp-controller="Home" asp-action="Index">Academix</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                            <ul class="navbar-nav flex-grow-1">
+                            <ul class="navbar-nav flex-grow-1 mx-5">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="All">All</a>
+                                    <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                                 </li>
                             </ul>
                             <partial name="_LoginPartial" />
