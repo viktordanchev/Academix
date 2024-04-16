@@ -1,8 +1,8 @@
 ﻿namespace Academix.Core.Models.StudentHome
 {
-    public class SubjectViewModel
+    public class SubjectServiceModel
     {
-        public SubjectViewModel()
+        public SubjectServiceModel()
         {
             Grades = new List<GradeServiceModel>();
             Absences = new List<AbsenceServiceModel>();

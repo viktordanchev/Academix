@@ -18,12 +18,3 @@ html {
 .footer-custom {
     line-height: 60px;
 }
-
-#particles-js {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    z-index: -100;
-    top: 0;
-    left: 0;
-}

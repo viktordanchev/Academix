@@ -14,25 +14,36 @@ namespace Academix.Core.Services
             _context = context;
         }
 
-        public async Task<int> GetStudent(string studentId)
+        public async Task<StudentServiceModel> GetStudent(string studentId)
         {
             var student = await _context.Students
-                .FirstAsync(s => s.StudentIdentityId == studentId);
+                .Where(s => s.StudentIdentityId == studentId)
+                .Select(s => new StudentServiceModel()
+                {
+                    Id = s.Id,
+                    School = s.Class.School.Name,
+                    SchoolCity = s.Class.School.City.Name,
+                    Class = s.Class.Name,
+                    ClassTeacher = $"{s.Class.ClassTeacher.TeacherIdentity.FirstName} {s.Class.ClassTeacher.TeacherIdentity.LastName}"
+                })
+                .FirstAsync();
 
-            return student.Id;
+            return student;
         }
 
-        public async Task<IEnumerable<SubjectViewModel>> GetAllSubjects(int studentId)
+        public async Task<IEnumerable<SubjectServiceModel>> GetAllSubjects(int studentId)
         {
             var subjects = await _context.SubjectsStudents
                 .Where(ss => ss.StudentId == studentId)
-                .Select(ss => new SubjectViewModel()
+                .Select(ss => new SubjectServiceModel()
                 {
                     Name = ss.Subject.Name,
                     TeacherName = $"{ss.Subject.Teacher.TeacherIdentity.FirstName} {ss.Subject.Teacher.TeacherIdentity.LastName}",
-                    AverageGrade = ss.Subject.Grades
+                    AverageGrade = ss.Student.Grades
+                        .Where(g => g.SubjectId == ss.SubjectId)
                         .Average(g => g.GradeNumber),
-                    Grades = ss.Subject.Grades
+                    Grades = ss.Student.Grades
+                        .Where(g => g.SubjectId == ss.SubjectId)
                         .Select(g => new GradeServiceModel()
                         {
                             GradeNumber = g.GradeNumber,
@@ -40,7 +51,8 @@ namespace Academix.Core.Services
                             GradeType = g.GradeType
                         })
                         .ToList(),
-                    Absences = ss.Subject.Absences
+                    Absences = ss.Student.Absences
+                        .Where(g => g.SubjectId == ss.SubjectId)
                         .Select(a => new AbsenceServiceModel()
                         {
                             ExcusedAbsence = a.ExcusedAbsence,

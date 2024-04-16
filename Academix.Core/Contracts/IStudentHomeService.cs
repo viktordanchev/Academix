@@ -4,7 +4,7 @@ namespace Academix.Core.Contracts
 {
     public interface IStudentHomeService
     {
-        Task<int> GetStudent(string studentId);
-        Task<IEnumerable<SubjectViewModel>> GetAllSubjects(int studentId);
+        Task<StudentServiceModel> GetStudent(string studentId);
+        Task<IEnumerable<SubjectServiceModel>> GetAllSubjects(int studentId);
     }
 }

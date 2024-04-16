@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Academix.Web.styles.css" asp-append-version="true" />
 </head>
-<body id="particles-js" class="bg-dark text-white">
+<body class="bg-dark text-white">
     <div class="position-absolute top-50 start-50 translate-middle h-100 w-100 d-flex flex-column justify-content-between">
         @if (SignInManager.IsSignedIn(User))
         {
@@ -35,7 +35,7 @@
             </header>
         }
 
-        <main class="mx-3 my-3 h-100 d-flex justify-content-center align-items-center">
+        <main class="h-100 d-flex justify-content-center align-items-center flex-column">
             @RenderBody()
         </main>
 
@@ -49,8 +49,6 @@
         }
     </div>
 
-    <script src="~/js/background/particles.js"></script>
-    <script src="~/js/background/app.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

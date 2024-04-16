@@ -1,38 +1,33 @@
-﻿@model IEnumerable<SubjectViewModel>
+﻿@model DashboardViewModel
 
 @{
     ViewData["Title"] = "Home";
 }
 
-<div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4">
-    <div class="text-white fs-1 fw-normal">Total Grade:</div>
-    <span class="text-white fs-1 fw-bold ms-lg-3">@Model.Average(g => g.AverageGrade).ToString("#.##")</span>
+<div class="mx-3 my-3 d-flex flex-wrap gap-3">
+    <div class="d-flex flex-wrap gap-3">
+        <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4 py-2">
+            <div class="d-inline text-white fs-1 fw-normal">School:</div>
+            <span class="text-white fs-1 fw-bold ms-lg-3">@Model.Student.School - @Model.Student.SchoolCity</span>
+        </div>
+        <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4 py-2">
+            <div class="d-inline text-white fs-1 fw-normal">Class:</div>
+            <span class="text-white fs-1 fw-bold ms-lg-3">@Model.Student.Class - @Model.Student.ClassTeacher</span>
+        </div>
+        <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4">
+            <div class="text-white fs-1 fw-normal">Total Grade:</div>
+            <span class="text-white fs-1 fw-bold ms-lg-3">@Model.Subjects.Average(g => g.AverageGrade).ToString("#.##")</span>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap flex-row gap-3">
+        @foreach (var subject in Model.Subjects)
+        {
+            <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4 w-100">
+                <div class="text-center text-white fs-3 fw-normal pt-3">@subject.Name</div>
+                <hr class="bg-white mx-4 my-3" />
+                <span class="text-white fs-1 fw-bold ms-lg-3">Teacher: @subject.TeacherName</span>
+            </div>
+        }
+    </div>
 </div>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">Subject</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-        </tr>
-    </tbody>
-</table>
-
