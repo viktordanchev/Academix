@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Academix.Web.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 

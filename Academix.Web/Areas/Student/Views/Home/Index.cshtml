@@ -4,8 +4,9 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="bg-auth rounded-10">
-    <div class="text-center text-white fs-3 fw-normal pt-3">Subjects</div>
+<div class="bg-auth rounded-10 w-100">
+    <div class="text-center text-white fs-3 fw-normal pt-3">Total</div>
     <hr class="bg-white mx-4 my-3" />
+    <p>@Model.Average(g => g.AverageGrade).ToString("#.##")</p>
 </div>
 

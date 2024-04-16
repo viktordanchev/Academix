@@ -9,7 +9,6 @@ builder.Services.AddApplicationServices();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/SignIn";
-    options.AccessDeniedPath = "/Home/Error";
 });
 
 var app = builder.Build();
@@ -22,7 +21,6 @@ else
 {
     app.UseExceptionHandler("/Home/Error/500");
     app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
-
     app.UseHsts();
 }
 
