@@ -1,4 +1,5 @@
-﻿using Academix.Core.Contracts;
+﻿using Academix.Common.Constants;
+using Academix.Core.Contracts;
 using Academix.Core.Models.Request;
 using Academix.Infrastructure.Data;
 using Academix.Web.Extensions;
@@ -8,7 +9,7 @@ using System.Security.Claims;
 
 namespace Academix.Web.Controllers
 {
-    [Authorize(Roles = "Admin,Director")]
+    [Authorize(Roles = $"{RoleConstants.Admin.RoleName},{RoleConstants.Director.RoleName}")]
     public class RequestController : BaseController
     {
         private readonly AcademixDbContext _context;

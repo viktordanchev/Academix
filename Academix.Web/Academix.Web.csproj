@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Academix.Common\Academix.Common.csproj" />
     <ProjectReference Include="..\Academix.Core\Academix.Core.csproj" />
     <ProjectReference Include="..\Academix.Infrastructure\Academix.Infrastructure.csproj" />
   </ItemGroup>
