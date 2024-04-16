@@ -9,3 +9,7 @@
 #alerts > ul {
     list-style: none;
 }
+
+.h-10 {
+    height: 10% !important;
+}
