@@ -10,6 +10,8 @@ namespace Academix.Infrastructure.Data.Models
         {
             SubjectsStudent = new List<SubjectStudent>();
             StudentParents = new List<StudentParent>();
+            Grades = new List<Grade>();
+            Absences = new List<Absence>();
         }
 
         [Key]
@@ -34,5 +36,9 @@ namespace Academix.Infrastructure.Data.Models
         public IEnumerable<SubjectStudent> SubjectsStudent { get; set; }
 
         public IEnumerable<StudentParent> StudentParents { get; set; }
+
+        public IEnumerable<Grade> Grades { get; set; }
+
+        public IEnumerable<Absence> Absences { get; set; }
     }
 }

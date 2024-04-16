@@ -8,6 +8,11 @@ namespace Academix.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Grade> builder)
         {
+            builder
+                .HasOne(g => g.Student)
+                .WithMany(s => s.Grades)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasData(DataSeed.SeedGrades());
         }
     }

@@ -17,7 +17,8 @@ namespace Academix.Infrastructure.Data.Configurations
                     DateAndTime = DateTime.Now,
                     ExcusedAbsence = false,
                     AbsenceType = 0,
-                    SubjectId = 1
+                    SubjectId = 1,
+                    StudentId = 1
                 },
                 new Absence()
                 {
@@ -25,7 +26,8 @@ namespace Academix.Infrastructure.Data.Configurations
                     DateAndTime = DateTime.Now.AddDays(1),
                     ExcusedAbsence = false,
                     AbsenceType = 0,
-                    SubjectId = 1
+                    SubjectId = 1,
+                    StudentId = 1
                 }
             };
         }
@@ -222,7 +224,8 @@ namespace Academix.Infrastructure.Data.Configurations
                     GradeNumber = 4,
                     DateAndTime = DateTime.Now,
                     GradeType = GradeTypes.Exam,
-                    SubjectId = 1
+                    SubjectId = 1,
+                    StudentId = 1
                 },
                 new Grade()
                 {
@@ -230,7 +233,8 @@ namespace Academix.Infrastructure.Data.Configurations
                     GradeNumber = 6,
                     DateAndTime = DateTime.Now.AddDays(12),
                     GradeType = GradeTypes.Exam,
-                    SubjectId = 1
+                    SubjectId = 1,
+                    StudentId = 1
                 },
                 new Grade()
                 {
@@ -238,7 +242,8 @@ namespace Academix.Infrastructure.Data.Configurations
                     GradeNumber = 6,
                     DateAndTime = DateTime.Now.AddDays(11),
                     GradeType = GradeTypes.Project,
-                    SubjectId = 2
+                    SubjectId = 2,
+                    StudentId = 1
                 },
                 new Grade()
                 {
@@ -246,7 +251,8 @@ namespace Academix.Infrastructure.Data.Configurations
                     GradeNumber = 2,
                     DateAndTime = DateTime.Now.AddDays(7),
                     GradeType = GradeTypes.Exam,
-                    SubjectId = 3
+                    SubjectId = 3,
+                    StudentId = 1
                 }
             };
         }
