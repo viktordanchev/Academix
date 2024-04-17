@@ -1,8 +1,8 @@
 ﻿namespace Academix.Core.Models.StudentHome
 {
-    public class DashboardViewModel
+    public class IndexViewModel
     {
-        public DashboardViewModel()
+        public IndexViewModel()
         {
             Subjects = new List<SubjectServiceModel>();
         }

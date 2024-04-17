@@ -333,19 +333,22 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     Id = 1,
                     Name = "Mathematics",
-                    TeacherId = 1
+                    TeacherId = 1,
+                    SchoolId = 1
                 },
                 new Subject()
                 {
                     Id = 2,
                     Name = "Physics",
-                    TeacherId = 2
+                    TeacherId = 2,
+                    SchoolId = 1
                 },
                 new Subject()
                 {
                     Id = 3,
                     Name = "History",
-                    TeacherId = 3
+                    TeacherId = 3,
+                    SchoolId = 1
                 }
             };
         }

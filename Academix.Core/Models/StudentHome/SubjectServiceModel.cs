@@ -12,8 +12,6 @@
 
         public string TeacherName { get; set; } = null!;
 
-        public double AverageGrade {  get; set; }
-
         public IEnumerable<GradeServiceModel> Grades { get; set; }
 
         public IEnumerable<AbsenceServiceModel> Absences { get; set; }

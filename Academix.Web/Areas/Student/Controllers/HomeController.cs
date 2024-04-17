@@ -20,13 +20,13 @@ namespace Academix.Web.Areas.Student.Controllers
             var student = await _studentHomeService.GetStudent(GetUserId());
             var subjects = await _studentHomeService.GetAllSubjects(student.Id);
 
-            var dashboard = new DashboardViewModel()
+            var info = new IndexViewModel()
             {
                 Student = student,
                 Subjects = subjects
             };
 
-            return View(dashboard);
+            return View(info);
         }
 
         private string GetUserId()

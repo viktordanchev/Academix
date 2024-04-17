@@ -25,6 +25,12 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(TeacherId))]
         public Teacher Teacher { get; set; } = null!;
 
+        [Required]
+        public int SchoolId { get; set; }
+
+        [ForeignKey(nameof(SchoolId))]
+        public School School { get; set; } = null!;
+
         public IEnumerable<Grade> Grades { get; set; }
 
         public IEnumerable<Absence> Absences { get; set; }

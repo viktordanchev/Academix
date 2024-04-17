@@ -17,7 +17,14 @@
             <header class="mx-3 my-3">
                 <nav class="rounded-10 navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3">
                     <div class="container-fluid mx-3">
-                        <a class="navbar-brand fs-1 fw-bold mx-3" asp-area="" asp-controller="Home" asp-action="Index">Academix</a>
+                        @if (User.IsInRole("Student"))
+                        {
+                            <a class="navbar-brand fs-1 fw-bold mx-3" asp-area="Student" asp-controller="Home" asp-action="Index">Academix</a>
+                        }
+                        else
+                        {
+                            <a class="navbar-brand fs-1 fw-bold mx-3" asp-area="" asp-controller="Home" asp-action="Index">Academix</a>
+                        }
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -35,7 +42,7 @@
             </header>
         }
 
-        <main class="h-100 d-flex justify-content-center align-items-center flex-column">
+        <main class="d-flex justify-content-center align-items-center flex-column flex-wrap">
             @RenderBody()
         </main>
 

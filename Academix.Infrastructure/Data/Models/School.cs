@@ -9,6 +9,7 @@ namespace Academix.Infrastructure.Data.Models
         {
             Teachers = new List<Teacher>();
             Classes = new List<Class>();
+            Subjects = new List<Subject>();
         }
 
         [Key]
@@ -31,5 +32,7 @@ namespace Academix.Infrastructure.Data.Models
         public IEnumerable<Teacher> Teachers { get; set; }
 
         public IEnumerable<Class> Classes { get; set; }
+
+        public IEnumerable<Subject> Subjects { get; set; }
     }
 }

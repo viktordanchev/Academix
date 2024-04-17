@@ -1,32 +1,114 @@
-﻿@model DashboardViewModel
+﻿@model IndexViewModel
 
 @{
     ViewData["Title"] = "Home";
 }
 
-<div class="mx-3 my-3 d-flex flex-wrap gap-3">
-    <div class="d-flex flex-wrap gap-3">
-        <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4 py-2">
-            <div class="d-inline text-white fs-1 fw-normal">School:</div>
-            <span class="text-white fs-1 fw-bold ms-lg-3">@Model.Student.School - @Model.Student.SchoolCity</span>
+<div class="container-fluid bg-transparent my-4 p-3">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3 text-center d-flex flex-wrap justify-content-center">
+        <div class="col">
+            <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                <div class="card-body align-content-center">
+                    <div class="clearfix">
+                        <div class="d-inline text-white fs-2 fw-normal">School:</div>
+                        <span class="text-white fs-2 fw-bold ms-lg-3">@Model.Student.School - @Model.Student.SchoolCity</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4 py-2">
-            <div class="d-inline text-white fs-1 fw-normal">Class:</div>
-            <span class="text-white fs-1 fw-bold ms-lg-3">@Model.Student.Class - @Model.Student.ClassTeacher</span>
+        <div class="col">
+            <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                <div class="card-body align-content-center">
+                    <div class="clearfix">
+                        <div class="d-inline text-white fs-2 fw-normal">Class:</div>
+                        <span class="text-white fs-2 fw-bold ms-lg-3">@Model.Student.Class - @Model.Student.ClassTeacher</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4">
-            <div class="text-white fs-1 fw-normal">Total Grade:</div>
-            <span class="text-white fs-1 fw-bold ms-lg-3">@Model.Subjects.Average(g => g.AverageGrade).ToString("#.##")</span>
+        <div class="col">
+            <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                <div class="card-body align-content-center">
+                    <div class="clearfix">
+                        <div class="d-inline text-white fs-2 fw-normal">Total Grade:</div>
+                        <span class="text-white fs-2 fw-bold ms-lg-3">
+                            @if (Model.Subjects.Any(s => s.Grades.Count() > 0))
+                            {
+                                @Model.Subjects.Average(g => g.Grades.Average(g => g.GradeNumber)).ToString("#.##")
+                            }
+                            else
+                            {
+                                <span>0</span>
+                            }
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                <div class="card-body align-content-center">
+                    <div class="clearfix">
+                        <div class="d-inline text-white fs-2 fw-normal">Total Absences:</div>
+                        <span class="text-white fs-2 fw-bold ms-lg-3">@Model.Subjects.Sum(s => s.Absences.Count())</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="d-flex flex-wrap flex-row gap-3">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3 text-center justify-content-center mt-1">
         @foreach (var subject in Model.Subjects)
         {
-            <div class="bg-auth rounded-10 d-flex justify-content-between align-items-center px-4 w-100">
-                <div class="text-center text-white fs-3 fw-normal pt-3">@subject.Name</div>
-                <hr class="bg-white mx-4 my-3" />
-                <span class="text-white fs-1 fw-bold ms-lg-3">Teacher: @subject.TeacherName</span>
+            <div class="col">
+                <div class="rounded-10 bg-babyblue card h-100 shadow-sm">
+                    <div class="card-body align-content-center">
+                        <div class="clearfix">
+                            <div class="d-block text-white fs-1 fw-normal">@subject.Name</div>
+                            <hr class="bg-white mx-4 my-3" />
+                            <div class="d-block my-2">
+                                <div class="d-inline text-white fs-3 fw-normal">Average Grade:</div>
+                                <span class="text-white fs-3 fw-bold ms-lg-3">
+                                    @if (subject.Grades.Count() > 0)
+                                    {
+                                        @subject.Grades.Average(g => g.GradeNumber).ToString("#.##")
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </span>
+                            </div>
+                            <div class="d-block my-2">
+                                <div class="d-inline text-white fs-3 fw-normal">Absences:</div>
+                                <span class="text-white fs-3 fw-bold ms-lg-3">@subject.Absences.Count()</span>
+                            </div>
+                            <div class="d-block my-2">
+                                <div class="d-inline text-white fs-3 fw-normal">Teacher:</div>
+                                <span class="text-white fs-3 fw-bold ms-lg-3">@subject.TeacherName</span>
+                            </div>
+                            <div class="d-block my-2 text-center">
+                                <div class="d-block text-white fs-3 fw-normal">Grades</div>
+                                <div class="d-flex flex-wrap justify-content-center gap-2">
+                                    @foreach (var grade in subject.Grades)
+                                    {
+                                        @if (grade.GradeNumber == 2)
+                                        {
+                                            <span class="px-2 rounded-10 bg-danger text-white fs-4 fw-bold">@grade.GradeNumber</span>
+                                        }
+                                        else if (grade.GradeNumber == 6)
+                                        {
+                                            <span class="px-2 rounded-10 bg-success text-white fs-4 fw-bold">@grade.GradeNumber</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="px-2 rounded-10 bg-warning text-white fs-4 fw-bold">@grade.GradeNumber</span>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
     </div>
