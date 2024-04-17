@@ -51,7 +51,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Absences");
+                    b.ToTable("Absences", (string)null);
 
                     b.HasData(
                         new
@@ -90,7 +90,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("AdminIdentityId");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admins", (string)null);
 
                     b.HasData(
                         new
@@ -369,7 +369,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasData(
                         new
@@ -413,7 +413,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("SchoolId");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
 
                     b.HasData(
                         new
@@ -448,7 +448,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("DirectorIdentityId");
 
-                    b.ToTable("Directors");
+                    b.ToTable("Directors", (string)null);
 
                     b.HasData(
                         new
@@ -487,7 +487,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Grades");
+                    b.ToTable("Grades", (string)null);
 
                     b.HasData(
                         new
@@ -540,7 +540,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("StudentsParents");
+                    b.ToTable("StudentsParents", (string)null);
 
                     b.HasData(
                         new
@@ -572,7 +572,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("SubjectsStudents");
+                    b.ToTable("SubjectsStudents", (string)null);
 
                     b.HasData(
                         new
@@ -608,7 +608,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("ParentIdentityId");
 
-                    b.ToTable("Parents");
+                    b.ToTable("Parents", (string)null);
 
                     b.HasData(
                         new
@@ -665,7 +665,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("RequesterId");
 
-                    b.ToTable("Requests");
+                    b.ToTable("Requests", (string)null);
                 });
 
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.School", b =>
@@ -692,7 +692,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("DirectorId");
 
-                    b.ToTable("Schools");
+                    b.ToTable("Schools", (string)null);
 
                     b.HasData(
                         new
@@ -737,7 +737,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("StudentIdentityId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
 
                     b.HasData(
                         new
@@ -790,7 +790,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
 
                     b.HasData(
                         new
@@ -837,7 +837,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasIndex("TeacherIdentityId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
 
                     b.HasData(
                         new
