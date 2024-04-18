@@ -18,7 +18,7 @@ namespace Academix.Infrastructure.Data.Configurations
 
             builder
                 .HasOne(sp => sp.Parent)
-                .WithMany(p => p.StudentsParent)
+                .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasData(DataSeed.SeedStudentParent());

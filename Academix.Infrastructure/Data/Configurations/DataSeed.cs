@@ -154,9 +154,21 @@ namespace Academix.Infrastructure.Data.Configurations
                 FirstName = "admin",
                 LastName = "Admin"
             };
-            admin.PasswordHash = hasher.HashPassword(teacher3, "123456");
+            admin.PasswordHash = hasher.HashPassword(admin, "123456");
 
-            return new ApplicationUser[] { director, student, student2, student3, parent, parent2, teacher, teacher2, teacher3, admin };
+            var admin2 = new ApplicationUser()
+            {
+                Id = "214ce248-b8b3-4832-8c3b-7f133e7a429e",
+                UserName = "admin2@mail.com",
+                NormalizedUserName = "ADMIN2@MAIL.COM",
+                Email = "admin2@mail.com",
+                NormalizedEmail = "ADMIN2@MAIL.COM",
+                FirstName = "admin2",
+                LastName = "Admin2"
+            };
+            admin2.PasswordHash = hasher.HashPassword(admin2, "123456");
+
+            return new ApplicationUser[] { director, student, student2, student3, parent, parent2, teacher, teacher2, teacher3, admin, admin2 };
         }
 
         public static City[] SeedCities()
@@ -198,18 +210,6 @@ namespace Academix.Infrastructure.Data.Configurations
                     Name = "8B",
                     SchoolId = 1,
                     ClassTeacherId = 2
-                }
-            };
-        }
-
-        public static Director[] SeedDirectors()
-        {
-            return new Director[]
-            {
-                new Director()
-                {
-                    Id = 1,
-                    DirectorIdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548"
                 }
             };
         }
@@ -257,23 +257,6 @@ namespace Academix.Infrastructure.Data.Configurations
             };
         }
 
-        public static Parent[] SeedParents()
-        {
-            return new Parent[]
-            {
-                new Parent()
-                {
-                    Id = 1,
-                    ParentIdentityId = "925da918-5cd0-4b17-9b62-2f417aac0343"
-                },
-                new Parent()
-                {
-                    Id = 2,
-                    ParentIdentityId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c"
-                }
-            };
-        }
-
         public static School[] SeedSchools()
         {
             return new School[]
@@ -283,7 +266,7 @@ namespace Academix.Infrastructure.Data.Configurations
                     Id = 1,
                     Name = "Vasil Levski",
                     CityId = 1,
-                    DirectorId = 1
+                    DirectorId = "a3717562-385e-41ce-9eff-0f1b994e5548"
                 },
                 new School()
                 {
@@ -382,17 +365,17 @@ namespace Academix.Infrastructure.Data.Configurations
                 new StudentParent()
                 {
                     StudentId = 1,
-                    ParentId = 1
+                    ParentId = "925da918-5cd0-4b17-9b62-2f417aac0343"
                 },
                 new StudentParent()
                 {
                     StudentId = 2,
-                    ParentId = 2
+                    ParentId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c"
                 },
                 new StudentParent()
                 {
                     StudentId = 3,
-                    ParentId = 2
+                    ParentId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c"
                 }
             };
         }
@@ -512,18 +495,11 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     UserId = "11f2b8bd-a49a-42cd-b08b-ce067e430965",
                     RoleId = "7f92327f-b1c1-4fd0-b837-afc278f256b2"
-                }
-            };
-        }
-
-        public static Admin[] SeedAdmins()
-        {
-            return new Admin[]
-            {
-                new Admin()
+                },
+                new IdentityUserRole<string>
                 {
-                    Id = 1,
-                    AdminIdentityId = "11f2b8bd-a49a-42cd-b08b-ce067e430965"
+                    UserId = "214ce248-b8b3-4832-8c3b-7f133e7a429e",
+                    RoleId = "7f92327f-b1c1-4fd0-b837-afc278f256b2"
                 }
             };
         }

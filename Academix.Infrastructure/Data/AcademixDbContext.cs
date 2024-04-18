@@ -14,12 +14,9 @@ namespace Academix.Infrastructure.Data
         }
 
         public DbSet<Absence> Absences { get; set; }
-        public DbSet<Admin> Admins { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Class> Classes { get; set; }
-        public DbSet<Director> Directors { get; set; }
         public DbSet<Grade> Grades { get; set; }
-        public DbSet<Parent> Parents { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<School> Schools { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -27,25 +24,24 @@ namespace Academix.Infrastructure.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<SubjectStudent> SubjectsStudents { get; set; }
         public DbSet<StudentParent> StudentsParents { get; set; }
+        public DbSet<RequestReceiver> RequestsReceivers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new AbsenceConfiguration());
-            builder.ApplyConfiguration(new AdminConfiguration());
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new IdentityRoleConfiguration());
+            builder.ApplyConfiguration(new IdentityUserRoleConfiguration());
+            builder.ApplyConfiguration(new AbsenceConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());
             builder.ApplyConfiguration(new ClassConfiguration());
-            builder.ApplyConfiguration(new DirectorConfiguration());
             builder.ApplyConfiguration(new GradeConfiguration());
-            builder.ApplyConfiguration(new IdentityRoleConfiguration());
-            builder.ApplyConfiguration(new ParentConfiguration());
             builder.ApplyConfiguration(new SchoolConfiguration());
             builder.ApplyConfiguration(new StudentConfiguration());
             builder.ApplyConfiguration(new SubjectConfiguration());
-            builder.ApplyConfiguration(new SubjectStudentConfiguration());
-            builder.ApplyConfiguration(new StudentParentConfiguration());
             builder.ApplyConfiguration(new TeacherConfiguration());
-            builder.ApplyConfiguration(new IdentityUserRoleConfiguration());
+            builder.ApplyConfiguration(new StudentParentConfiguration());
+            builder.ApplyConfiguration(new SubjectStudentConfiguration());
+            builder.ApplyConfiguration(new RequestReceiverConfiguration());
 
             base.OnModelCreating(builder);
         }

@@ -12,9 +12,9 @@ namespace Academix.Infrastructure.Data.Models.Mapping
         public Student Student { get; set; } = null!;
 
         [Required]
-        public int ParentId { get; set; }
+        public string ParentId { get; set; } = null!;
 
         [ForeignKey(nameof(ParentId))]
-        public Parent Parent { get; set; } = null!;
+        public ApplicationUser Parent { get; set; } = null!;
     }
 }

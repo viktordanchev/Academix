@@ -1,25 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Academix.Infrastructure.Data.Models.Mapping;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Academix.Infrastructure.Data.Models
 {
     public class Request
     {
+        public Request()
+        {
+            RequestReceivers = new List<RequestReceiver>();
+        }
+
         [Key]
         public int Id { get; set; }
 
         [Required]
         public string Role { get; set; } = null!;
-         
-        public int? DirectorId { get; set; }
-
-        [ForeignKey(nameof(DirectorId))]
-        public Director? Director { get; set; }
-
-        public int? AdminId { get; set; }
-
-        [ForeignKey(nameof(AdminId))]
-        public Admin? Admin { get; set; }
 
         [Required]
         public string RequesterId { get; set; } = null!;
@@ -35,5 +31,7 @@ namespace Academix.Infrastructure.Data.Models
         public int? StudentId { get; set; }
 
         public string? Message { get; set; }
+
+        public IEnumerable<RequestReceiver> RequestReceivers { get; set; }
     }
 }

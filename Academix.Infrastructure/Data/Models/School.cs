@@ -24,10 +24,10 @@ namespace Academix.Infrastructure.Data.Models
         [ForeignKey(nameof(CityId))]
         public City City { get; set; } = null!;
 
-        public int? DirectorId { get; set; }
+        public string? DirectorId { get; set; }
 
         [ForeignKey(nameof(DirectorId))]
-        public Director? Director { get; set; }
+        public ApplicationUser? Director { get; set; }
 
         public IEnumerable<Teacher> Teachers { get; set; }
 

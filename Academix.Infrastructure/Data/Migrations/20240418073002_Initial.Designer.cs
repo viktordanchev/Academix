@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academix.Infrastructure.Migrations
 {
     [DbContext(typeof(AcademixDbContext))]
-    [Migration("20240410102233_UpdatedRequestsTable")]
-    partial class UpdatedRequestsTable
+    [Migration("20240418073002_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,10 +41,15 @@ namespace Academix.Infrastructure.Migrations
                     b.Property<bool>("ExcusedAbsence")
                         .HasColumnType("bit");
 
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
 
@@ -55,16 +60,18 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = 1,
                             AbsenceType = 0,
-                            DateAndTime = new DateTime(2024, 4, 10, 13, 22, 32, 691, DateTimeKind.Local).AddTicks(8912),
+                            DateAndTime = new DateTime(2024, 4, 18, 10, 30, 2, 355, DateTimeKind.Local).AddTicks(1521),
                             ExcusedAbsence = false,
+                            StudentId = 1,
                             SubjectId = 1
                         },
                         new
                         {
                             Id = 2,
                             AbsenceType = 0,
-                            DateAndTime = new DateTime(2024, 4, 11, 13, 22, 32, 691, DateTimeKind.Local).AddTicks(8946),
+                            DateAndTime = new DateTime(2024, 4, 19, 10, 30, 2, 355, DateTimeKind.Local).AddTicks(1550),
                             ExcusedAbsence = false,
+                            StudentId = 1,
                             SubjectId = 1
                         });
                 });
@@ -146,7 +153,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be269961-380f-438b-add4-81cfff1711ad",
+                            ConcurrencyStamp = "5e6b6aec-ff84-4e8d-a28d-9f1bb4adcea9",
                             Email = "i.ivanov@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -154,9 +161,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "I.IVANOV@MAIL.COM",
                             NormalizedUserName = "I.IVANOV@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK+B6xeE7RIk5N9eYnDmM4W7sDx0KGInENBq0pV+ehJATkcclIV75c5OiUgHEivsvA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMiJVcixwNgDdFTOZ7RLuc0CG27a1rb5wBjZofpwwR7Z7qtmyxayd3FwnW7ZgBiOtw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2f0fd0cb-ea70-4a20-8169-66cf40805d2f",
+                            SecurityStamp = "2580bb08-2303-485f-bc9a-d3b71dc4333d",
                             TwoFactorEnabled = false,
                             UserName = "i.ivanov@mail.com"
                         },
@@ -164,7 +171,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "db35c47d-33cd-4fcd-9a17-e40dd8d30348",
+                            ConcurrencyStamp = "37f395ca-a14a-4e0c-bad0-cbd6da2bde45",
                             Email = "m.marinov@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Mitko",
@@ -172,9 +179,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.MARINOV@MAIL.COM",
                             NormalizedUserName = "M.MARINOV@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK2smOh4h1P3kkAuMHdfrgCP6gODA3M/6weZbfFZFqGJ/u3Pg301fU9ObiEgNRVhWQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGjcAf0MwKrUrQtRjwMwpCy0WqjyFg77KwfmtQCCnIYtGEeYzriOjhbezt3T+kiKmQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9b8d6a8c-702c-40dd-99dc-d0be7487e3a3",
+                            SecurityStamp = "86360492-d123-4140-b580-348817443110",
                             TwoFactorEnabled = false,
                             UserName = "m.marinov@mail.com"
                         },
@@ -182,7 +189,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "a171483f-6e48-446a-a5d7-36110d0c1443",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b89d212b-e2e3-4cb2-830d-564ad3ccc394",
+                            ConcurrencyStamp = "63c87baf-018c-4653-97d6-709465c048c7",
                             Email = "d.kirilov@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Drago",
@@ -190,9 +197,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "D.KIRILOV@MAIL.COM",
                             NormalizedUserName = "D.KIRILOV@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED6ooP/fX1GXzje6sgDiPD8gqflJKldHqcv++pQ6WuDL/x1MUfhsVq6hiFVb7vDrcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENJ2cUaF2dl6HD0FqG87JPDFW/0A0P11xKdi4V41jnsn+fZsun1Bv1P4bRyRuLy3Xg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7a0af354-8878-4427-b46d-be82410dd569",
+                            SecurityStamp = "51c7b1d6-649e-4352-8a2e-de48c4578fd0",
                             TwoFactorEnabled = false,
                             UserName = "d.kirilov@mail.com"
                         },
@@ -200,7 +207,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "b2502a25-8341-4e5c-af74-cd0f889ede1b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8af6b7c8-0681-4d29-8b00-9b8d413ed65b",
+                            ConcurrencyStamp = "e537f147-86e2-4640-98aa-244ed7ed09c3",
                             Email = "m.kirilova@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Marta",
@@ -208,9 +215,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "M.KIRILOVA@MAIL.COM",
                             NormalizedUserName = "M.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECLlkOW0GuWdYQtEsSIdDYE6DNM5zZbebMBSAw5LJ+t85r1bqVPw1uQQZk/2es8RPw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAbpPAinLzpsfD+9QkKrGMLq+1PY0bbZUFigfP0O+G1f6+UThskS4qHMPDzhLWY4CQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d34f1ab4-08b9-4443-9e09-ec98a3a2962d",
+                            SecurityStamp = "7f5d2c47-cf40-48f9-afc5-f34d2c480401",
                             TwoFactorEnabled = false,
                             UserName = "m.kirilova@mail.com"
                         },
@@ -218,7 +225,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "925da918-5cd0-4b17-9b62-2f417aac0343",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "192181ca-3adb-4bed-ae19-98874b06b70c",
+                            ConcurrencyStamp = "32de89ab-43c0-4d0e-89a2-a2d087a860df",
                             Email = "v.marinov@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Vasil",
@@ -226,9 +233,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "V.MARINOV@MAIL.COM",
                             NormalizedUserName = "V.MARINOV@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOXYNGHdQXbxV9sFw6zHQsjdd5UFu10+3dk/lK+2vMtdtdaRjKoeENzm/vRkHHgKeg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKnTxGJYPJA43bRPYh5YTGq+rvts60rxMcGJ3wlXdTYlLBpRlcgA79eripLlQ4fYRg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "577b278d-8fb5-4a47-95b0-8a1ae45b3ac5",
+                            SecurityStamp = "af405718-5a7e-421d-b599-9050120546e0",
                             TwoFactorEnabled = false,
                             UserName = "v.marinov@mail.com"
                         },
@@ -236,7 +243,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9a7964da-e076-4649-b024-f316d3779d2b",
+                            ConcurrencyStamp = "3635cee0-23f8-4e2c-bfe7-f2def58fed3c",
                             Email = "v.kirilova@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Vanya",
@@ -244,9 +251,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "V.KIRILOVA@MAIL.COM",
                             NormalizedUserName = "V.KIRILOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO+75CGMmcBZt3i4H0rShnRSwN8aQJv6/Q6ai4wKmzFDX2JVNbGDst/5Z3AhLuBYjg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBe2mmLpy5VnsD7RUi+MNdm11OgzSgehC7pdpdyS40VyP6KC2wOLqSqKd3+VsaMMVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "71e6d333-1c34-4368-a73e-fea5b8d91b87",
+                            SecurityStamp = "e4f25458-e103-45fe-839d-5f35e23d82cc",
                             TwoFactorEnabled = false,
                             UserName = "v.kirilova@mail.com"
                         },
@@ -254,7 +261,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "5093413e-4acb-471a-9ce7-53df30689fc1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f50190c-49e8-4b7f-8fb5-fa7fa9fa3849",
+                            ConcurrencyStamp = "b1a1e703-b04b-436b-a504-799d9fdfcc09",
                             Email = "n.zakova@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Nikoleta",
@@ -262,9 +269,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "N.ZAKOVA@MAIL.COM",
                             NormalizedUserName = "N.ZAKOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/D2Rf7gAU6nxSkqs5c/b69E7WmcV3TKyXBRmrV00Culu5ptSw7ko+QPO7C2H/7jA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJbGwayqb6bufu8n7vgeEO8e7izeDv0KMWYzeWjtB2PEaDMfibIXMk4FZoDlN6IsTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "10480288-0e21-4fc1-9250-b1d5567ef73f",
+                            SecurityStamp = "5c1e5adf-9afc-4cca-88ec-fd0741a27c48",
                             TwoFactorEnabled = false,
                             UserName = "n.zakova@mail.com"
                         },
@@ -272,7 +279,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "6c1ff15b-1853-4d20-98ff-9695affb432c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6818d693-cb73-4429-b0ff-dab93a0221d6",
+                            ConcurrencyStamp = "4766490a-7538-4993-a291-5083207cf087",
                             Email = "d.milev@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dragan",
@@ -280,9 +287,9 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "D.MILEV@MAIL.COM",
                             NormalizedUserName = "D.MILEV@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKjMNAG784ACWBWGko7/1Xcb1qzgT6ZgIVDWy1Df90Gp6PoW+OdbvEPNreoi5+ipzg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI/sE1eE9kyZXb62REiK4cK7iVTc3+6tP6Aoc0RrJe25TCQfUg0MsL03zuObZJOT5Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d4534f37-7ab5-4bf9-87a9-05261fdfe33f",
+                            SecurityStamp = "a835cbfd-123b-443d-9722-3683f698d899",
                             TwoFactorEnabled = false,
                             UserName = "d.milev@mail.com"
                         },
@@ -290,7 +297,7 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = "bd3e68c0-728b-44a0-ba3a-992d8ae683f9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ef111e6d-02cd-4bf4-a14a-1b58bb4b11ff",
+                            ConcurrencyStamp = "5a1ba777-3909-4edb-91e2-645b8ca9d7b6",
                             Email = "z.draganova@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Zara",
@@ -298,11 +305,29 @@ namespace Academix.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "Z.DRAGANOVA@MAIL.COM",
                             NormalizedUserName = "Z.DRAGANOVA@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELooAbXVMQcNa12cesd/qorAMxLMEwKZxZSOxW0WeqqyHHFGC+dXW2jDoQZNdsSr7w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECSOksfUhqsoIlK04fWjuvOQQI91kOYusyjMLwjJ0ez2rduAMxwatuEpPcthS2D74A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "53928e03-abe1-49ed-9194-f926ce9c9d36",
+                            SecurityStamp = "7cb6b945-93e0-4418-bbea-f8f5894a4d00",
                             TwoFactorEnabled = false,
                             UserName = "z.draganova@mail.com"
+                        },
+                        new
+                        {
+                            Id = "11f2b8bd-a49a-42cd-b08b-ce067e430965",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "96b7e83d-d1cf-4c22-aab2-bdebc97db8ea",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = false,
+                            FirstName = "admin",
+                            LastName = "Admin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENTUkEuRk1gLphcr8ff5kMJiwuMzidXidkoKAsIdo7cMWO7xH6Yw40I5VBmOUMvuMg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8187cc7c-9a67-443b-b76c-87eb067ea88e",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@mail.com"
                         });
                 });
 
@@ -383,32 +408,6 @@ namespace Academix.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Director", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("DirectorIdentityId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DirectorIdentityId");
-
-                    b.ToTable("Directors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DirectorIdentityId = "a3717562-385e-41ce-9eff-0f1b994e5548"
-                        });
-                });
-
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Grade", b =>
                 {
                     b.Property<int>("Id")
@@ -426,10 +425,15 @@ namespace Academix.Infrastructure.Migrations
                     b.Property<int>("GradeType")
                         .HasColumnType("int");
 
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
 
@@ -439,34 +443,85 @@ namespace Academix.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateAndTime = new DateTime(2024, 4, 10, 13, 22, 32, 702, DateTimeKind.Local).AddTicks(6491),
+                            DateAndTime = new DateTime(2024, 4, 18, 10, 30, 2, 355, DateTimeKind.Local).AddTicks(2459),
                             GradeNumber = 4,
                             GradeType = 0,
+                            StudentId = 1,
                             SubjectId = 1
                         },
                         new
                         {
                             Id = 2,
-                            DateAndTime = new DateTime(2024, 4, 22, 13, 22, 32, 702, DateTimeKind.Local).AddTicks(6517),
+                            DateAndTime = new DateTime(2024, 4, 30, 10, 30, 2, 355, DateTimeKind.Local).AddTicks(2469),
                             GradeNumber = 6,
                             GradeType = 0,
+                            StudentId = 1,
                             SubjectId = 1
                         },
                         new
                         {
                             Id = 3,
-                            DateAndTime = new DateTime(2024, 4, 21, 13, 22, 32, 702, DateTimeKind.Local).AddTicks(6520),
+                            DateAndTime = new DateTime(2024, 4, 29, 10, 30, 2, 355, DateTimeKind.Local).AddTicks(2472),
                             GradeNumber = 6,
                             GradeType = 1,
+                            StudentId = 1,
                             SubjectId = 2
                         },
                         new
                         {
                             Id = 4,
-                            DateAndTime = new DateTime(2024, 4, 17, 13, 22, 32, 702, DateTimeKind.Local).AddTicks(6523),
+                            DateAndTime = new DateTime(2024, 4, 25, 10, 30, 2, 355, DateTimeKind.Local).AddTicks(2474),
                             GradeNumber = 2,
                             GradeType = 0,
+                            StudentId = 1,
                             SubjectId = 3
+                        });
+                });
+
+            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Mapping.RequestReceiver", b =>
+                {
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RequestId", "ReceiverId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("RequestsReceivers");
+                });
+
+            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Mapping.StudentParent", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ParentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("StudentId", "ParentId");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("StudentsParents");
+
+                    b.HasData(
+                        new
+                        {
+                            StudentId = 1,
+                            ParentId = "925da918-5cd0-4b17-9b62-2f417aac0343"
+                        },
+                        new
+                        {
+                            StudentId = 2,
+                            ParentId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c"
+                        },
+                        new
+                        {
+                            StudentId = 3,
+                            ParentId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c"
                         });
                 });
 
@@ -502,37 +557,6 @@ namespace Academix.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Parent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ParentIdentityId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentIdentityId");
-
-                    b.ToTable("Parents");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ParentIdentityId = "925da918-5cd0-4b17-9b62-2f417aac0343"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ParentIdentityId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c"
-                        });
-                });
-
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Request", b =>
                 {
                     b.Property<int>("Id")
@@ -542,9 +566,6 @@ namespace Academix.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("ClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DirectorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Message")
@@ -566,10 +587,7 @@ namespace Academix.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DirectorId");
-
-                    b.HasIndex("RequesterId")
-                        .IsUnique();
+                    b.HasIndex("RequesterId");
 
                     b.ToTable("Requests");
                 });
@@ -585,8 +603,8 @@ namespace Academix.Infrastructure.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DirectorId")
-                        .HasColumnType("int");
+                    b.Property<string>("DirectorId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -605,8 +623,14 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = 1,
                             CityId = 1,
-                            DirectorId = 1,
+                            DirectorId = "a3717562-385e-41ce-9eff-0f1b994e5548",
                             Name = "Vasil Levski"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CityId = 1,
+                            Name = "137 Georgi Asparuhov"
                         });
                 });
 
@@ -627,9 +651,6 @@ namespace Academix.Infrastructure.Migrations
                     b.Property<int?>("NumberInClass")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StudentIdentityId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -637,8 +658,6 @@ namespace Academix.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClassId");
-
-                    b.HasIndex("ParentId");
 
                     b.HasIndex("StudentIdentityId");
 
@@ -651,7 +670,6 @@ namespace Academix.Infrastructure.Migrations
                             Address = "Vasil Aprilov 5",
                             ClassId = 1,
                             NumberInClass = 5,
-                            ParentId = 1,
                             StudentIdentityId = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc"
                         },
                         new
@@ -660,7 +678,6 @@ namespace Academix.Infrastructure.Migrations
                             Address = "Krali Marko 12",
                             ClassId = 2,
                             NumberInClass = 3,
-                            ParentId = 2,
                             StudentIdentityId = "a171483f-6e48-446a-a5d7-36110d0c1443"
                         },
                         new
@@ -669,7 +686,6 @@ namespace Academix.Infrastructure.Migrations
                             Address = "Kalimanci 13",
                             ClassId = 2,
                             NumberInClass = 15,
-                            ParentId = 2,
                             StudentIdentityId = "b2502a25-8341-4e5c-af74-cd0f889ede1b"
                         });
                 });
@@ -686,10 +702,15 @@ namespace Academix.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SchoolId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SchoolId");
 
                     b.HasIndex("TeacherId");
 
@@ -700,18 +721,21 @@ namespace Academix.Infrastructure.Migrations
                         {
                             Id = 1,
                             Name = "Mathematics",
+                            SchoolId = 1,
                             TeacherId = 1
                         },
                         new
                         {
                             Id = 2,
                             Name = "Physics",
+                            SchoolId = 1,
                             TeacherId = 2
                         },
                         new
                         {
                             Id = 3,
                             Name = "History",
+                            SchoolId = 1,
                             TeacherId = 3
                         });
                 });
@@ -790,37 +814,37 @@ namespace Academix.Infrastructure.Migrations
                         new
                         {
                             Id = "a550b411-e5c7-407f-aaba-35161bab127e",
-                            ConcurrencyStamp = "18f86ba0-8f60-490b-83f5-ab97eb370ed3",
+                            ConcurrencyStamp = "07958f8c-bd71-4d41-a858-5b7b5639fa43",
                             Name = "Director",
                             NormalizedName = "DIRECTOR"
                         },
                         new
                         {
                             Id = "f67cd347-818b-4c3e-a1ce-ae76e1a2e31b",
-                            ConcurrencyStamp = "ee077e51-3cda-41d9-8eb8-eef30cb74d02",
+                            ConcurrencyStamp = "228a84d5-7636-4ed3-9b21-0a2a1b116ebb",
                             Name = "Teacher",
                             NormalizedName = "TEACHER"
                         },
                         new
                         {
                             Id = "e67d14b1-de35-47bd-96ac-a70fcc4c25be",
-                            ConcurrencyStamp = "30824498-22dc-42db-8962-6a69dc43c296",
+                            ConcurrencyStamp = "1169dfe6-955b-4c1d-b98b-2aefe373a4bd",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
                             Id = "fc1ee3a5-9b29-43ea-b038-2265c1806a75",
-                            ConcurrencyStamp = "b9281978-3825-4943-95b7-bca0ab8511ee",
+                            ConcurrencyStamp = "506538d8-b0c3-4908-bda2-2af9887e8cf2",
                             Name = "Parent",
                             NormalizedName = "PARENT"
                         },
                         new
                         {
                             Id = "7f92327f-b1c1-4fd0-b837-afc278f256b2",
-                            ConcurrencyStamp = "3f3cc866-2f75-4b4f-a5d8-2c1d348f83b1",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
+                            ConcurrencyStamp = "dfc1699d-031c-4f7e-88cf-d7688ce20836",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -957,6 +981,11 @@ namespace Academix.Infrastructure.Migrations
                         {
                             UserId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c",
                             RoleId = "fc1ee3a5-9b29-43ea-b038-2265c1806a75"
+                        },
+                        new
+                        {
+                            UserId = "11f2b8bd-a49a-42cd-b08b-ce067e430965",
+                            RoleId = "7f92327f-b1c1-4fd0-b837-afc278f256b2"
                         });
                 });
 
@@ -983,11 +1012,19 @@ namespace Academix.Infrastructure.Migrations
 
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Absence", b =>
                 {
+                    b.HasOne("Academix.Infrastructure.Data.Models.Student", "Student")
+                        .WithMany("Absences")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Academix.Infrastructure.Data.Models.Subject", "Subject")
                         .WithMany("Absences")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Student");
 
                     b.Navigation("Subject");
                 });
@@ -1009,26 +1046,61 @@ namespace Academix.Infrastructure.Migrations
                     b.Navigation("School");
                 });
 
-            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Director", b =>
-                {
-                    b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "DirectorIdentity")
-                        .WithMany()
-                        .HasForeignKey("DirectorIdentityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DirectorIdentity");
-                });
-
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Grade", b =>
                 {
+                    b.HasOne("Academix.Infrastructure.Data.Models.Student", "Student")
+                        .WithMany("Grades")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Academix.Infrastructure.Data.Models.Subject", "Subject")
                         .WithMany("Grades")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Student");
+
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Mapping.RequestReceiver", b =>
+                {
+                    b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Academix.Infrastructure.Data.Models.Request", "Request")
+                        .WithMany("RequestReceivers")
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Mapping.StudentParent", b =>
+                {
+                    b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Academix.Infrastructure.Data.Models.Student", "Student")
+                        .WithMany("StudentParents")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Mapping.SubjectStudent", b =>
@@ -1050,32 +1122,13 @@ namespace Academix.Infrastructure.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Parent", b =>
-                {
-                    b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "ParentIdentity")
-                        .WithMany()
-                        .HasForeignKey("ParentIdentityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ParentIdentity");
-                });
-
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Request", b =>
                 {
-                    b.HasOne("Academix.Infrastructure.Data.Models.Director", "Director")
-                        .WithMany("Requests")
-                        .HasForeignKey("DirectorId")
+                    b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "Requester")
+                        .WithMany()
+                        .HasForeignKey("RequesterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "Requester")
-                        .WithOne()
-                        .HasForeignKey("Academix.Infrastructure.Data.Models.Request", "RequesterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Director");
 
                     b.Navigation("Requester");
                 });
@@ -1088,7 +1141,7 @@ namespace Academix.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Academix.Infrastructure.Data.Models.Director", "Director")
+                    b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "Director")
                         .WithMany()
                         .HasForeignKey("DirectorId");
 
@@ -1105,10 +1158,6 @@ namespace Academix.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Academix.Infrastructure.Data.Models.Parent", "Parent")
-                        .WithMany("Students")
-                        .HasForeignKey("ParentId");
-
                     b.HasOne("Academix.Infrastructure.Data.Models.ApplicationUser", "StudentIdentity")
                         .WithMany()
                         .HasForeignKey("StudentIdentityId")
@@ -1117,18 +1166,24 @@ namespace Academix.Infrastructure.Migrations
 
                     b.Navigation("Class");
 
-                    b.Navigation("Parent");
-
                     b.Navigation("StudentIdentity");
                 });
 
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Subject", b =>
                 {
+                    b.HasOne("Academix.Infrastructure.Data.Models.School", "School")
+                        .WithMany("Subjects")
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Academix.Infrastructure.Data.Models.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("School");
 
                     b.Navigation("Teacher");
                 });
@@ -1208,25 +1263,28 @@ namespace Academix.Infrastructure.Migrations
                     b.Navigation("Students");
                 });
 
-            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Director", b =>
+            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Request", b =>
                 {
-                    b.Navigation("Requests");
-                });
-
-            modelBuilder.Entity("Academix.Infrastructure.Data.Models.Parent", b =>
-                {
-                    b.Navigation("Students");
+                    b.Navigation("RequestReceivers");
                 });
 
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.School", b =>
                 {
                     b.Navigation("Classes");
 
+                    b.Navigation("Subjects");
+
                     b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("Academix.Infrastructure.Data.Models.Student", b =>
                 {
+                    b.Navigation("Absences");
+
+                    b.Navigation("Grades");
+
+                    b.Navigation("StudentParents");
+
                     b.Navigation("SubjectsStudent");
                 });
 
