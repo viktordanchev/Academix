@@ -1,8 +1,6 @@
 ﻿using Academix.Common.Constants;
 using Academix.Core.Contracts;
-using Academix.Core.Models.Request;
 using Academix.Infrastructure.Data;
-using Academix.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -24,16 +22,7 @@ namespace Academix.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            IEnumerable<AllViewModel> requests;
-
-            if (User.IsAdmin())
-            {
-                requests = await _requestService.GetAllRequestsToAdmin(GetUserId());
-            }
-            else
-            {
-                requests = await _requestService.GetAllRequestsToDirector(GetUserId());
-            }
+            var requests = await _requestService.GetAllRequests(GetUserId());
 
             return View(requests);
         }

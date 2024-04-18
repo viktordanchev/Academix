@@ -19,33 +19,16 @@ namespace Academix.Core.Services
             _userManager = userManager;
         }
 
-        public async Task<IEnumerable<AllViewModel>> GetAllRequestsToAdmin(string userId)
+        public async Task<IEnumerable<AllViewModel>> GetAllRequests(string userId)
         {
-            var requests = await _context.Requests
-                   .Where(r => r.Admin.AdminIdentityId == userId)
+            var requests = await _context.RequestsReceivers
+                   .Where(r => r.ReceiverId == userId)
                    .Select(r => new AllViewModel()
                    {
-                       Id = r.Id,
-                       Role = r.Role,
-                       RequesterName = $"{r.Requester.FirstName} + {r.Requester.LastName}",
-                       Message = r.Message
-                   })
-                   .AsNoTracking()
-                   .ToListAsync();
-
-            return requests;
-        }
-
-        public async Task<IEnumerable<AllViewModel>> GetAllRequestsToDirector(string userId)
-        {
-            var requests = await _context.Requests
-                   .Where(r => r.Director.DirectorIdentityId == userId)
-                   .Select(r => new AllViewModel()
-                   {
-                       Id = r.Id,
-                       Role = r.Role,
-                       RequesterName = $"{r.Requester.FirstName} + {r.Requester.LastName}",
-                       Message = r.Message
+                       Id = r.Request.Id,
+                       Role = r.Request.Role,
+                       RequesterName = $"{r.Request.Requester.FirstName} + {r.Request.Requester.LastName}",
+                       Message = r.Request.Message
                    })
                    .AsNoTracking()
                    .ToListAsync();
@@ -60,8 +43,6 @@ namespace Academix.Core.Services
                 {
                     Id = r.Id,
                     Role = r.Role,
-                    DirectorId = r.DirectorId,
-                    AdminId = r.AdminId,
                     RequesterId = r.RequesterId,
                     SchoolId = r.SchoolId,
                     ClassId = r.ClassId,
@@ -82,17 +63,10 @@ namespace Academix.Core.Services
             switch (request.Role)
             {
                 case "Director":
-                    var director = new Director()
-                    {
-                        DirectorIdentity = requester
-                    };
-
                     var school = await _context.Schools
                         .FirstAsync(s => s.Id == request.SchoolId);
 
-                    school.Director = director;
-
-                    await _context.Directors.AddAsync(director);
+                    school.Director = requester;
                     break;
                 case "Student":
                     var student = new Student()
@@ -113,21 +87,15 @@ namespace Academix.Core.Services
                     await _context.Teachers.AddAsync(teacher);
                     break;
                 case "Parent":
-                    var parent = new Parent()
-                    {
-                        ParentIdentity = requester
-                    };
-
                     var student2 = await _context.Students
                         .FirstAsync(s => s.Id == request.StudentId);
 
                     var studentParent = new StudentParent()
                     {
                         Student = student2,
-                        Parent = parent
+                        Parent = requester
                     };
 
-                    await _context.Parents.AddAsync(parent);
                     await _context.StudentsParents.AddAsync(studentParent);
                     break;
             }

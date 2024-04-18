@@ -1,5 +1,6 @@
 ﻿using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
+using Academix.Infrastructure.Data.Models.Mapping;
 using Academix.Web.Extensions;
 using Academix.Web.Models.Account;
 using Microsoft.AspNetCore.Authorization;
@@ -209,23 +210,49 @@ namespace Academix.Web.Controllers
                 Message = model.Message
             };
 
+            var requestsReceivers = new List<RequestReceiver>();
+            
             if (model.Role == "Director")
             {
-                var admins = await _context.Admins
-                    .Select(u => u.Id)
-                    .ToArrayAsync();
+                var admins = _userManager.GetUsersInRoleAsync("Admin").Result;
 
-                request.AdminId = admins[0];
+                foreach (var admin in admins)
+                {
+                    var requestReceiver = new RequestReceiver()
+                    {
+                        Request = request,
+                        Receiver = admin
+                    };
+
+                    requestsReceivers.Add(requestReceiver);
+                }
             }
             else
             {
-                request.DirectorId = school.DirectorId;
+                if(school.DirectorId == null)
+                {
+                    ModelState.AddModelError(string.Empty, "This school doesn't yet have director.");
+
+                    model.Roles = await GetAllRoles();
+                    model.Schools = await GetAllSchools();
+
+                    return View(model);
+                }
+
+                var requestReceiver = new RequestReceiver()
+                {
+                    Request = request,
+                    ReceiverId = school.DirectorId
+                };
+
+                requestsReceivers.Add(requestReceiver);
             }
 
+            await _context.RequestsReceivers.AddRangeAsync(requestsReceivers);
             await _context.Requests.AddAsync(request);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(Manage));
         }
 
         [HttpPost]

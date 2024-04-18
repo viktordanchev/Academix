@@ -24,7 +24,7 @@ namespace Academix.Core.Services
                     Class = s.Student.Class.Name,
                     ClassTeacher = $"{s.Student.Class.ClassTeacher.TeacherIdentity.FirstName} {s.Student.Class.ClassTeacher.TeacherIdentity.LastName}",
                     School = s.Student.Class.School.Name,
-                    SchoolDirector = $"{s.Student.Class.School.Director.DirectorIdentity.FirstName}{s.Student.Class.School.Director.DirectorIdentity.LastName}",
+                    SchoolDirector = $"{s.Student.Class.School.Director.FirstName}{s.Student.Class.School.Director.LastName}",
                     Grades = s.Student.Grades
                     .Select(g => new GradeServiceModel()
                     {
