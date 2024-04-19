@@ -16,7 +16,6 @@ namespace Academix.Infrastructure.Data.Configurations
                     Id = 1,
                     DateAndTime = DateTime.Now,
                     ExcusedAbsence = false,
-                    AbsenceType = 0,
                     SubjectId = 1,
                     StudentId = 1
                 },
@@ -25,8 +24,15 @@ namespace Academix.Infrastructure.Data.Configurations
                     Id = 2,
                     DateAndTime = DateTime.Now.AddDays(1),
                     ExcusedAbsence = false,
-                    AbsenceType = 0,
                     SubjectId = 1,
+                    StudentId = 1
+                },
+                new Absence()
+                {
+                    Id = 3,
+                    DateAndTime = DateTime.Now.AddDays(2),
+                    ExcusedAbsence = true,
+                    SubjectId = 2,
                     StudentId = 1
                 }
             };

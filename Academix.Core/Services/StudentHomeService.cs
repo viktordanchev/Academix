@@ -53,8 +53,7 @@ namespace Academix.Core.Services
                         .Select(a => new AbsenceServiceModel()
                         {
                             ExcusedAbsence = a.ExcusedAbsence,
-                            DateAndTime = a.DateAndTime,
-                            AbsenceType = a.AbsenceType
+                            DateAndTime = a.DateAndTime
                         })
                         .ToList()
                 })

@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Academix.Common.Constants;
-using Academix.Infrastructure.Data.Models.Enumerations;
 
 namespace Academix.Infrastructure.Data.Models
 {
@@ -15,10 +13,6 @@ namespace Academix.Infrastructure.Data.Models
 
         [Required]
         public bool ExcusedAbsence { get; set; }
-
-        [Required]
-        [Range(AbsenceConstants.AbsenceTypeMin, AbsenceConstants.AbsenceTypeMax)]
-        public AbsenceTypes AbsenceType { get; set; }
 
         [Required]
         public int SubjectId { get; set; }
