@@ -5,11 +5,11 @@ using System.Security.Claims;
 
 namespace Academix.Web.Areas.Student.Controllers
 {
-    public class HomeController : StudentBaseController
+    public class DashboardController : StudentBaseController
     {
         private readonly IStudentHomeService _studentHomeService;
 
-        public HomeController(IStudentHomeService studentHomeService)
+        public DashboardController(IStudentHomeService studentHomeService)
         {
             _studentHomeService = studentHomeService;
         }

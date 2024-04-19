@@ -1,0 +1,12 @@
+﻿@if (User.IsInRole("Student"))
+{
+    <li class="nav-item mx-3">
+        <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-area="Student" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+    </li>
+}
+else if (User.IsInRole("Parent"))
+{
+    <li class="nav-item mx-3">
+        <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-area="Parent" asp-controller="Students" asp-action="Index">Students</a>
+    </li>
+}
