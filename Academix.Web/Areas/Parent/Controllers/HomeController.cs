@@ -9,19 +9,18 @@ namespace Academix.Web.Areas.Parent.Controllers
     public class HomeController : ParentBaseController
     {
         private readonly IParentHomeService _parentHomeService;
-        private readonly AcademixDbContext _con;
 
-        public HomeController(IParentHomeService parentHomeService, AcademixDbContext con)
+        public HomeController(IParentHomeService parentHomeService)
         {
             _parentHomeService = parentHomeService;
-            _con = con;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var students = await _parentHomeService.GetStudentsInfo(GetUserId());
 
-            return View();
+            return View(students);
         }
 
         private string GetUserId()

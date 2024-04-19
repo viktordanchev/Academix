@@ -45,10 +45,6 @@
             </select>
             <span asp-validation-for="StudentId" class="text-danger fw-bold"></span>
         </div>
-        <div class="form-group mx-4">
-            <label asp-for="Message" class="d-block text-white fs-5">Message</label>
-            <textarea class="form-control d-block" rows="3"></textarea>
-        </div>
         <div class="d-flex flex-row mx-4 justify-content-between py-4">
             <a asp-controller="Account" asp-action="Manage" class="w-20 btn btn-lg btn-primary">Cancel</a>
             <button id="registerSubmit" type="submit" class="w-20 btn btn-lg btn-primary">Submit</button>

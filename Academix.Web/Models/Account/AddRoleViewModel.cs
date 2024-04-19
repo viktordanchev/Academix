@@ -22,8 +22,6 @@ namespace Academix.Web.Models.Account
         [Required(ErrorMessage = "The Student field is required.")]
         public int StudentId { get; set; }
 
-        public string? Message { get; set; }
-
         public IEnumerable<string> Roles { get; set; }
 
         public IEnumerable<InfoViewModel> Schools { get; set; }

@@ -4,20 +4,40 @@
     ViewBag.Title = "All Requests";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
-<div class="text-center row">
-    @foreach (var e in Model)
-    {
-        <div class="card col-4" style="width: 20rem; ">
-            <div class="card-body">
-                <h4 class="card-title mt-1">Role: @e.Role</h4>
-                <h4 class="card-title mt-1">@e.RequesterName</h4>
-                <h5 class="card-title mt-1">@e.Message</h5>
-            </div>
+<h1 class="display-1 fw-bold ">All Requests</h1>
 
-            <a asp-controller="Request" asp-action="Accept" asp-route-id="@e.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Accept</a>
-            <a asp-controller="Request" asp-action="Deny" asp-route-id="@e.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Deny</a>
-        </div>
-    }
+<div class="container-fluid bg-transparent my-4 p-3">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-5 g-3 text-center d-flex flex-wrap justify-content-center">
+        @foreach (var request in Model)
+        {
+            <div id="card" class="col">
+                <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                    <div class="card-body mx-3 d-flex justify-content-between flex-column">
+                        <div>
+                            <div class="d-block my-2 text-white fs-4 fw-normal">Requester: <b>@request.RequesterName</b></div>
+                            <hr class="bg-white" />
+                            <div class="d-block my-2 text-white fs-4 fw-normal text-start">Role: <b>@request.Role</b></div>
+                            <div class="d-block my-2 text-white fs-4 fw-normal text-start">School: <b>@request.School</b></div>
+                            @if (request.Role == "Student")
+                            {
+                                <div class="d-block my-2 text-white fs-4 fw-normal text-start">Class: <b>@request.Class</b></div>
+                            }
+                            else if (request.Role == "Parent")
+                            {
+                                <div class="d-block my-2 text-white fs-4 fw-normal text-start">Student class: <b>@request.Class</b></div>
+                                <div class="d-block my-2 text-white fs-4 fw-normal text-start">Student: <b>@request.Student</b></div>
+                            }
+                        </div>
+                        <div class="pt-2 d-flex justify-content-around gap-4">
+                            <a id="slide" asp-controller="Request" asp-action="Accept" asp-route-id="@request.Id" class="btn btn-primary w-100 mb-2 fw-bold">Accept</a>
+                            <a id="slide" asp-controller="Request" asp-action="Deny" asp-route-id="@request.Id" class="btn btn-primary w-100 mb-2 fw-bold">Deny</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+@section Scripts {
+}

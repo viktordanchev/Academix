@@ -26,11 +26,18 @@ namespace Academix.Infrastructure.Data.Models
         [Required]
         public int SchoolId { get; set; }
 
+        [ForeignKey(nameof(SchoolId))]
+        public School School { get; set; } = null!;
+
         public int? ClassId { get; set; }
+
+        [ForeignKey(nameof(ClassId))]
+        public Class? Class { get; set; }
 
         public int? StudentId { get; set; }
 
-        public string? Message { get; set; }
+        [ForeignKey(nameof(StudentId))]
+        public Student? Student { get; set; }
 
         public IEnumerable<RequestReceiver> RequestReceivers { get; set; }
     }

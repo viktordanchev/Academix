@@ -11,6 +11,7 @@ namespace Academix.Web.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IParentHomeService, ParentHomeService>();
             services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IStudentHomeService, StudentHomeService>();
 

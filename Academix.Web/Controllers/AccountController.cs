@@ -205,9 +205,8 @@ namespace Academix.Web.Controllers
                 Role = model.Role,
                 RequesterId = GetUserId(),
                 SchoolId = model.SchoolId,
-                ClassId = model.ClassId,
-                StudentId = model.StudentId,
-                Message = model.Message
+                ClassId = model.ClassId != 0 ? model.ClassId : null,
+                StudentId = model.StudentId != 0 ? model.StudentId : null
             };
 
             var requestsReceivers = new List<RequestReceiver>();
@@ -248,9 +247,11 @@ namespace Academix.Web.Controllers
                 requestsReceivers.Add(requestReceiver);
             }
 
-            await _context.RequestsReceivers.AddRangeAsync(requestsReceivers);
+            request.RequestReceivers = requestsReceivers;
             await _context.Requests.AddAsync(request);
             await _context.SaveChangesAsync();
+
+            TempData["AlertMessage"] = "Request was sent.";
 
             return RedirectToAction(nameof(Manage));
         }
@@ -335,6 +336,13 @@ namespace Academix.Web.Controllers
             if (!isRoleExist || model.Role == "Admin" || school == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid role. Please choose valid data.");
+
+                result = false;
+            }
+
+            if (User.IsInRole(model.Role) && model.Role != "Admin")
+            {
+                ModelState.AddModelError(string.Empty, $"You are already {model.Role}");
 
                 result = false;
             }

@@ -27,8 +27,10 @@ namespace Academix.Core.Services
                    {
                        Id = r.Request.Id,
                        Role = r.Request.Role,
-                       RequesterName = $"{r.Request.Requester.FirstName} + {r.Request.Requester.LastName}",
-                       Message = r.Request.Message
+                       RequesterName = $"{r.Request.Requester.FirstName} {r.Request.Requester.LastName}",
+                       School = r.Request.School.Name,
+                       Class = r.Request.Class.Name,
+                       Student = $"{r.Request.Student.StudentIdentity.FirstName} {r.Request.Student.StudentIdentity.LastName}"
                    })
                    .AsNoTracking()
                    .ToListAsync();
@@ -46,8 +48,7 @@ namespace Academix.Core.Services
                     RequesterId = r.RequesterId,
                     SchoolId = r.SchoolId,
                     ClassId = r.ClassId,
-                    StudentId = r.StudentId,
-                    Message = r.Message
+                    StudentId = r.StudentId
                 })
                 .FirstOrDefaultAsync(r => r.Id == requestId);
 

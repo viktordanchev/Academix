@@ -14,29 +14,29 @@ namespace Academix.Core.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<StudentServiceModel>> GetStudentsInfo(int parentId)
+        public async Task<IEnumerable<StudentViewModel>> GetStudentsInfo(string parentId)
         {
             var students = await _context.StudentsParents
-                .Select(s => new StudentServiceModel()
+                .Where(sp => sp.ParentId == parentId)
+                .Select(s => new StudentViewModel()
                 {
                     Name = $"{s.Student.StudentIdentity.FirstName} {s.Student.StudentIdentity.LastName}",
                     NumberInClass = s.Student.NumberInClass,
                     Class = s.Student.Class.Name,
                     ClassTeacher = $"{s.Student.Class.ClassTeacher.TeacherIdentity.FirstName} {s.Student.Class.ClassTeacher.TeacherIdentity.LastName}",
                     School = s.Student.Class.School.Name,
-                    SchoolDirector = $"{s.Student.Class.School.Director.FirstName}{s.Student.Class.School.Director.LastName}",
-                    Grades = s.Student.Grades
-                    .Select(g => new GradeServiceModel()
-                    {
-                        GradeNumber = g.GradeNumber
-                    })
-                    .ToList(),
-                    Absences = s.Student.Absences
-                    .Select(a => new AbsenceServiceModel()
-                    {
-                        AbsenceType = a.AbsenceType
-                    })
-                    .ToList()
+                    SchoolDirector = $"{s.Student.Class.School.Director.FirstName} {s.Student.Class.School.Director.LastName}",
+                    Subjects = s.Student.SubjectsStudent
+                        .Where(ss => ss.StudentId == s.Student.Id)
+                        .Select(ss => new SubjectServiceModel() 
+                        { 
+                            Name = ss.Subject.Name,
+                            Grades = ss.Subject.Grades
+                                .Select(g => g.GradeNumber)
+                                .ToList(),
+                            Absences = ss.Subject.Absences.Count()
+                        })
+                        .ToList()
                 })
                 .AsNoTracking()
                 .ToListAsync();
