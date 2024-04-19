@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $('.grade').popover({
-        placement: 'top',
+        placement: 'bottom',
         trigger: 'hover'
     });
 });
