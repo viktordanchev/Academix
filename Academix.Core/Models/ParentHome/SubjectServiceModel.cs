@@ -4,14 +4,14 @@
     {
         public SubjectServiceModel()
         {
-            Grades = new List<int>();
+            Grades = new List<GradeServiceModel>();
         }
 
         public string Name { get; set; } = null!;
 
         public int Absences { get; set; }
 
-        public IEnumerable<int> Grades { get; set; }
+        public IEnumerable<GradeServiceModel> Grades { get; set; }
 
     }
 }

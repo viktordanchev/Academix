@@ -32,7 +32,12 @@ namespace Academix.Core.Services
                         { 
                             Name = ss.Subject.Name,
                             Grades = ss.Subject.Grades
-                                .Select(g => g.GradeNumber)
+                                .Select(g => new GradeServiceModel()
+                                {
+                                    GradeNumber = g.GradeNumber,
+                                    GradeType = g.GradeType,
+                                    DateAndTime = g.DateAndTime,
+                                })
                                 .ToList(),
                             Absences = ss.Subject.Absences.Count()
                         })

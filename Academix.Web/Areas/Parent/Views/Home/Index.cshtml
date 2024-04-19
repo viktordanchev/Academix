@@ -54,17 +54,29 @@
                                             <div class="d-flex flex-wrap justify-content-center gap-2">
                                                 @foreach (var grade in subject.Grades)
                                                 {
-                                                    @if (grade == 2)
+                                                    @if (grade.GradeNumber == 2)
                                                     {
-                                                        <span class="px-2 rounded-10 bg-danger text-white fs-4 fw-bold">@grade</span>
+                                                        <span data-toggle="popover"
+                                                              data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                              class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+                                                            @grade.GradeNumber
+                                                        </span>
                                                     }
-                                                    else if (grade == 6)
+                                                    else if (grade.GradeNumber == 6)
                                                     {
-                                                        <span class="px-2 rounded-10 bg-success text-white fs-4 fw-bold">@grade</span>
+                                                        <span data-toggle="popover"
+                                                              data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                              class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+                                                            @grade.GradeNumber
+                                                        </span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="px-2 rounded-10 bg-warning text-white fs-4 fw-bold">@grade</span>
+                                                        <span data-toggle="popover"
+                                                              data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                              class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+                                                            @grade.GradeNumber
+                                                        </span>
                                                     }
                                                 }
                                             </div>
@@ -80,3 +92,6 @@
     </div>
 </div>
 
+@section Scripts {
+    <script src="~/js/areas/popover.js"></script>
+}
