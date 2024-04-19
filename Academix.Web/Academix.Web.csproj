@@ -31,9 +31,7 @@
     <Folder Include="Areas\Parent\Controllers\" />
     <Folder Include="Areas\Parent\Models\" />
     <Folder Include="Areas\Parent\Views\" />
-    <Folder Include="Areas\Teacher\Controllers\" />
     <Folder Include="Areas\Teacher\Models\" />
-    <Folder Include="Areas\Teacher\Views\" />
   </ItemGroup>
 
 </Project>

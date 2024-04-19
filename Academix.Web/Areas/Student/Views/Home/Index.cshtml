@@ -78,9 +78,37 @@
                                     }
                                 </span>
                             </div>
-                            <div class="d-block my-2">
-                                <div class="d-inline text-white fs-3 fw-normal">Absences:</div>
-                                <span class="text-white fs-3 fw-bold ms-lg-3">@subject.Absences.Count()</span>
+                            <div class="d-block">
+                                <div class="d-block">
+                                    <div class="d-inline text-white fs-3 fw-normal">Absences:</div>
+                                    <span class="text-white fs-3 fw-bold ms-lg-3">@subject.Absences.Count()</span>
+                                </div>
+                                <div class="d-inline">
+                                    <div class="d-inline text-white fs-4 fw-normal">Excused:</div>
+                                    @if (subject.Absences.Where(a => a.ExcusedAbsence).Count() > 0)
+                                    {
+                                        <span class="px-2 rounded-10 bg-success text-white fs-4 fw-bold">
+                                            @subject.Absences.Where(a => a.ExcusedAbsence).Count()
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fs-3 fw-bold ms-lg-2">0</span>
+                                    }
+                                </div>
+                                <div class="d-inline">
+                                    <div class="d-inline text-white fs-4 fw-normal">Not Excused:</div>
+                                    @if (subject.Absences.Where(a => !a.ExcusedAbsence).Count() > 0)
+                                    {
+                                        <span class="px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+                                            @subject.Absences.Where(a => !a.ExcusedAbsence).Count()
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fs-3 fw-bold ms-lg-2">0</span>
+                                    }
+                                </div>
                             </div>
                             <div class="d-block my-2">
                                 <div class="d-inline text-white fs-3 fw-normal">Teacher:</div>
@@ -93,15 +121,27 @@
                                     {
                                         @if (grade.GradeNumber == 2)
                                         {
-                                            <span class="px-2 rounded-10 bg-danger text-white fs-4 fw-bold">@grade.GradeNumber</span>
+                                            <span data-toggle="popover"
+                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                  class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+                                                @grade.GradeNumber
+                                            </span>
                                         }
                                         else if (grade.GradeNumber == 6)
                                         {
-                                            <span class="px-2 rounded-10 bg-success text-white fs-4 fw-bold">@grade.GradeNumber</span>
+                                            <span data-toggle="popover"
+                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                  class="grade px-2 rounded-10 bg-success text-white fs-4 fw-bold">
+                                                @grade.GradeNumber
+                                            </span>
                                         }
                                         else
                                         {
-                                            <span class="px-2 rounded-10 bg-warning text-white fs-4 fw-bold">@grade.GradeNumber</span>
+                                            <span data-toggle="popover"
+                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                  class="grade px-2 rounded-10 bg-warning text-white fs-4 fw-bold">
+                                                @grade.GradeNumber
+                                            </span>
                                         }
                                     }
                                 </div>
@@ -113,3 +153,7 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/student-area/popover.js"></script>
+}
