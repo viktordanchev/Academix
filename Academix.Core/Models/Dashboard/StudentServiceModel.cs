@@ -1,4 +1,4 @@
-﻿namespace Academix.Core.Models.StudentHome
+﻿namespace Academix.Core.Models.Dashboard
 {
     public class StudentServiceModel
     {

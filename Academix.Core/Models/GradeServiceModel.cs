@@ -1,6 +1,6 @@
 ﻿using Academix.Infrastructure.Data.Models.Enumerations;
 
-namespace Academix.Core.Models.ParentHome
+namespace Academix.Core.Models
 {
     public class GradeServiceModel
     {

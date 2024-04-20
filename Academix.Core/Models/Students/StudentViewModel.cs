@@ -1,4 +1,4 @@
-﻿namespace Academix.Core.Models.ParentHome
+﻿namespace Academix.Core.Models.Students
 {
     public class StudentViewModel
     {
@@ -6,8 +6,6 @@
         {
             Subjects = new List<SubjectServiceModel>();
         }
-
-        public int? NumberInClass { get; set; }
 
         public string Name { get; set; } = null!;
 

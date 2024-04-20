@@ -1,27 +1,27 @@
 ﻿using Academix.Core.Contracts;
-using Academix.Core.Models.ParentHome;
+using Academix.Core.Models;
+using Academix.Core.Models.Students;
 using Academix.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Core.Services
 {
-    public class ParentHomeService : IParentHomeService
+    public class StudentsService : IStudentsService
     {
         private readonly AcademixDbContext _context;
 
-        public ParentHomeService(AcademixDbContext context)
+        public StudentsService(AcademixDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<StudentViewModel>> GetStudentsInfo(string parentId)
+        public async Task<IEnumerable<StudentViewModel>> GetStudentsInfoAsync(string parentId)
         {
             var students = await _context.StudentsParents
                 .Where(sp => sp.ParentId == parentId)
                 .Select(s => new StudentViewModel()
                 {
                     Name = $"{s.Student.StudentIdentity.FirstName} {s.Student.StudentIdentity.LastName}",
-                    NumberInClass = s.Student.NumberInClass,
                     Class = s.Student.Class.Name,
                     ClassTeacher = $"{s.Student.Class.ClassTeacher.TeacherIdentity.FirstName} {s.Student.Class.ClassTeacher.TeacherIdentity.LastName}",
                     School = s.Student.Class.School.Name,

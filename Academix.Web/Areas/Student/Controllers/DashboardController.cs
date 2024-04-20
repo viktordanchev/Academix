@@ -1,5 +1,5 @@
 ﻿using Academix.Core.Contracts;
-using Academix.Core.Models.StudentHome;
+using Academix.Core.Models.Dashboard;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -7,9 +7,9 @@ namespace Academix.Web.Areas.Student.Controllers
 {
     public class DashboardController : StudentBaseController
     {
-        private readonly IStudentHomeService _studentHomeService;
+        private readonly IDashboardService _studentHomeService;
 
-        public DashboardController(IStudentHomeService studentHomeService)
+        public DashboardController(IDashboardService studentHomeService)
         {
             _studentHomeService = studentHomeService;
         }
@@ -17,8 +17,8 @@ namespace Academix.Web.Areas.Student.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var student = await _studentHomeService.GetStudent(GetUserId());
-            var subjects = await _studentHomeService.GetAllSubjects(student.Id);
+            var student = await _studentHomeService.GetStudentAsync(GetUserId());
+            var subjects = await _studentHomeService.GetAllSubjectsAsync(student.Id);
 
             var info = new IndexViewModel()
             {

@@ -1,20 +1,21 @@
 ﻿using Academix.Core.Contracts;
-using Academix.Core.Models.StudentHome;
+using Academix.Core.Models;
+using Academix.Core.Models.Dashboard;
 using Academix.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Core.Services
 {
-    public class StudentHomeService : IStudentHomeService
+    public class DashboardService : IDashboardService
     {
         private readonly AcademixDbContext _context;
 
-        public StudentHomeService(AcademixDbContext context)
+        public DashboardService(AcademixDbContext context)
         {
             _context = context;
         }
 
-        public async Task<StudentServiceModel> GetStudent(string studentId)
+        public async Task<StudentServiceModel> GetStudentAsync(string studentId)
         {
             var student = await _context.Students
                 .Where(s => s.StudentIdentityId == studentId)
@@ -31,7 +32,7 @@ namespace Academix.Core.Services
             return student;
         }
 
-        public async Task<IEnumerable<SubjectServiceModel>> GetAllSubjects(int studentId)
+        public async Task<IEnumerable<SubjectServiceModel>> GetAllSubjectsAsync(int studentId)
         {
             var subjects = await _context.SubjectsStudents
                 .Where(ss => ss.StudentId == studentId)

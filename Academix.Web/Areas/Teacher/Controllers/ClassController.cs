@@ -2,7 +2,7 @@
 
 namespace Academix.Web.Areas.Teacher.Controllers
 {
-    public class HomeController : TeacherBaseController
+    public class ClassController : TeacherBaseController
     {
         public IActionResult Index()
         {

@@ -19,8 +19,6 @@ namespace Academix.Infrastructure.Data.Models
 
         public string? Address { get; set; }
 
-        public int? NumberInClass { get; set; }
-
         [Required]
         public string StudentIdentityId { get; set; } = null!;
 

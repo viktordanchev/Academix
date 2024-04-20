@@ -22,7 +22,7 @@ namespace Academix.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var requests = await _requestService.GetAllRequests(GetUserId());
+            var requests = await _requestService.GetAllRequestsAsync(GetUserId());
 
             return View(requests);
         }
@@ -30,15 +30,15 @@ namespace Academix.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Accept(int id)
         {
-            var request = await _requestService.GetRequestById(id);
+            var request = await _requestService.GetRequestByIdAsync(id);
 
             if (request == null)
             {
                 return RedirectToAction(nameof(All));
             }
 
-            await _requestService.AssignToRole(request);
-            await _requestService.RemoveRequest(request.Id);
+            await _requestService.AssignToRoleAsync(request);
+            await _requestService.RemoveRequestAsync(request.Id);
 
             return RedirectToAction(nameof(All));
         }
@@ -46,14 +46,14 @@ namespace Academix.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Deny(int id)
         {
-            var request = await _requestService.GetRequestById(id);
+            var request = await _requestService.GetRequestByIdAsync(id);
 
             if (request == null)
             {
                 return RedirectToAction(nameof(All));
             }
 
-            await _requestService.RemoveRequest(request.Id);
+            await _requestService.RemoveRequestAsync(request.Id);
 
             return RedirectToAction(nameof(All));
         }

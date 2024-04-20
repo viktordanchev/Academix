@@ -1,16 +1,14 @@
 ﻿using Academix.Core.Contracts;
-using Academix.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Academix.Web.Areas.Parent.Controllers
 {
     public class StudentsController : ParentBaseController
     {
-        private readonly IParentHomeService _parentHomeService;
+        private readonly IStudentsService _parentHomeService;
 
-        public StudentsController(IParentHomeService parentHomeService)
+        public StudentsController(IStudentsService parentHomeService)
         {
             _parentHomeService = parentHomeService;
         }
@@ -18,7 +16,7 @@ namespace Academix.Web.Areas.Parent.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var students = await _parentHomeService.GetStudentsInfo(GetUserId());
+            var students = await _parentHomeService.GetStudentsInfoAsync(GetUserId());
 
             return View(students);
         }

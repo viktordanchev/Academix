@@ -19,7 +19,7 @@ namespace Academix.Core.Services
             _userManager = userManager;
         }
 
-        public async Task<IEnumerable<AllViewModel>> GetAllRequests(string userId)
+        public async Task<IEnumerable<AllViewModel>> GetAllRequestsAsync(string userId)
         {
             var requests = await _context.RequestsReceivers
                    .Where(r => r.ReceiverId == userId)
@@ -38,7 +38,7 @@ namespace Academix.Core.Services
             return requests;
         }
 
-        public async Task<RequestServiceModel> GetRequestById(int requestId)
+        public async Task<RequestServiceModel> GetRequestByIdAsync(int requestId)
         {
             var request = await _context.Requests
                 .Select(r => new RequestServiceModel()
@@ -55,7 +55,7 @@ namespace Academix.Core.Services
             return request;
         }
 
-        public async Task AssignToRole(RequestServiceModel request)
+        public async Task AssignToRoleAsync(RequestServiceModel request)
         {
             var requester = await _userManager.FindByIdAsync(request.RequesterId);
 
@@ -104,7 +104,7 @@ namespace Academix.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task RemoveRequest(int requestId)
+        public async Task RemoveRequestAsync(int requestId)
         {
             var request = await _context.Requests
                 .FirstAsync(r => r.Id == requestId);

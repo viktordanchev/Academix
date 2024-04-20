@@ -1,0 +1,73 @@
+﻿@model StudentViewModel
+
+@{
+    ViewData["Title"] = "Student";
+}
+
+<div class="text-white bg-auth rounded-10">
+    <div class="mx-4">
+        <label asp-for="ClassId" class="d-block text-white fs-5">Choose class</label>
+        <select asp-for="ClassId" class="form-select d-block" id="classId">
+            <option value="" selected disabled hidden>Classes</option>
+        </select>
+        <span asp-validation-for="ClassId" class="text-danger fw-bold"></span>
+    </div>
+    <div class="mx-4">
+        <label asp-for="StudentId" class="d-block text-white fs-5">Choose student</label>
+        <select asp-for="StudentId" class="form-select d-block" id="studentId">
+            <option value="" selected disabled hidden>Students</option>
+        </select>
+        <span asp-validation-for="StudentId" class="text-danger fw-bold"></span>
+    </div>
+    <a asp-area="Teacher" asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Filter</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            getClassesBySchoolId();
+        })
+        var getClassesBySchoolId = function () {
+            $.ajax({
+                url: '@Url.Action("GetClassesBySchool", "Student")',
+                type: 'GET',
+                data: {
+                    schoolId: $(@Model.SchoolId),
+                },
+                success: function (data) {
+                    $(data).each(
+                        function (index, item) {
+                            $('#classId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                        }
+                    );
+                }
+            })
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            getStudentsByClassId();
+        })
+        $("#classId").change(function () {
+            getStudentsByClassId();
+        });
+        var getStudentsByClassId = function () {
+            $.ajax({
+                url: '@Url.Action("GetStudentsByClass", "Student")',
+                type: 'GET',
+                data: {
+                    classId: $('#classId').val(),
+                },
+                success: function (data) {
+                    $('#studentId').find('option').remove().end()
+                        .append('<option value="" selected disabled hidden>Students</option>')
+                    $(data).each(
+                        function (index, item) {
+                            $('#studentId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                        }
+                    );
+                }
+            })
+        }
+    </script>
+}

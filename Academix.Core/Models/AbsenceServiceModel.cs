@@ -1,4 +1,6 @@
-﻿namespace Academix.Core.Models.StudentHome
+﻿using Academix.Infrastructure.Data.Models.Enumerations;
+
+namespace Academix.Core.Models
 {
     public class AbsenceServiceModel
     {

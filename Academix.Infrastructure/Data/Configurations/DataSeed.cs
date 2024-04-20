@@ -291,7 +291,6 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     Id = 1,
                     Address = "Vasil Aprilov 5",
-                    NumberInClass = 5,
                     StudentIdentityId = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc",
                     ClassId = 1
                 },
@@ -299,7 +298,6 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     Id = 2,
                     Address = "Krali Marko 12",
-                    NumberInClass = 3,
                     StudentIdentityId = "a171483f-6e48-446a-a5d7-36110d0c1443",
                     ClassId = 2
                 },
@@ -307,7 +305,6 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     Id = 3,
                     Address = "Kalimanci 13",
-                    NumberInClass = 15,
                     StudentIdentityId = "b2502a25-8341-4e5c-af74-cd0f889ede1b",
                     ClassId = 2
                 }
