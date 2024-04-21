@@ -1,5 +1,4 @@
 ﻿using Academix.Core.Contracts;
-using Academix.Core.Models.Student;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,30 +14,21 @@ namespace Academix.Web.Areas.Teacher.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = "")
         {
-            var model = new StudentViewModel();
+            var query = searchQuery.ToLower();
+
             var schoolId = await _studentService.GetSchoolIdAsync(GetUserId());
+            var students = await _studentService.GetStudentsAsync(schoolId, GetUserId());
 
-            model.SchoolId = schoolId;
+            if (!string.IsNullOrEmpty(query))
+            {
+                students = students
+                    .Where(s => s.Name.ToLower().Contains(query)
+                        || s.Class.ToLower().Contains(query));
+            }
 
-            return View(model);
-        }
-
-        [HttpGet]
-        public async Task<JsonResult> GetClassesBySchool(int schoolId)
-        {
-            var classes = await _studentService.GetClassesBySchoolAsync(schoolId);
-
-            return Json(classes);
-        }
-
-        [HttpGet]
-        public async Task<JsonResult> GetStudentsByClass(int classId)
-        {
-            var students = await _studentService.GetStudentsByClassAsync(classId);
-
-            return Json(students);
+            return View(students);
         }
 
         private string GetUserId()

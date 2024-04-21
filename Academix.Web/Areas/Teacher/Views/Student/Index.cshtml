@@ -1,73 +1,123 @@
-﻿@model StudentViewModel
+﻿@model IEnumerable<StudentViewModel>
 
 @{
-    ViewData["Title"] = "Student";
+    ViewData["Title"] = "Students";
 }
 
-<div class="text-white bg-auth rounded-10">
-    <div class="mx-4">
-        <label asp-for="ClassId" class="d-block text-white fs-5">Choose class</label>
-        <select asp-for="ClassId" class="form-select d-block" id="classId">
-            <option value="" selected disabled hidden>Classes</option>
-        </select>
-        <span asp-validation-for="ClassId" class="text-danger fw-bold"></span>
+<div class="container-fluid bg-babyblue my-4 p-3">
+    <form method="get" asp-controller="Student" asp-action="Index" class="form-inline d-flex justify-content-center mb-3">
+        <div class="d-flex flex-row w-25 w-sm-100">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search student.." aria-label="Search" name="searchQuery">
+            <button class="btn btn-primary btn-la my-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </form>
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-6 g-3 text-center d-flex flex-wrap justify-content-center">
+        @foreach (var student in Model)
+        {
+            <div class="col">
+                <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                    <div class="card-body align-content-center">
+                        <div class="clearfix">
+                            <div>
+                                <div class="d-block text-white fs-5 fw-normal">Student</div>
+                                <span class="text-white fs-5 fw-bold ms-lg-3">@student.Name</span>
+                            </div>
+                            <hr class="bg-white mx-4 my-3" />
+                            <div class="text-start">
+                                <div>
+                                    <div class="d-inline text-white fs-5 fw-normal">Class:</div>
+                                    <span class="text-white fs-5 fw-bold ms-lg-1">@student.Class</span>
+                                </div>
+                                <div>
+                                    <div class="d-inline text-white fs-5 fw-normal">Class teacher:</div>
+                                    <span class="text-white fs-5 fw-bold ms-lg-1">@student.ClassTeacher</span>
+                                </div>
+                                <div class="d-block text-center">
+                                    <div class="d-block">
+                                        <div class="d-inline text-white fs-5 fw-normal">Absences:</div>
+                                        <span class="text-white fs-5 fw-bold ms-lg-1">@student.Absences.Count()</span>
+                                    </div>
+                                    <div class="d-inline">
+                                        <div class="d-inline text-white fs-5 fw-normal">Excused:</div>
+                                        @if (student.Absences.Where(a => a.ExcusedAbsence).Count() > 0)
+                                        {
+                                            <span class="px-2 rounded-10 bg-success text-white fs-5 fw-bold">
+                                                @student.Absences.Where(a => a.ExcusedAbsence).Count()
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fs-5 fw-bold ms-lg-2">0</span>
+                                        }
+                                    </div>
+                                    <div class="d-inline">
+                                        <div class="d-inline text-white fs-5 fw-normal">Not Excused:</div>
+                                        @if (student.Absences.Where(a => !a.ExcusedAbsence).Count() > 0)
+                                        {
+                                            <span class="px-2 rounded-10 bg-danger text-white fs-5 fw-bold">
+                                                @student.Absences.Where(a => !a.ExcusedAbsence).Count()
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fs-5 fw-bold ms-lg-2">0</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-inline text-white fs-5 fw-normal">Average Grade:</div>
+                                    <span class="text-white fs-5 fw-bold ms-lg-1">
+                                        @if (student.Grades.Count() > 0)
+                                        {
+                                            @student.Grades.Average(g => g.GradeNumber).ToString("#.##")
+                                        }
+                                        else
+                                        {
+                                            <span>0</span>
+                                        }
+                                    </span>
+                                </div>
+                                <div class="d-block my-2 text-center">
+                                    <div class="d-block text-white fs-3 fw-normal">Grades</div>
+                                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                                        @foreach (var grade in student.Grades)
+                                        {
+                                            @if (grade.GradeNumber == 2)
+                                            {
+                                                <span data-toggle="popover"
+                                                      data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                      class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+                                                    @grade.GradeNumber
+                                                </span>
+                                            }
+                                            else if (grade.GradeNumber == 6)
+                                            {
+                                                <span data-toggle="popover"
+                                                      data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                      class="grade px-2 rounded-10 bg-success text-white fs-4 fw-bold">
+                                                    @grade.GradeNumber
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span data-toggle="popover"
+                                                      data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                      class="grade px-2 rounded-10 bg-warning text-white fs-4 fw-bold">
+                                                    @grade.GradeNumber
+                                                </span>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-    <div class="mx-4">
-        <label asp-for="StudentId" class="d-block text-white fs-5">Choose student</label>
-        <select asp-for="StudentId" class="form-select d-block" id="studentId">
-            <option value="" selected disabled hidden>Students</option>
-        </select>
-        <span asp-validation-for="StudentId" class="text-danger fw-bold"></span>
-    </div>
-    <a asp-area="Teacher" asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Filter</a>
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            getClassesBySchoolId();
-        })
-        var getClassesBySchoolId = function () {
-            $.ajax({
-                url: '@Url.Action("GetClassesBySchool", "Student")',
-                type: 'GET',
-                data: {
-                    schoolId: $(@Model.SchoolId),
-                },
-                success: function (data) {
-                    $(data).each(
-                        function (index, item) {
-                            $('#classId').append('<option value="' + item.id + '">' + item.name + '</option>')
-                        }
-                    );
-                }
-            })
-        }
-    </script>
-    <script>
-        $(document).ready(function () {
-            getStudentsByClassId();
-        })
-        $("#classId").change(function () {
-            getStudentsByClassId();
-        });
-        var getStudentsByClassId = function () {
-            $.ajax({
-                url: '@Url.Action("GetStudentsByClass", "Student")',
-                type: 'GET',
-                data: {
-                    classId: $('#classId').val(),
-                },
-                success: function (data) {
-                    $('#studentId').find('option').remove().end()
-                        .append('<option value="" selected disabled hidden>Students</option>')
-                    $(data).each(
-                        function (index, item) {
-                            $('#studentId').append('<option value="' + item.id + '">' + item.name + '</option>')
-                        }
-                    );
-                }
-            })
-        }
-    </script>
+    <script src="~/js/areas/popover.js"></script>
 }
