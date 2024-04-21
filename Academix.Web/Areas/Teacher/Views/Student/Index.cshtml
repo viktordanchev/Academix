@@ -4,7 +4,7 @@
     ViewData["Title"] = "Students";
 }
 
-<div class="container-fluid bg-babyblue my-4 p-3">
+<div class="container-fluid bg-transparent my-4 p-3">
     <form method="get" asp-controller="Student" asp-action="Index" class="form-inline d-flex justify-content-center mb-3">
         <div class="d-flex flex-row w-25 w-sm-100">
             <input class="form-control mr-sm-2" type="search" placeholder="Search student.." aria-label="Search" name="searchQuery">
@@ -20,23 +20,12 @@
                         <div class="clearfix">
                             <div>
                                 <div class="d-block text-white fs-5 fw-normal">Student</div>
-                                <span class="text-white fs-5 fw-bold ms-lg-3">@student.Name</span>
+                                <span class="text-white fs-5 fw-bold ms-lg-3">@student.Name - @student.Class</span>
                             </div>
                             <hr class="bg-white mx-4 my-3" />
-                            <div class="text-start">
-                                <div>
-                                    <div class="d-inline text-white fs-5 fw-normal">Class:</div>
-                                    <span class="text-white fs-5 fw-bold ms-lg-1">@student.Class</span>
-                                </div>
-                                <div>
-                                    <div class="d-inline text-white fs-5 fw-normal">Class teacher:</div>
-                                    <span class="text-white fs-5 fw-bold ms-lg-1">@student.ClassTeacher</span>
-                                </div>
-                                <div class="d-block text-center">
-                                    <div class="d-block">
-                                        <div class="d-inline text-white fs-5 fw-normal">Absences:</div>
-                                        <span class="text-white fs-5 fw-bold ms-lg-1">@student.Absences.Count()</span>
-                                    </div>
+                            <div class="d-flex flex-column mb-3">
+                                <div class="d-block text-white fs-3 fw-normal">Absences</div>
+                                <div class="d-flex flex-row justify-content-between mb-2">
                                     <div class="d-inline">
                                         <div class="d-inline text-white fs-5 fw-normal">Excused:</div>
                                         @if (student.Absences.Where(a => a.ExcusedAbsence).Count() > 0)
@@ -64,7 +53,14 @@
                                         }
                                     </div>
                                 </div>
-                                <div>
+                                <div class="d-flex flex-row justify-content-between gap-3">
+                                    <a asp-controller="Student" asp-action="AddGrade" class="btn btn-primary w-50">Add</a>
+                                    <a asp-controller="Student" asp-action="AddGrade" class="btn btn-primary w-50">Remove</a>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <div class="d-block text-white fs-3 fw-normal">Grades</div>
+                                <div class="d-block">
                                     <div class="d-inline text-white fs-5 fw-normal">Average Grade:</div>
                                     <span class="text-white fs-5 fw-bold ms-lg-1">
                                         @if (student.Grades.Count() > 0)
@@ -77,37 +73,38 @@
                                         }
                                     </span>
                                 </div>
-                                <div class="d-block my-2 text-center">
-                                    <div class="d-block text-white fs-3 fw-normal">Grades</div>
-                                    <div class="d-flex flex-wrap justify-content-center gap-2">
-                                        @foreach (var grade in student.Grades)
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-2">
+                                    @foreach (var grade in student.Grades)
+                                    {
+                                        @if (grade.GradeNumber == 2)
                                         {
-                                            @if (grade.GradeNumber == 2)
-                                            {
-                                                <span data-toggle="popover"
-                                                      data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
-                                                      class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
-                                                    @grade.GradeNumber
-                                                </span>
-                                            }
-                                            else if (grade.GradeNumber == 6)
-                                            {
-                                                <span data-toggle="popover"
-                                                      data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
-                                                      class="grade px-2 rounded-10 bg-success text-white fs-4 fw-bold">
-                                                    @grade.GradeNumber
-                                                </span>
-                                            }
-                                            else
-                                            {
-                                                <span data-toggle="popover"
-                                                      data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
-                                                      class="grade px-2 rounded-10 bg-warning text-white fs-4 fw-bold">
-                                                    @grade.GradeNumber
-                                                </span>
-                                            }
+                                            <span data-toggle="popover"
+                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                  class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+                                                @grade.GradeNumber
+                                            </span>
                                         }
-                                    </div>
+                                        else if (grade.GradeNumber == 6)
+                                        {
+                                            <span data-toggle="popover"
+                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                  class="grade px-2 rounded-10 bg-success text-white fs-4 fw-bold">
+                                                @grade.GradeNumber
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span data-toggle="popover"
+                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+                                                  class="grade px-2 rounded-10 bg-warning text-white fs-4 fw-bold">
+                                                @grade.GradeNumber
+                                            </span>
+                                        }
+                                    }
+                                </div>
+                                <div class="d-flex flex-row justify-content-between gap-3">
+                                    <a asp-controller="Student" asp-action="AddGrade" asp-route-id="@student.Id" class="btn btn-primary w-50">Add</a>
+                                    <a asp-controller="Student" asp-action="AllGrades" asp-route-id="@student.Id" class="btn btn-primary w-50">Info</a>
                                 </div>
                             </div>
                         </div>

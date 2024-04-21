@@ -1,0 +1,16 @@
+﻿@model IEnumerable<AllGradesViewModel>
+
+@{
+    ViewData["Title"] = "Grades";
+}
+
+<div class="bg-auth rounded-10 px-3 py-3 d-flex flex-column gap-3">
+    @foreach (var grade in Model)
+    {
+        <div class="d-flex flex-row justify-content-between text-center">
+            <span class="fs-4">Grade: @grade.GradeNumber | @grade.GradeType | @grade.DateAndTime</span>
+            <a asp-controller="Student" asp-action="RemoveGrade" asp-route-id="@grade.Id" class="btn btn-primary">Remove</a>
+        </div>
+    }
+    <a asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Cancel</a>
+</div>

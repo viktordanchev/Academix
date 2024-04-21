@@ -7,6 +7,9 @@ namespace Academix.Core.Contracts
     {
         Task<IEnumerable<StudentViewModel>> GetStudentsAsync(int schoolId, string teacherId);
         Task<int> GetSchoolIdAsync(string teacherId);
-        public async Task AddGradeAsync(int studentId, int subjectId, GradeServiceModel model)
+        Task AddGradeAsync(int studentId, AddGradeViewModel model);
+        Task<int> GetSubjectIdAsync(string teacherId);
+        Task<IEnumerable<AllGradesViewModel>> GetGradesAsync(int studentId, int subjectId);
+        Task RemoveGradeAsync(int gradeId);
     }
 }

@@ -1,0 +1,38 @@
+﻿@model AddGradeViewModel
+
+@{
+    ViewData["Title"] = "Grade";
+}
+
+<div class="bg-auth rounded-10">
+    <div class="text-center text-white fs-3 fw-normal pt-3">Grade</div>
+    <hr class="bg-white mx-4 my-3" />
+    <form method="post" class="d-flex flex-column">
+        <div asp-validation-summary="ModelOnly" id="alerts" class="text-danger fw-bold" role="alert"></div>
+        <div class="d-flex flex-column justify-content-between">
+            <div class="mx-4">
+                <label asp-for="GradeNumber" class="d-block text-white fs-5">Grade number</label>
+                <input asp-for="GradeNumber" class="d-block w-100 form-control" aria-required="true" />
+                <span asp-validation-for="GradeNumber" class="text-danger fw-bold"></span>
+            </div>
+            <div class="mx-4">
+                <label asp-for="GradeType" class="form-label-add-edit">Select Type</label>
+                <select asp-for="GradeType" class="form-control" aria-required="true">
+                    @foreach (var type in Model.GradeTypes)
+                    {
+                        <option value="@type.Number">@type.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="GradeType" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="d-flex flex-row mx-4 justify-content-between py-4">
+            <a asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Cancel</a>
+            <button asp-controller="Student" asp-action="AddGrade" type="submit" class="w-20 btn btn-lg btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
