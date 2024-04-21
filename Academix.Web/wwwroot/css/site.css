@@ -1,4 +1,5 @@
 @import url(custom/styles.css);
+@import url(custom/responsive.css);
 
 html {
     font-size: 14px;
