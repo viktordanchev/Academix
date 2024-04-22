@@ -506,5 +506,98 @@ namespace Academix.Infrastructure.Data.Configurations
                 }
             };
         }
+
+        public static IdentityUserClaim<string>[] SeedUserClaims()
+        {
+            var director = new IdentityUserClaim<string>()
+            {
+                Id = 1,
+                ClaimType = "FullName",
+                ClaimValue = "Ivan Ivanov",
+                UserId = "a3717562-385e-41ce-9eff-0f1b994e5548"
+            };
+
+            var student = new IdentityUserClaim<string>()
+            {
+                Id = 2,
+                ClaimType = "FullName",
+                ClaimValue = "Mitko Marinov",
+                UserId = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc"
+            };
+
+            var student2 = new IdentityUserClaim<string>()
+            {
+                Id = 3,
+                ClaimType = "FullName",
+                ClaimValue = "Drago Kirilov",
+                UserId = "a171483f-6e48-446a-a5d7-36110d0c1443"
+            };
+
+            var student3 = new IdentityUserClaim<string>()
+            {
+                Id = 4,
+                ClaimType = "FullName",
+                ClaimValue = "Marta Kirilova",
+                UserId = "b2502a25-8341-4e5c-af74-cd0f889ede1b"
+            };
+
+            var parent = new IdentityUserClaim<string>()
+            {
+                Id = 5,
+                ClaimType = "FullName",
+                ClaimValue = "Vasil Marinov",
+                UserId = "925da918-5cd0-4b17-9b62-2f417aac0343"
+            };
+
+            var parent2 = new IdentityUserClaim<string>()
+            {
+                Id = 6,
+                ClaimType = "FullName",
+                ClaimValue = "Vanya Kirilova",
+                UserId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c"
+            };
+
+            var teacher = new IdentityUserClaim<string>()
+            {
+                Id = 7,
+                ClaimType = "FullName",
+                ClaimValue = "Nikoleta Zakova",
+                UserId = "5093413e-4acb-471a-9ce7-53df30689fc1"
+            };
+
+            var teacher2 = new IdentityUserClaim<string>()
+            {
+                Id = 8,
+                ClaimType = "FullName",
+                ClaimValue = "Dragan Milev",
+                UserId = "6c1ff15b-1853-4d20-98ff-9695affb432c"
+            };
+
+            var teacher3 = new IdentityUserClaim<string>()
+            {
+                Id = 9,
+                ClaimType = "FullName",
+                ClaimValue = "Zara Draganova",
+                UserId = "bd3e68c0-728b-44a0-ba3a-992d8ae683f9"
+            };
+
+            var admin = new IdentityUserClaim<string>()
+            {
+                Id = 10,
+                ClaimType = "FullName",
+                ClaimValue = "admin Admin",
+                UserId = "11f2b8bd-a49a-42cd-b08b-ce067e430965"
+            };
+
+            var admin2 = new IdentityUserClaim<string>()
+            {
+                Id = 11,
+                ClaimType = "FullName",
+                ClaimValue = "admin2 Admin2",
+                UserId = "214ce248-b8b3-4832-8c3b-7f133e7a429e"
+            };
+
+            return new IdentityUserClaim<string>[] { director, student, student2, student3, parent, parent2, teacher, teacher2, teacher3, admin, admin2 };
+        }
     }
 }

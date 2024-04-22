@@ -31,6 +31,7 @@ namespace Academix.Infrastructure.Data
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new IdentityRoleConfiguration());
             builder.ApplyConfiguration(new IdentityUserRoleConfiguration());
+            builder.ApplyConfiguration(new IdentityUserClaimConfiguration());
             builder.ApplyConfiguration(new AbsenceConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());
             builder.ApplyConfiguration(new ClassConfiguration());

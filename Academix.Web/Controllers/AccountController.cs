@@ -68,6 +68,7 @@ namespace Academix.Web.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
+            await _userManager.AddClaimAsync(user, new Claim("FullName", $"{user.FirstName} {user.LastName}"));
 
             if (!result.Succeeded)
             {

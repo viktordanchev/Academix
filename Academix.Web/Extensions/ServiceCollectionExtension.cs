@@ -11,6 +11,7 @@ namespace Academix.Web.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentsService, StudentsService>();
             services.AddScoped<IRequestService, RequestService>();

@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Class\" />
+  </ItemGroup>
+
 </Project>
