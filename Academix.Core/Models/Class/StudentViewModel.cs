@@ -1,22 +1,20 @@
-﻿namespace Academix.Core.Models.Student
+﻿namespace Academix.Core.Models.Class
 {
     public class StudentViewModel
     {
         public StudentViewModel()
         {
-            Grades = new List<GradeServiceModel>();
             Absences = new List<AbsenceServiceModel>();
+            Parents = new List<ParentServiceModel>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
 
-        public string Class { get; set; } = null!;
+        public string? Address { get; set; }
 
-        public string? ClassTeacher { get; set; }
-
-        public IEnumerable<GradeServiceModel> Grades { get; set; }
+        public IEnumerable<ParentServiceModel> Parents { get; set; }
 
         public IEnumerable<AbsenceServiceModel> Absences { get; set; }
     }

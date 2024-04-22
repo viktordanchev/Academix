@@ -2,7 +2,6 @@
 using Academix.Core.Models.Student;
 using Academix.Infrastructure.Data.Models.Enumerations;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Academix.Web.Areas.Teacher.Controllers
 {
@@ -133,11 +132,6 @@ namespace Academix.Web.Areas.Teacher.Controllers
             await _studentService.RemoveAbsenceAsync(id);
 
             return RedirectToAction("AllAbsences", new { studentId });
-        }
-
-        private string GetUserId()
-        {
-            return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
         private IEnumerable<GradeTypeServiceModel> GetAllTypes()

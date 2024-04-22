@@ -1,6 +1,7 @@
 ﻿using Academix.Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Academix.Web.Areas.Teacher.Controllers
 {
@@ -8,5 +9,9 @@ namespace Academix.Web.Areas.Teacher.Controllers
     [Authorize(Roles = RoleConstants.Teacher.RoleName)]
     public class TeacherBaseController : Controller
     {
+        public string GetUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
     }
 }

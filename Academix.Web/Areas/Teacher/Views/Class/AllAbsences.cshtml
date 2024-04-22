@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AllAbsencesViewModel>
+﻿@using Academix.Core.Models.Class
+@model IEnumerable<AbsenceViewModel>
 
 @{
     ViewData["Title"] = "Absences";
@@ -12,9 +13,9 @@
         <div class="d-flex flex-row justify-content-between text-center mb-3">
             <div class="fs-4 fw-bold">Absence:</div>
             <span class="fs-4 ms-lg-3">| Excused: @absence.Excused | @absence.DateAndTime</span>
-            <a asp-controller="Student" asp-action="RemoveAbsence" asp-route-id="@absence.AbsenceId" 
-            asp-route-studentId="@absence.StudentId" class="btn btn-primary ms-lg-3">Remove</a>
+            <a asp-controller="Class" asp-action="ExcuseAbsence" asp-route-id="@absence.AbsenceId"
+               asp-route-studentId="@absence.StudentId" class=" btn btn-primary ms-lg-3">Excuse</a>
         </div>
     }
-    <a asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Cancel</a>
-</div>
+    <a asp-controller="Class" asp-action="Index" class="w-20 btn btn-lg btn-primary">Cancel</a>
+</div> 

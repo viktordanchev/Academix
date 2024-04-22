@@ -4,7 +4,7 @@ namespace Academix.Core.Models
 {
     public class AbsenceServiceModel
     {
-        public bool ExcusedAbsence { get; set; }
+        public bool IsExcused { get; set; }
 
         public DateTime DateAndTime { get; set; }
     }

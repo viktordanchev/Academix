@@ -39,7 +39,7 @@ namespace Academix.Core.Services
                         .Where(a => a.Subject.Teacher.TeacherIdentityId == teacherId)
                         .Select(a => new AbsenceServiceModel()
                         {
-                            ExcusedAbsence = a.ExcusedAbsence,
+                            IsExcused = a.ExcusedAbsence,
                             DateAndTime = a.DateAndTime
                         })
                         .ToList()
