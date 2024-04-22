@@ -83,17 +83,18 @@ namespace Academix.Core.Services
 
         public async Task<IEnumerable<AllGradesViewModel>> GetGradesAsync(int studentId, int subjectId)
         {
-             var grades = await _context.Grades
-                .Where(g => g.SubjectId == subjectId && g.StudentId == studentId)
-                .Select(g => new AllGradesViewModel()
-                {
-                    Id = g.Id,
-                    GradeNumber = g.GradeNumber,
-                    GradeType = g.GradeType,
-                    DateAndTime = g.DateAndTime
-                })
-                .AsNoTracking()
-                .ToListAsync();
+            var grades = await _context.Grades
+               .Where(g => g.SubjectId == subjectId && g.StudentId == studentId)
+               .Select(g => new AllGradesViewModel()
+               {
+                   GradeId = g.Id,
+                   StudentId = g.StudentId,
+                   GradeNumber = g.GradeNumber,
+                   GradeType = g.GradeType,
+                   DateAndTime = g.DateAndTime
+               })
+               .AsNoTracking()
+               .ToListAsync();
 
             return grades;
         }
@@ -103,8 +104,72 @@ namespace Academix.Core.Services
             var grade = await _context.Grades
                 .FirstAsync(g => g.Id == gradeId);
 
-            _context.Remove(grade);
+            _context.Grades.Remove(grade);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsStudentHasSubjectAsync(int studentId, int subjectId)
+        {
+            var student = await _context.SubjectsStudents
+                .FirstOrDefaultAsync(ss => ss.StudentId == studentId && ss.SubjectId == subjectId);
+
+            return student == null ? false : true;
+        }
+
+        public async Task<IEnumerable<AllAbsencesViewModel>> GetAbsencesAsync(int studentId, int subjectId)
+        {
+            var absences = await _context.Absences
+               .Where(a => a.SubjectId == subjectId && a.StudentId == studentId)
+               .Select(a => new AllAbsencesViewModel()
+               {
+                   AbsenceId = a.Id,
+                   StudentId = a.StudentId,
+                   Excused = a.ExcusedAbsence == true ? "Yes" : "No",
+                   DateAndTime = a.DateAndTime
+               })
+               .AsNoTracking()
+               .ToListAsync();
+
+            return absences;
+        }
+
+        public async Task AddAbsenceAsync(int studentId, int subjectId)
+        {
+            var absence = new Absence 
+            { 
+                ExcusedAbsence = false,
+                DateAndTime = DateTime.Now,
+                SubjectId = subjectId,
+                StudentId = studentId
+            };
+
+            await _context.AddAsync(absence);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveAbsenceAsync(int absenceId)
+        {
+            var grade = await _context.Absences
+                .FirstAsync(g => g.Id == absenceId);
+
+            _context.Absences.Remove(grade);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsAbsenceItsForSubject(int absenceId, int subjectId)
+        {
+            var absence = await _context.Absences
+                .FirstOrDefaultAsync(a => a.Id == absenceId && a.SubjectId == subjectId);
+
+            return absence == null ? false : true;
+        }
+
+        public async Task<bool> IsGradeItsForSubject(int gradeId, int subjectId)
+        {
+            var grade = await _context.Grades
+                .FirstOrDefaultAsync(a => a.Id == gradeId && a.SubjectId == subjectId);
+
+            return grade == null ? false : true;
         }
     }
 }

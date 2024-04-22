@@ -1,4 +1,6 @@
-﻿namespace Academix.Core.Models.Student
+﻿using Academix.Core.Contracts;
+
+namespace Academix.Core.Models.Student
 {
     public class StudentViewModel
     {

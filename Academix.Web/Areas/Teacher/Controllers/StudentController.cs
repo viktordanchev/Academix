@@ -49,6 +49,11 @@ namespace Academix.Web.Areas.Teacher.Controllers
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
+            if (!await _studentService.IsStudentHasSubjectAsync(id, subjectId))
+            {
+                return BadRequest();
+            }
+
             model.SubjectId = subjectId;
             await _studentService.AddGradeAsync(id, model);
 
@@ -56,21 +61,78 @@ namespace Academix.Web.Areas.Teacher.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllGrades(int id)
+        public async Task<IActionResult> AllGrades(int studentId)
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
-            var grades = await _studentService.GetGradesAsync(id, subjectId);
+            if (!await _studentService.IsStudentHasSubjectAsync(studentId, subjectId))
+            {
+                return BadRequest();
+            }
+
+            var grades = await _studentService.GetGradesAsync(studentId, subjectId);
 
             return View(grades);
         }
 
         [HttpGet]
-        public async Task<IActionResult> RemoveGrade(int id)
+        public async Task<IActionResult> RemoveGrade(int id, int studentId)
         {
+            var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
+
+            if (!await _studentService.IsGradeItsForSubject(id, subjectId))
+            {
+                return BadRequest();
+            }
+
             await _studentService.RemoveGradeAsync(id);
 
-            return RedirectToAction("AllGrades");
+            return RedirectToAction("AllGrades", new { studentId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllAbsences(int studentId)
+        {
+            var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
+
+            if (!await _studentService.IsStudentHasSubjectAsync(studentId, subjectId))
+            {
+                return BadRequest();
+            }
+
+            var absences = await _studentService.GetAbsencesAsync(studentId, subjectId);
+
+            return View(absences);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddAbsence(int id)
+        {
+            var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
+
+            if (!await _studentService.IsStudentHasSubjectAsync(id, subjectId))
+            {
+                return BadRequest();
+            }
+
+            await _studentService.AddAbsenceAsync(id, subjectId);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveAbsence(int id, int studentId)
+        {
+            var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
+
+            if (!await _studentService.IsAbsenceItsForSubject(id, subjectId))
+            {
+                return BadRequest();
+            }
+
+            await _studentService.RemoveAbsenceAsync(id);
+
+            return RedirectToAction("AllAbsences", new { studentId });
         }
 
         private string GetUserId()

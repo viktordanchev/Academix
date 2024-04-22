@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GradeServiceModel>
+
+@foreach (var grade in Model)
+{
+    @if (grade.GradeNumber == 2)
+    {
+        <span data-toggle="popover"
+              data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+              class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
+            @grade.GradeNumber
+        </span>
+    }
+    else if (grade.GradeNumber == 6)
+    {
+        <span data-toggle="popover"
+              data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+              class="grade px-2 rounded-10 bg-success text-white fs-4 fw-bold">
+            @grade.GradeNumber
+        </span>
+    }
+    else
+    {
+        <span data-toggle="popover"
+              data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
+              class="grade px-2 rounded-10 bg-warning text-white fs-4 fw-bold">
+            @grade.GradeNumber
+        </span>
+    }
+}

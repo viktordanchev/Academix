@@ -54,8 +54,8 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-row justify-content-between gap-3">
-                                    <a asp-controller="Student" asp-action="AddGrade" class="btn btn-primary w-50">Add</a>
-                                    <a asp-controller="Student" asp-action="AddGrade" class="btn btn-primary w-50">Remove</a>
+                                    <a asp-controller="Student" asp-action="AddAbsence" asp-route-id="@student.Id" class="btn btn-primary w-50">Add</a>
+                                    <a asp-controller="Student" asp-action="AllAbsences" asp-route-studentId="@student.Id" class="btn btn-primary w-50">All</a>
                                 </div>
                             </div>
                             <div class="d-flex flex-column">
@@ -74,37 +74,11 @@
                                     </span>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-2">
-                                    @foreach (var grade in student.Grades)
-                                    {
-                                        @if (grade.GradeNumber == 2)
-                                        {
-                                            <span data-toggle="popover"
-                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
-                                                  class="grade px-2 rounded-10 bg-danger text-white fs-4 fw-bold">
-                                                @grade.GradeNumber
-                                            </span>
-                                        }
-                                        else if (grade.GradeNumber == 6)
-                                        {
-                                            <span data-toggle="popover"
-                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
-                                                  class="grade px-2 rounded-10 bg-success text-white fs-4 fw-bold">
-                                                @grade.GradeNumber
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span data-toggle="popover"
-                                                  data-bs-content="Type: @grade.GradeType | Date: @grade.DateAndTime"
-                                                  class="grade px-2 rounded-10 bg-warning text-white fs-4 fw-bold">
-                                                @grade.GradeNumber
-                                            </span>
-                                        }
-                                    }
+                                    <partial name="_GradesPartial" model="@student.Grades" />
                                 </div>
                                 <div class="d-flex flex-row justify-content-between gap-3">
                                     <a asp-controller="Student" asp-action="AddGrade" asp-route-id="@student.Id" class="btn btn-primary w-50">Add</a>
-                                    <a asp-controller="Student" asp-action="AllGrades" asp-route-id="@student.Id" class="btn btn-primary w-50">Info</a>
+                                    <a asp-controller="Student" asp-action="AllGrades" asp-route-studentId="@student.Id" class="btn btn-primary w-50">All</a>
                                 </div>
                             </div>
                         </div>
