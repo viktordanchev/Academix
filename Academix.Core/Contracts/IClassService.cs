@@ -9,5 +9,6 @@ namespace Academix.Core.Contracts
         Task<IEnumerable<AbsenceViewModel>> GetAbsencesAsync(int studentId);
         Task UpdatedAbsenceAsync(int id);
         Task<bool> IsAbsenceExist(int id);
+        Task<bool> IsTeacherHasClass(string teacherId);
     }
 }

@@ -6,6 +6,11 @@
 
 <h1 class="display-1 fw-bold ">My Class</h1>
 
+@if (Model.Count() == 0)
+{
+    <h2 class="display-4 text-danger">You don't have your own class</h2>
+}
+
 <div class="container-fluid bg-transparent my-4 p-3">
     <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-6 g-3 text-center d-flex flex-wrap justify-content-center">
         @foreach (var student in Model)
@@ -20,7 +25,30 @@
                             </div>
                             <div>
                                 <div class="d-inline text-white fs-5 fw-normal">Address:</div>
-                                <span class="text-white fs-5 fw-bold ms-lg-2">@student.Address</span>
+                                <span class="text-white fs-5 fw-bold">
+                                    @if (student.Address == null)
+                                    {
+                                        <span>None</span>
+                                    }
+                                    else
+                                    {
+                                        @student.Address;
+                                    }
+                                </span>
+                            </div>
+                            <div>
+                                <div class="d-inline text-white fs-5 fw-normal">Phone number:</div>
+                                <span class="text-white fs-5 fw-bold">
+                                    @if (student.PhoneNumber == null)
+                                    {
+                                        <span>None</span>
+                                    }
+                                    else
+                                    {
+                                        @student.PhoneNumber
+                                        ;
+                                    }
+                                </span>
                             </div>
                             <hr class="bg-white mx-3 my-1" />
                             <div>

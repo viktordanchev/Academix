@@ -14,6 +14,8 @@
 
         public string? Address { get; set; }
 
+        public string? PhoneNumber { get; set; }
+
         public IEnumerable<ParentServiceModel> Parents { get; set; }
 
         public IEnumerable<AbsenceServiceModel> Absences { get; set; }

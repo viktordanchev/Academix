@@ -299,7 +299,7 @@ namespace Academix.Infrastructure.Data.Configurations
                     Id = 2,
                     Address = "Krali Marko 12",
                     StudentIdentityId = "a171483f-6e48-446a-a5d7-36110d0c1443",
-                    ClassId = 2
+                    ClassId = 1
                 },
                 new Student()
                 {

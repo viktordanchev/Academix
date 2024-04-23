@@ -1,5 +1,6 @@
 ﻿using Academix.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 
 namespace Academix.Web.Areas.Teacher.Controllers
 {
@@ -15,7 +16,13 @@ namespace Academix.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var classId = await _classService.GetClassIdAsync(GetUserId());
+            var classId = 0;
+
+            if (await _classService.IsTeacherHasClass(GetUserId()))
+            {
+                classId = await _classService.GetClassIdAsync(GetUserId());
+            }
+
             var students = await _classService.GetStudentsAsync(classId);
 
             return View(students);

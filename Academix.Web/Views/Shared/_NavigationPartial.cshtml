@@ -4,13 +4,15 @@
         <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-area="Student" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
     </li>
 }
-else if (User.IsParent())
+
+@if (User.IsParent())
 {
     <li class="nav-item ms-lg-3">
         <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-area="Parent" asp-controller="Students" asp-action="Index">Students</a>
     </li>
 }
-else if (User.IsTeacher())
+
+@if (User.IsTeacher())
 {
     <li class="nav-item ms-lg-3">
         <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-area="Teacher" asp-controller="Class" asp-action="Index">MyClass</a>
@@ -19,13 +21,15 @@ else if (User.IsTeacher())
         <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-area="Teacher" asp-controller="Student" asp-action="Index">Students</a>
     </li>
 }
-else if (User.IsDirector())
+
+@if (User.IsDirector())
 {
     <li class="nav-item ms-lg-3">
         <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-controller="Request" asp-action="All">Requests</a>
     </li>
 }
-else if (User.IsAdmin())
+
+@if (User.IsAdmin())
 {
     <li class="nav-item ms-lg-3">
         <a class="text-whiteblue fs-3 fw-bold text-decoration-none" asp-controller="Request" asp-action="All">Requests</a>

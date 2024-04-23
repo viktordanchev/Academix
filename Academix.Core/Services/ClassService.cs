@@ -32,6 +32,7 @@ namespace Academix.Core.Services
                     Id = s.Id,
                     Name = $"{s.StudentIdentity.FirstName} {s.StudentIdentity.LastName}",
                     Address = s.Address,
+                    PhoneNumber = s.StudentIdentity.PhoneNumber,
                     Parents = s.StudentParents
                         .Where(sp => sp.StudentId == s.Id)
                         .Select(p => new ParentServiceModel()
@@ -87,6 +88,14 @@ namespace Academix.Core.Services
                 .FirstOrDefaultAsync(a => a.Id == id);
 
             return absence == null ? false : true;
+        }
+
+        public async Task<bool> IsTeacherHasClass(string teacherId)
+        {
+            var currClass = await _context.Classes
+                .FirstOrDefaultAsync(c => c.ClassTeacher.TeacherIdentity.Id == teacherId);
+
+            return currClass == null ? false : true;
         }
     }
 }
