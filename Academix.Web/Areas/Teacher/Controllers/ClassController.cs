@@ -33,11 +33,13 @@ namespace Academix.Web.Areas.Teacher.Controllers
         {
             var absences = await _classService.GetAbsencesAsync(id);
 
+            TempData["StudentId"] = id;
+
             return View(absences);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ExcuseAbsence(int id, int studentId)
+        public async Task<IActionResult> ExcuseAbsence(int id)
         {
             if (!await _classService.IsAbsenceExist(id))
             {
@@ -46,7 +48,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
 
             await _classService.UpdatedAbsenceAsync(id);
 
-            return RedirectToAction(nameof(AllAbsences), new { id = studentId });
+            return RedirectToAction(nameof(AllAbsences), new { id = TempData["StudentId"] });
         }
     }
 }

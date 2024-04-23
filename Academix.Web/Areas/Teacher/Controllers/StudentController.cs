@@ -71,11 +71,13 @@ namespace Academix.Web.Areas.Teacher.Controllers
 
             var grades = await _studentService.GetGradesAsync(studentId, subjectId);
 
+            TempData["StudentId"] = studentId;
+
             return View(grades);
         }
 
         [HttpGet]
-        public async Task<IActionResult> RemoveGrade(int id, int studentId)
+        public async Task<IActionResult> RemoveGrade(int id)
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
@@ -86,7 +88,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
 
             await _studentService.RemoveGradeAsync(id);
 
-            return RedirectToAction("AllGrades", new { studentId });
+            return RedirectToAction("AllGrades", new { studentId = TempData["StudentId"] });
         }
 
         [HttpGet]
@@ -100,6 +102,8 @@ namespace Academix.Web.Areas.Teacher.Controllers
             }
 
             var absences = await _studentService.GetAbsencesAsync(studentId, subjectId);
+
+            TempData["StudentId"] = studentId;
 
             return View(absences);
         }
@@ -120,7 +124,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> RemoveAbsence(int id, int studentId)
+        public async Task<IActionResult> RemoveAbsence(int id)
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
@@ -131,7 +135,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
 
             await _studentService.RemoveAbsenceAsync(id);
 
-            return RedirectToAction("AllAbsences", new { studentId });
+            return RedirectToAction("AllAbsences", new { studentId = TempData["StudentId"] });
         }
 
         private IEnumerable<GradeTypeServiceModel> GetAllTypes()

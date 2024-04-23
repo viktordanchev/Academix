@@ -357,6 +357,11 @@ namespace Academix.Infrastructure.Data.Configurations
                 {
                     SubjectId = 3,
                     StudentId = 1
+                },
+                new SubjectStudent()
+                {
+                    SubjectId = 1,
+                    StudentId = 2
                 }
             };
         }

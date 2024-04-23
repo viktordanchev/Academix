@@ -12,8 +12,7 @@
         <div class="d-flex flex-row justify-content-between text-center mb-3">
             <div class="fs-4 fw-bold">Grade:</div>
             <span class="fs-4 ms-lg-3">| @grade.GradeNumber | @grade.GradeType | @grade.DateAndTime</span>
-            <a asp-controller="Student" asp-action="RemoveGrade" asp-route-id="@grade.GradeId" 
-            asp-route-studentId="@grade.StudentId" class="btn btn-primary ms-lg-3">Remove</a>
+            <a asp-controller="Student" asp-action="RemoveGrade" asp-route-id="@grade.GradeId" class="btn btn-primary ms-lg-3">Remove</a>
         </div>
     }
     <a asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Cancel</a>
