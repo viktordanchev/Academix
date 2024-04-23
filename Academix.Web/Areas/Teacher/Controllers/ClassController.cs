@@ -1,6 +1,5 @@
 ﻿using Academix.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.InteropServices;
 
 namespace Academix.Web.Areas.Teacher.Controllers
 {

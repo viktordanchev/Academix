@@ -12,6 +12,11 @@
 
 #alerts > ul {
     list-style: none;
+    padding: 0px 25px 0px 25px;
+}
+
+#alerts > ul li {
+    text-align: center;
 }
 
 .h-10 {

@@ -14,7 +14,7 @@ namespace Academix.Infrastructure.Data.Configurations
             builder
                 .HasOne(ss => ss.Subject)
                 .WithMany(s => s.SubjectStudents)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .HasOne(ss => ss.Student)
