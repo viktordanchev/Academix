@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AllViewModel>
+
+@{
+    ViewData["Title"] = "Subjects";
+}
+
+<div class="mb-5 text-center">
+    <h1 class="display-1 fw-bold ">Subjects</h1>
+
+    @if (Model.Count() == 0)
+    {
+        <h2 class="display-4 text-danger">No subjects</h2>
+    }
+</div>
+
+<a asp-controller="Subject" asp-action="Add" class="btn btn-primary w-25">Add</a>
+
+<div class="container-fluid bg-transparent my-4 p-3">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-6 g-3 text-center d-flex flex-wrap justify-content-center">
+        @foreach (var subject in Model)
+        {
+            <div class="col">
+                <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                    <div class="card-body align-content-center">
+                        <div class="mb-3">
+                            <div>
+                                <div class="d-block text-white fs-4 fw-normal">Subject</div>
+                                <span class="text-white fs-4 fw-bold">@subject.Name</span>
+                            </div>
+                            <hr class="bg-white mx-3 my-1" />
+                            <div>
+                                <div class="d-inline text-white fs-5 fw-normal">Teacher:</div>
+                                <span class="text-white fs-5 fw-bold">
+                                    @if (subject.Teacher == null)
+                                    {
+                                        <span>None</span>
+                                    }
+                                    else
+                                    {
+                                        @subject.Teacher
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row justify-content-between gap-3">
+                            <a asp-controller="Subject" asp-action="AddStudent" asp-route-id="@subject.Id" class="btn btn-primary w-50">Add student</a>
+                            <a asp-controller="Subject" asp-action="Remove" asp-route-id="@subject.Id" class="btn btn-primary w-75">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/areas/popover.js"></script>
+}
