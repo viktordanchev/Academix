@@ -32,6 +32,7 @@ namespace Academix.Core.Services
                         { 
                             Name = ss.Subject.Name,
                             Grades = ss.Subject.Grades
+                                .Where(g => g.StudentId == s.StudentId)
                                 .Select(g => new GradeServiceModel()
                                 {
                                     GradeNumber = g.GradeNumber,
@@ -39,7 +40,8 @@ namespace Academix.Core.Services
                                     DateAndTime = g.DateAndTime,
                                 })
                                 .ToList(),
-                            Absences = ss.Subject.Absences.Count()
+                            Absences = ss.Subject.Absences
+                                .Where(a => a.StudentId == s.StudentId).Count()
                         })
                         .ToList()
                 })
