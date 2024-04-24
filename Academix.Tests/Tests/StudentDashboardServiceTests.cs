@@ -5,10 +5,10 @@ using Academix.Infrastructure.Data;
 namespace Academix.Tests.Tests
 {
     [TestFixture]
-    public class DashboardServiceTests
+    public class StudentDashboardServiceTests
     {
         private AcademixDbContext context;
-        private IDashboardService service;
+        private IStudentDashboardService service;
 
         private readonly string studentId = "1ae342a8-9fab-4c0a-bd5a-70b351717ecc";
         private readonly string student2Id = "a171483f-6e48-446a-a5d7-36110d0c1443";
@@ -17,7 +17,7 @@ namespace Academix.Tests.Tests
         public void SetUp()
         {
             context = MockDatabase.Instance();
-            service = new DashboardService(context);
+            service = new StudentDashboardService(context);
         }
 
         [TearDown]

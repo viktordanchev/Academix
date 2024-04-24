@@ -2,7 +2,7 @@
 
 namespace Academix.Core.Contracts
 {
-    public interface ISubjectService
+    public interface IDirectorSubjectService
     {
         Task<int> GetSchoolIdAsync(string directorId);
         Task<IEnumerable<AllViewModel>> GetSubjectsAsync(int schoolId);

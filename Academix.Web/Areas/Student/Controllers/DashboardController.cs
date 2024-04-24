@@ -7,9 +7,9 @@ namespace Academix.Web.Areas.Student.Controllers
 {
     public class DashboardController : StudentBaseController
     {
-        private readonly IDashboardService _studentHomeService;
+        private readonly IStudentDashboardService _studentHomeService;
 
-        public DashboardController(IDashboardService studentHomeService)
+        public DashboardController(IStudentDashboardService studentHomeService)
         {
             _studentHomeService = studentHomeService;
         }

@@ -2,7 +2,7 @@
 
 namespace Academix.Core.Contracts
 {
-    public interface IStudentService
+    public interface ITeacherStudentService
     {
         Task<IEnumerable<StudentViewModel>> GetStudentsAsync(int schoolId, string teacherId);
         Task<int> GetSchoolIdAsync(string teacherId);

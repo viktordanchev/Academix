@@ -2,7 +2,7 @@
 
 namespace Academix.Core.Contracts
 {
-    public interface IDashboardService
+    public interface IStudentDashboardService
     {
         Task<StudentServiceModel> GetStudentAsync(string studentId);
         Task<IEnumerable<SubjectServiceModel>> GetAllSubjectsAsync(int studentId);

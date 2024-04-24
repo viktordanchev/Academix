@@ -5,17 +5,17 @@ using Academix.Infrastructure.Data;
 
 namespace Academix.Tests.Tests
 {
-    public class SubjectServiceTests
+    public class DirectorSubjectServiceTests
     {
         private AcademixDbContext context;
-        private ISubjectService service;
+        private IDirectorSubjectService service;
         private readonly string directorId = "a3717562-385e-41ce-9eff-0f1b994e5548";
 
         [SetUp]
         public void SetUp()
         {
             context = MockDatabase.Instance();
-            service = new SubjectService(context);
+            service = new DirectorSubjectService(context);
         }
 
         [TearDown]

@@ -4,10 +4,10 @@ using Academix.Infrastructure.Data;
 
 namespace Academix.Tests.Tests
 {
-    public class StudentsServiceTests
+    public class ParentStudentServiceTests
     {
         private AcademixDbContext context;
-        private IStudentsService service;
+        private IParentStudentService service;
         private readonly string parentId = "24a0fdf5-ca4f-4c0f-8120-f6c87448033c";
         private readonly string parent2Id = "925da918-5cd0-4b17-9b62-2f417aac0343";
 
@@ -15,7 +15,7 @@ namespace Academix.Tests.Tests
         public void SetUp()
         {
             context = MockDatabase.Instance();
-            service = new StudentsService(context);
+            service = new ParentStudentService(context);
         }
 
         [TearDown]

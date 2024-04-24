@@ -5,16 +5,16 @@ using Academix.Infrastructure.Data;
 namespace Academix.Tests.Tests
 {
     [TestFixture]
-    public class ClassServiceTests
+    public class TeacherClassServiceTests
     {
         private AcademixDbContext context;
-        private IClassService service;
+        private ITeacherClassService service;
 
         [SetUp]
         public void SetUp()
         {
             context = MockDatabase.Instance();
-            service = new ClassService(context);
+            service = new TeacherClassService(context);
         }
 
         [TearDown]

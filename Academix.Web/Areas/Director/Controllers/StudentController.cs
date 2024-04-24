@@ -6,9 +6,9 @@ namespace Academix.Web.Areas.Director.Controllers
     public class StudentController : DirectorBaseController
     {
         private readonly IDirectorStudentService _directorStudentService;
-        private readonly ISubjectService _subjectService;
+        private readonly IDirectorSubjectService _subjectService;
 
-        public StudentController(IDirectorStudentService directorStudentService, ISubjectService subjectService)
+        public StudentController(IDirectorStudentService directorStudentService, IDirectorSubjectService subjectService)
         {
             _directorStudentService = directorStudentService;
             _subjectService = subjectService;

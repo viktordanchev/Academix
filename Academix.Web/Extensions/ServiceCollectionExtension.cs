@@ -12,12 +12,12 @@ namespace Academix.Web.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IDirectorStudentService, DirectorStudentService>();
-            services.AddScoped<ISubjectService, SubjectService>();
-            services.AddScoped<IClassService, ClassService>();
-            services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<IStudentsService, StudentsService>();
+            services.AddScoped<IDirectorSubjectService, DirectorSubjectService>();
+            services.AddScoped<ITeacherClassService, TeacherClassService>();
+            services.AddScoped<ITeacherStudentService, TeacherStudentService>();
+            services.AddScoped<IParentStudentService, ParentStudentService>();
             services.AddScoped<IRequestService, RequestService>();
-            services.AddScoped<IDashboardService, DashboardService>();
+            services.AddScoped<IStudentDashboardService, StudentDashboardService>();
 
             return services;
         }

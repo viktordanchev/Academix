@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Core.Services
 {
-    public class SubjectService : ISubjectService
+    public class DirectorSubjectService : IDirectorSubjectService
     {
         private readonly AcademixDbContext _context;
 
-        public SubjectService(AcademixDbContext context)
+        public DirectorSubjectService(AcademixDbContext context)
         {
             _context = context;
         }

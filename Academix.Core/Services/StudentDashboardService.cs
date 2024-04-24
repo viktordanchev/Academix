@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Core.Services
 {
-    public class DashboardService : IDashboardService
+    public class StudentDashboardService : IStudentDashboardService
     {
         private readonly AcademixDbContext _context;
 
-        public DashboardService(AcademixDbContext context)
+        public StudentDashboardService(AcademixDbContext context)
         {
             _context = context;
         }

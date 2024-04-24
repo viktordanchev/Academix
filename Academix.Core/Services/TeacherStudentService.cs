@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Core.Services
 {
-    public class StudentService : IStudentService
+    public class TeacherStudentService : ITeacherStudentService
     {
         private readonly AcademixDbContext _context;
 
-        public StudentService(AcademixDbContext context)
+        public TeacherStudentService(AcademixDbContext context)
         {
             _context = context;
         }

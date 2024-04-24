@@ -5,9 +5,9 @@ namespace Academix.Web.Areas.Teacher.Controllers
 {
     public class ClassController : TeacherBaseController
     {
-        private readonly IClassService _classService;
+        private readonly ITeacherClassService _classService;
 
-        public ClassController(IClassService classService)
+        public ClassController(ITeacherClassService classService)
         {
             _classService = classService;
         }

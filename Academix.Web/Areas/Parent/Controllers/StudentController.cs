@@ -4,11 +4,11 @@ using System.Security.Claims;
 
 namespace Academix.Web.Areas.Parent.Controllers
 {
-    public class StudentsController : ParentBaseController
+    public class StudentController : ParentBaseController
     {
-        private readonly IStudentsService _parentHomeService;
+        private readonly IParentStudentService _parentHomeService;
 
-        public StudentsController(IStudentsService parentHomeService)
+        public StudentController(IParentStudentService parentHomeService)
         {
             _parentHomeService = parentHomeService;
         }
