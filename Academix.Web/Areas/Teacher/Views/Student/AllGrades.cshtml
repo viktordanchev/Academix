@@ -6,14 +6,22 @@
 
 <h1 class="display-1 fw-bold ">Grades</h1>
 
-<div class="bg-auth rounded-10 px-3 py-3 d-flex flex-column gap-3 mx-3 my-3">
-    @foreach (var grade in Model)
-    {
-        <div class="d-flex flex-row justify-content-between text-center mb-3">
-            <div class="fs-4 fw-bold">Grade:</div>
-            <span class="fs-4 ms-lg-3">| @grade.GradeNumber | @grade.GradeType | @grade.DateAndTime</span>
-            <a asp-controller="Student" asp-action="RemoveGrade" asp-route-id="@grade.GradeId" class="btn btn-primary ms-lg-3">Remove</a>
-        </div>
-    }
-    <a asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Cancel</a>
-</div>
+@if (Model.Count() == 0)
+{
+    <h2 class="display-4 text-danger">This student doesn't has grades</h2>
+}
+else
+{
+    <div class="bg-auth rounded-10 px-3 py-3 d-flex flex-column gap-3 mx-3 my-3">
+        @foreach (var grade in Model)
+        {
+            <div class="d-flex flex-row justify-content-between text-center">
+                <div class="fs-4 fw-bold">Grade:</div>
+                <span class="fs-4 ms-lg-3">| @grade.GradeNumber | @grade.GradeType | @grade.DateAndTime</span>
+                <a asp-controller="Student" asp-action="RemoveGrade" asp-route-id="@grade.GradeId" class="btn btn-primary ms-lg-3">Remove</a>
+            </div>
+        }
+    </div>
+}
+
+<a asp-controller="Student" asp-action="Index" class="w-20 btn btn-lg btn-primary">Cancel</a>

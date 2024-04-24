@@ -45,18 +45,8 @@ app.UseEndpoints(endpoints =>
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
     endpoints.MapControllerRoute(
-        name: "Student All Grades",
-        pattern: "Teacher/Student/AllGrades/{studentId}",
-        defaults: new { Controller = "Student", Action = "AllGrades" });
-
-    endpoints.MapControllerRoute(
-        name: "Student All Absences",
-        pattern: "Teacher/Student/AllAbsences/{studentId}",
-        defaults: new { Controller = "Student", Action = "AllAbsences" });
-
-    endpoints.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Authentication}/{id?}");
+        name: "default",
+        pattern: "{controller=Home}/{action=Authentication}/{id?}");
 
     endpoints.MapRazorPages();
 });
