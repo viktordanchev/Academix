@@ -339,7 +339,7 @@ namespace Academix.Infrastructure.Data.Configurations
             };
         }
 
-        public static SubjectStudent[] SeedSubjectStudent()
+        public static SubjectStudent[] SeedSubjectsStudents()
         {
             return new SubjectStudent[]
             {
@@ -366,7 +366,7 @@ namespace Academix.Infrastructure.Data.Configurations
             };
         }
 
-        public static StudentParent[] SeedStudentParent()
+        public static StudentParent[] SeedStudentsParents()
         {
             return new StudentParent[] 
             {
@@ -388,7 +388,7 @@ namespace Academix.Infrastructure.Data.Configurations
             };
         }
 
-        public static Teacher[] SeedTeacher()
+        public static Teacher[] SeedTeachers()
         {
             return new Teacher[]
             {
@@ -413,7 +413,7 @@ namespace Academix.Infrastructure.Data.Configurations
             };
         }
 
-        public static IdentityRole[] SeedRoles()
+        public static IdentityRole[] SeedRolesSeedRoles()
         {
             return new IdentityRole[]
             {

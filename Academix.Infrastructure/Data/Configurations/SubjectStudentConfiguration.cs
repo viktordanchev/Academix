@@ -21,7 +21,7 @@ namespace Academix.Infrastructure.Data.Configurations
                 .WithMany(s => s.SubjectsStudent)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasData(DataSeed.SeedSubjectStudent());
+            builder.HasData(DataSeed.SeedSubjectsStudents());
         }
     }
 }

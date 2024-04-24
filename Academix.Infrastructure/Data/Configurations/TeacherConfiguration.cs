@@ -13,7 +13,7 @@ namespace Academix.Infrastructure.Data.Configurations
                 .WithMany(s => s.Teachers)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasData(DataSeed.SeedTeacher());
+            builder.HasData(DataSeed.SeedTeachers());
         }
     }
 }
