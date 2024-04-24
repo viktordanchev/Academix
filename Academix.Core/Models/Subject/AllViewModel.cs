@@ -6,6 +6,6 @@
 
         public string Name { get; set; } = null!;
 
-        public string? Teacher { get; set; }
+        public string Teacher { get; set; } = null!;
     }
 }

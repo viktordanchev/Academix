@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AllStudentsViewModel>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h1 class="display-1 fw-bold ">Students</h1>
+
+<div class="container-fluid bg-transparent my-4 p-3">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-6 g-3 text-center d-flex flex-wrap justify-content-center">
+        @foreach (var student in Model)
+        {
+            <div class="col">
+                <div class="rounded-10 bg-auth card h-100 shadow-sm">
+                    <div class="card-body align-content-center">
+                        <div class="mb-3">
+                            <div>
+                                <div class="d-block text-white fs-4 fw-normal">Student</div>
+                                <span class="text-white fs-4 fw-bold">@student.Name</span>
+                            </div>
+                            <hr class="bg-white mx-1 " />
+                            <div class="text-start">
+                                <div class="d-inline text-white fs-4 fw-normal">Total grade:</div>
+                                <span class="text-white fs-4 fw-bold">
+                                    @if (student.TotalGrade.Count > 0)
+                                    {
+                                        @student.TotalGrade.Average().ToString("#.##")
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </span>
+                            </div>
+                            <div class ="text-start">
+                                <div class="d-inline text-white fs-4 fw-normal">Address:</div>
+                                <span class="text-white fs-4 fw-bold">@student.Address</span>
+                            </div>
+                            <div class="text-start">
+                                <div class="d-inline text-white fs-4 fw-normal">Phone:</div>
+                                <span class="text-white fs-4 fw-bold">@student.PhoneNumber</span>
+                            </div>
+                        </div>
+                        <a asp-controller="Student" asp-action="SelectSubject" asp-route-id="@student.Id" class="btn btn-primary w-75">Add subject</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

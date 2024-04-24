@@ -14,10 +14,15 @@ namespace Academix.Web.Areas.Director.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(string student = "")
         {
             var schoolId = await _subjectService.GetSchoolIdAsync(GetUserId());
             var subjects = await _subjectService.GetSubjectsAsync(schoolId);
+
+            if(string.IsNullOrEmpty(student))
+            {
+                TempData.Remove("StudentId");
+            }
 
             return View(subjects);
         }
@@ -56,16 +61,6 @@ namespace Academix.Web.Areas.Director.Controllers
         public async Task<IActionResult> Remove(int id)
         {
             if(await _subjectService.IsSubjectExistAsync(id))
-            {
-                await _subjectService.RemoveSubjectAsync(id);
-            }
-
-            return RedirectToAction(nameof(All));
-        }
-
-        public async Task<IActionResult> AddStudent(int id)
-        {
-            if (await _subjectService.IsSubjectExistAsync(id))
             {
                 await _subjectService.RemoveSubjectAsync(id);
             }

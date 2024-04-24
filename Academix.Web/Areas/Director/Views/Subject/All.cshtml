@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AllViewModel>
+@inject IDirectorStudentService Service
 
 @{
     ViewData["Title"] = "Subjects";
@@ -13,7 +14,10 @@
     }
 </div>
 
-<a asp-controller="Subject" asp-action="Add" class="btn btn-primary w-25">Add</a>
+@if (TempData.Peek("StudentId") == null)
+{
+    <a asp-controller="Subject" asp-action="Add" class="btn btn-primary w-25">Add</a>
+}
 
 <div class="container-fluid bg-transparent my-4 p-3">
     <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-6 g-3 text-center d-flex flex-wrap justify-content-center">
@@ -30,29 +34,29 @@
                             <hr class="bg-white mx-3 my-1" />
                             <div>
                                 <div class="d-inline text-white fs-5 fw-normal">Teacher:</div>
-                                <span class="text-white fs-5 fw-bold">
-                                    @if (subject.Teacher == null)
-                                    {
-                                        <span>None</span>
-                                    }
-                                    else
-                                    {
-                                        @subject.Teacher
-                                    }
-                                </span>
+                                <span class="text-white fs-5 fw-bold">@subject.Teacher</span>
                             </div>
                         </div>
-                        <div class="d-flex flex-row justify-content-between gap-3">
-                            <a asp-controller="Subject" asp-action="AddStudent" asp-route-id="@subject.Id" class="btn btn-primary w-50">Add student</a>
+                        @if (TempData.Peek("StudentId") == null)
+                        {
                             <a asp-controller="Subject" asp-action="Remove" asp-route-id="@subject.Id" class="btn btn-primary w-75">Remove</a>
-                        </div>
+                        }
+                        else
+                        {
+                            @if (await Service.IsStudentHasSubjectAsync((int)TempData.Peek("StudentId"), subject.Id))
+                            {
+                                <a asp-controller="Student" asp-action="RemoveSubject" asp-route-id="@subject.Id"
+                                   asp-route-studentId="@TempData.Peek("StudentId")" class="btn btn-primary w-75">Remove</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Student" asp-action="AddSubject" asp-route-id="@subject.Id"
+                                   asp-route-studentId="@TempData.Peek("StudentId")" class="btn btn-primary w-75">Add</a>
+                            }
+                        }
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
-
-@section Scripts {
-    <script src="~/js/areas/popover.js"></script>
-}

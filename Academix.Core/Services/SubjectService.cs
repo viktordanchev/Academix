@@ -3,7 +3,6 @@ using Academix.Core.Models.Subject;
 using Academix.Infrastructure.Data;
 using Academix.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.InteropServices;
 
 namespace Academix.Core.Services
 {
@@ -100,7 +99,5 @@ namespace Academix.Core.Services
 
             return subject == null ? false : true;
         }
-
-        public async Task AddStudentToSubjectAsync(int )
     }
 }
