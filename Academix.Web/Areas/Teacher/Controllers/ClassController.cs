@@ -15,13 +15,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var classId = 0;
-
-            if (await _classService.IsTeacherHasClass(GetUserId()))
-            {
-                classId = await _classService.GetClassIdAsync(GetUserId());
-            }
-
+            var classId = await _classService.GetClassIdAsync(GetUserId());
             var students = await _classService.GetStudentsAsync(classId);
 
             return View(students);

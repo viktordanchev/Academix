@@ -8,10 +8,12 @@ namespace Academix.Web.Areas.Teacher.Controllers
     public class StudentController : TeacherBaseController
     {
         private readonly IStudentService _studentService;
+        private readonly IDirectorStudentService _directorStudentService;
 
-        public StudentController(IStudentService studentService)
+        public StudentController(IStudentService studentService, IDirectorStudentService directorStudentService)
         {
             _studentService = studentService;
+            _directorStudentService = directorStudentService;
         }
 
         [HttpGet]
@@ -48,7 +50,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
-            if (!await _studentService.IsStudentHasSubjectAsync(id, subjectId))
+            if (!await _directorStudentService.IsStudentHasSubjectAsync(id, subjectId))
             {
                 return BadRequest();
             }
@@ -64,7 +66,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
-            if (!await _studentService.IsStudentHasSubjectAsync(studentId, subjectId))
+            if (!await _directorStudentService.IsStudentHasSubjectAsync(studentId, subjectId))
             {
                 return BadRequest();
             }
@@ -96,7 +98,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
-            if (!await _studentService.IsStudentHasSubjectAsync(studentId, subjectId))
+            if (!await _directorStudentService.IsStudentHasSubjectAsync(studentId, subjectId))
             {
                 return BadRequest();
             }
@@ -113,7 +115,7 @@ namespace Academix.Web.Areas.Teacher.Controllers
         {
             var subjectId = await _studentService.GetSubjectIdAsync(GetUserId());
 
-            if (!await _studentService.IsStudentHasSubjectAsync(id, subjectId))
+            if (!await _directorStudentService.IsStudentHasSubjectAsync(id, subjectId))
             {
                 return BadRequest();
             }

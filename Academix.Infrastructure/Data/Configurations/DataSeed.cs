@@ -413,7 +413,7 @@ namespace Academix.Infrastructure.Data.Configurations
             };
         }
 
-        public static IdentityRole[] SeedRolesSeedRoles()
+        public static IdentityRole[] SeedRoles()
         {
             return new IdentityRole[]
             {

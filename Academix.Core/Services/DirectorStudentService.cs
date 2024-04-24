@@ -1,10 +1,8 @@
 ﻿using Academix.Core.Contracts;
 using Academix.Core.Models.DirectorStudent;
 using Academix.Infrastructure.Data;
-using Academix.Infrastructure.Data.Models;
 using Academix.Infrastructure.Data.Models.Mapping;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 
 namespace Academix.Core.Services
 {

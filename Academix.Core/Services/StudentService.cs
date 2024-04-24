@@ -108,14 +108,6 @@ namespace Academix.Core.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsStudentHasSubjectAsync(int studentId, int subjectId)
-        {
-            var student = await _context.SubjectsStudents
-                .FirstOrDefaultAsync(ss => ss.StudentId == studentId && ss.SubjectId == subjectId);
-
-            return student == null ? false : true;
-        }
-
         public async Task<IEnumerable<AllAbsencesViewModel>> GetAbsencesAsync(int studentId, int subjectId)
         {
             var absences = await _context.Absences

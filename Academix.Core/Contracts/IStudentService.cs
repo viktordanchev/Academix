@@ -10,7 +10,6 @@ namespace Academix.Core.Contracts
         Task<int> GetSubjectIdAsync(string teacherId);
         Task<IEnumerable<AllGradesViewModel>> GetGradesAsync(int studentId, int subjectId);
         Task RemoveGradeAsync(int gradeId);
-        Task<bool> IsStudentHasSubjectAsync(int studentId, int subjectId);
         Task<IEnumerable<AllAbsencesViewModel>> GetAbsencesAsync(int studentId, int subjectId);
         Task AddAbsenceAsync(int studentId, int subjectId);
         Task RemoveAbsenceAsync(int absenceId);

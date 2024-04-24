@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using static Academix.Infrastructure.Data.Configurations.DataSeed;
 
-namespace Academix.Core.Services.Tests
+namespace Academix.Tests
 {
     public static class MockDatabase
     {

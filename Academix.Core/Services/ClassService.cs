@@ -18,9 +18,9 @@ namespace Academix.Core.Services
         public async Task<int> GetClassIdAsync(string teacherId)
         {
             var currClass = await _context.Classes
-                .FirstAsync(c => c.ClassTeacher.TeacherIdentity.Id == teacherId);
+                .FirstOrDefaultAsync(c => c.ClassTeacher.TeacherIdentity.Id == teacherId);
 
-            return currClass.Id;
+            return currClass == null ? 0 : currClass.Id;
         }
 
         public async Task<IEnumerable<StudentViewModel>> GetStudentsAsync(int classId)
@@ -88,14 +88,6 @@ namespace Academix.Core.Services
                 .FirstOrDefaultAsync(a => a.Id == id);
 
             return absence == null ? false : true;
-        }
-
-        public async Task<bool> IsTeacherHasClass(string teacherId)
-        {
-            var currClass = await _context.Classes
-                .FirstOrDefaultAsync(c => c.ClassTeacher.TeacherIdentity.Id == teacherId);
-
-            return currClass == null ? false : true;
         }
     }
 }
