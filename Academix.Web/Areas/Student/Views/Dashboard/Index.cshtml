@@ -1,6 +1,7 @@
 ﻿@model IndexViewModel
 
 @{
+    double averageGrade = 0;
     ViewData["Title"] = "Dashboard";
 }
 
@@ -32,14 +33,21 @@
                     <div class="clearfix">
                         <div class="d-inline text-white fs-2 fw-normal">Total Grade:</div>
                         <span class="text-white fs-2 fw-bold ms-lg-3">
-                            @if (Model.Subjects.Any(s => s.Grades.Count() > 0))
-                            {
-                                @Model.Subjects.Average(g => g.Grades.Average(g => g.GradeNumber)).ToString("#.##")
+                            @{
+                                var grades = 0;
+
+                                foreach (var subject in Model.Subjects)
+                                {
+                                    if(subject.Grade != null)
+                                    {
+                                        averageGrade += (double)subject.Grade;
+                                        grades++;
+                                    }
+                                }
+
+                                averageGrade /= grades;
                             }
-                            else
-                            {
-                                <span>0</span>
-                            }
+                            @averageGrade.ToString("#.##")
                         </span>
                     </div>
                 </div>
@@ -68,9 +76,9 @@
                             <div class="d-block my-2">
                                 <div class="d-inline text-white fs-3 fw-normal">Average Grade:</div>
                                 <span class="text-white fs-3 fw-bold ms-lg-3">
-                                    @if (subject.Grades.Count() > 0)
+                                    @if (subject.Grade != null)
                                     {
-                                        @subject.Grades.Average(g => g.GradeNumber).ToString("#.##")
+                                        @subject.Grade.Value.ToString("#.##")
                                     }
                                     else
                                     {

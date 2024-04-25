@@ -2,6 +2,7 @@
 using Academix.Core.Models;
 using Academix.Core.Models.Dashboard;
 using Academix.Infrastructure.Data;
+using Academix.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Core.Services
@@ -40,6 +41,9 @@ namespace Academix.Core.Services
                 {
                     Name = ss.Subject.Name,
                     TeacherName = $"{ss.Subject.Teacher.TeacherIdentity.FirstName} {ss.Subject.Teacher.TeacherIdentity.LastName}",
+                    Grade = ss.Student.Grades
+                        .Where(g => g.SubjectId == ss.SubjectId)
+                        .Average(g => g.GradeNumber),
                     Grades = ss.Student.Grades
                         .Where(g => g.SubjectId == ss.SubjectId)
                         .Select(g => new GradeServiceModel()
