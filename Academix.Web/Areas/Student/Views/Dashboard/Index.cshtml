@@ -33,21 +33,14 @@
                     <div class="clearfix">
                         <div class="d-inline text-white fs-2 fw-normal">Total Grade:</div>
                         <span class="text-white fs-2 fw-bold ms-lg-3">
-                            @{
-                                var grades = 0;
-
-                                foreach (var subject in Model.Subjects)
-                                {
-                                    if(subject.Grade != null)
-                                    {
-                                        averageGrade += (double)subject.Grade;
-                                        grades++;
-                                    }
-                                }
-
-                                averageGrade /= grades;
+                            @if(Model.Subjects.Any(s => s.Grades.Count() > 0))
+                            {
+                                @Model.Subjects.Where(g => g.Grades.Count() > 0).Average(g => g.Grades.Average(g => g.GradeNumber)).ToString("#.##")
                             }
-                            @averageGrade.ToString("#.##")
+                            else
+                            {
+                                <span>0</span>
+                            }
                         </span>
                     </div>
                 </div>
@@ -76,9 +69,9 @@
                             <div class="d-block my-2">
                                 <div class="d-inline text-white fs-3 fw-normal">Average Grade:</div>
                                 <span class="text-white fs-3 fw-bold ms-lg-3">
-                                    @if (subject.Grade != null)
+                                    @if (subject.Grades.Count() > 0)
                                     {
-                                        @subject.Grade.Value.ToString("#.##")
+                                        @subject.Grades.Average(g => g.GradeNumber).ToString("#.##")
                                     }
                                     else
                                     {

@@ -41,9 +41,6 @@ namespace Academix.Core.Services
                 {
                     Name = ss.Subject.Name,
                     TeacherName = $"{ss.Subject.Teacher.TeacherIdentity.FirstName} {ss.Subject.Teacher.TeacherIdentity.LastName}",
-                    Grade = ss.Student.Grades
-                        .Where(g => g.SubjectId == ss.SubjectId)
-                        .Average(g => g.GradeNumber),
                     Grades = ss.Student.Grades
                         .Where(g => g.SubjectId == ss.SubjectId)
                         .Select(g => new GradeServiceModel()
