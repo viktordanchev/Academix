@@ -27,7 +27,11 @@ namespace Academix.Core.Services
                     PhoneNumber = s.StudentIdentity.PhoneNumber != null ? s.StudentIdentity.PhoneNumber : "None",
                     TotalGrade = s.SubjectsStudent
                         .Where(ss => ss.StudentId == s.Id)
-                        .Select(s => s.Subject.Grades.Average(g => g.GradeNumber))
+                        .Select(s => s.Subject.Grades
+                            .Where(g => g.StudentId == s.StudentId)
+                            .Select(g => g.GradeNumber)
+                            .DefaultIfEmpty()
+                            .Average())
                         .ToList()
                 })
                 .AsNoTracking()

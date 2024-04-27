@@ -2,7 +2,6 @@
 using Academix.Core.Models;
 using Academix.Core.Models.Dashboard;
 using Academix.Infrastructure.Data;
-using Academix.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academix.Core.Services

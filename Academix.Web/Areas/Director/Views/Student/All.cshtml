@@ -29,7 +29,7 @@
                             <div class="text-start">
                                 <div class="d-inline text-white fs-4 fw-normal">Total grade:</div>
                                 <span class="text-white fs-4 fw-bold">
-                                    @if (student.TotalGrade.Count > 0)
+                                    @if (student.TotalGrade.Any(g => g != 0))
                                     {
                                         @student.TotalGrade.Average().ToString("#.##")
                                     }
