@@ -32,9 +32,9 @@
                     <div class="clearfix">
                         <div class="d-inline text-white fs-2 fw-normal">Total Grade:</div>
                         <span class="text-white fs-2 fw-bold ms-lg-3">
-                            @if (Model.Subjects.Any(s => s.Grades.Count() > 0))
+                            @if(Model.Subjects.Any(s => s.Grades.Count() > 0))
                             {
-                                @Model.Subjects.Average(g => g.Grades.Average(g => g.GradeNumber)).ToString("#.##")
+                                @Model.Subjects.Where(g => g.Grades.Count() > 0).Average(g => g.Grades.Average(g => g.GradeNumber)).ToString("#.##")
                             }
                             else
                             {
