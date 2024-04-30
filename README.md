@@ -7,5 +7,4 @@
 - HTML
 - CSS
 - JavaScript
-- Bootstrap
-- 
+- MS SQL
