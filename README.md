@@ -14,8 +14,8 @@ The main goal is to simplify and automate a large part of teachers duties.
 # Photos
 <h2>Authentication</h2>
 <img src="https://github.com/viktordanchev/Academix/assets/115632936/4a1042aa-3ee0-459b-b0f7-aaed3f50affc" width=900>
-<img src="https://github.com/viktordanchev/Academix/assets/115632936/5a27545b-270d-479a-bfb5-d0dd739c64b7" width=450>
-<img src="https://github.com/viktordanchev/Academix/assets/115632936/f27bb993-788a-4aa6-8e3a-176a2dc28fe5" width=450>
+<img src="https://github.com/viktordanchev/Academix/assets/115632936/5a27545b-270d-479a-bfb5-d0dd739c64b7" width=300>
+<img src="https://github.com/viktordanchev/Academix/assets/115632936/f27bb993-788a-4aa6-8e3a-176a2dc28fe5" width=300>
 
 <h2>User</h2>
 <ul>
