@@ -25,8 +25,8 @@ The main goal is to simplify and automate a large part of teachers duties.
   </li>
   <li>
     <h3>Manage</h3>
-        <img src="https://github.com/viktordanchev/Academix/assets/115632936/dfd99062-049c-46ef-b22d-5a3bf6c76475" width=350>
-        <img src="https://github.com/viktordanchev/Academix/assets/115632936/e2b068ca-62a9-423b-bf2b-4965bea38e3e" width=350>
+        <img src="https://github.com/viktordanchev/Academix/assets/115632936/dfd99062-049c-46ef-b22d-5a3bf6c76475" width=400>
+        <img src="https://github.com/viktordanchev/Academix/assets/115632936/e2b068ca-62a9-423b-bf2b-4965bea38e3e" width=400>
   </li>
 </ul>
 
