@@ -52,8 +52,8 @@ The main goal is to simplify and automate a large part of teachers duties.
 <ul>
   <li>
     <h3>MyClass</h3>
-    <img src="https://github.com/viktordanchev/Academix/assets/115632936/dc0cb0af-d9c2-4cd1-92ff-945d7defcc83" width=900>
-    <img src="https://github.com/viktordanchev/Academix/assets/115632936/d4ae03d4-3ef3-4a44-8a27-e87334ae9b9b" width=900>
+    <img src="https://github.com/viktordanchev/Academix/assets/115632936/dc0cb0af-d9c2-4cd1-92ff-945d7defcc83" width=390>
+    <img src="https://github.com/viktordanchev/Academix/assets/115632936/d4ae03d4-3ef3-4a44-8a27-e87334ae9b9b" width=390>
   </li>
   <li>
     <h3>Students</h3>
@@ -72,8 +72,8 @@ The main goal is to simplify and automate a large part of teachers duties.
   </li>
   <li>
     <h3>Subjects</h3>
-    <img src="https://github.com/viktordanchev/Academix/assets/115632936/3dfbac7d-60be-4ed6-a0c3-483a8a13bee3" width=450>
-    <img src="https://github.com/viktordanchev/Academix/assets/115632936/dd0a410b-8a22-4778-b7bd-6ab8d016cd1a" width=450>
+    <img src="https://github.com/viktordanchev/Academix/assets/115632936/3dfbac7d-60be-4ed6-a0c3-483a8a13bee3" width=390>
+    <img src="https://github.com/viktordanchev/Academix/assets/115632936/dd0a410b-8a22-4778-b7bd-6ab8d016cd1a" width=390>
   </li>
   <li>
     <h3>Students</h3>
