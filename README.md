@@ -26,10 +26,7 @@ The main goal is to simplify and automate a large part of teachers duties.
   <li>
     <h3>Manage</h3>
         <img src="https://github.com/viktordanchev/Academix/assets/115632936/dfd99062-049c-46ef-b22d-5a3bf6c76475" width=450>
-        <img src="https://github.com/viktordanchev/Academix/assets/115632936/635e7245-68a6-486b-a9cc-99b4c12f282f" width=450>
-        <img src="https://github.com/viktordanchev/Academix/assets/115632936/01ca83c5-a12f-4a63-8ee0-fbe2c3bb3fc3" width=300>
-        <img src="https://github.com/viktordanchev/Academix/assets/115632936/c2fd5b01-730a-498c-903f-80a3f6d31300" width=300>
-        <img src="https://github.com/viktordanchev/Academix/assets/115632936/8003adcf-e171-4744-8874-9b95f4e12ceb" width=300>
+        <img src="https://github.com/viktordanchev/Academix/assets/115632936/e2b068ca-62a9-423b-bf2b-4965bea38e3e" width=450>
   </li>
 </ul>
 
@@ -63,7 +60,7 @@ The main goal is to simplify and automate a large part of teachers duties.
     <img src="https://github.com/viktordanchev/Academix/assets/115632936/1c010ecf-0ee7-401a-8fad-b28635c967cd" width=900>
     <img src="https://github.com/viktordanchev/Academix/assets/115632936/e0c13a74-d67e-4861-94eb-f800583c71f5" width=300>
     <img src="https://github.com/viktordanchev/Academix/assets/115632936/503cb74f-da13-4ca7-a342-5d9dccfd1a0b" width=300>
-    <img src="https://github.com/viktordanchev/Academix/assets/115632936/6309f6ac-098b-49c8-8732-855501b8604d" width=300>
+    <img src="https://github.com/viktordanchev/Academix/assets/115632936/598076e3-2115-4ca8-baaa-c0c20fcb61a8" width=300>
   </li>
 </ul>
 
@@ -75,8 +72,8 @@ The main goal is to simplify and automate a large part of teachers duties.
   </li>
   <li>
     <h3>Subjects</h3>
-    <img src="https://github.com/viktordanchev/Academix/assets/115632936/3dfbac7d-60be-4ed6-a0c3-483a8a13bee3" width=900>
-    <img src="https://github.com/viktordanchev/Academix/assets/115632936/2fd98667-c506-4dac-9fa4-901f29baa39e" width=900>
+    <img src="https://github.com/viktordanchev/Academix/assets/115632936/3dfbac7d-60be-4ed6-a0c3-483a8a13bee3" width=450>
+    <img src="https://github.com/viktordanchev/Academix/assets/115632936/dd0a410b-8a22-4778-b7bd-6ab8d016cd1a" width=450>
   </li>
   <li>
     <h3>Students</h3>
