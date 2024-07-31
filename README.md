@@ -35,7 +35,7 @@ The main goal is to simplify and automate a large part of teachers duties.
   <li>
     <h3>Dashboard</h3>
     <img src="https://github.com/viktordanchev/Academix/assets/115632936/6d223187-8bd0-461d-aee2-bf25f5d9dc6d" width=900>
-    <p>When we hover grade we can see more infor about it</p>
+    <p>When we hover grade we can see more info about it</p>
     <img src="https://github.com/viktordanchev/Academix/assets/115632936/694d20b0-d326-4b60-b88e-a600e25481b8" width=400>
   </li>
 </ul>
